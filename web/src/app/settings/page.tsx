@@ -122,7 +122,7 @@ export default function SettingsPage() {
               </div>
             </div>
 
-            <div className="h-px bg-gray-100 dark:bg-gray-800" />
+            <div className="h-px bg-gray-200/60 dark:bg-gray-800/80" />
 
             {/* Currency & Region */}
             <div className="relative z-20">
@@ -144,12 +144,12 @@ export default function SettingsPage() {
               </div>
             </div>
 
-            <div className="h-px bg-gray-100 dark:bg-gray-800" />
+            <div className="h-px bg-gray-200/60 dark:bg-gray-800/80" />
 
             {/* Appearance / Theme */}
             <div className="relative z-10">
               <div className="flex items-center gap-2 mb-3">
-                <Palette className="w-4 h-4 text-[#2563EB]" />
+                <Palette className="w-4 h-4 text-[#2563EB] dark:text-blue-400" />
                 <h3 className="text-xs font-semibold text-gray-900 dark:text-white uppercase tracking-wider">
                   Appearance & Theme
                 </h3>
@@ -164,8 +164,8 @@ export default function SettingsPage() {
                     onClick={() => setTheme("light")}
                     className={`flex flex-col items-center gap-2 p-3.5 rounded-xs border transition-all cursor-pointer text-center ${
                       theme === "light"
-                        ? "border-[#2563EB] bg-blue-50/40 text-[#2563EB] ring-1 ring-[#2563EB]"
-                        : "border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+                        ? "border-[#2563EB] bg-blue-50/50 dark:bg-blue-950/40 text-[#2563EB] dark:text-blue-400 ring-1 ring-[#2563EB]"
+                        : "border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/60"
                     }`}
                   >
                     <Sun className="w-5 h-5 stroke-[1.8]" />
@@ -177,8 +177,8 @@ export default function SettingsPage() {
                     onClick={() => setTheme("dark")}
                     className={`flex flex-col items-center gap-2 p-3.5 rounded-xs border transition-all cursor-pointer text-center ${
                       theme === "dark"
-                        ? "border-[#2563EB] bg-blue-50/40 dark:bg-blue-950/40 text-[#2563EB] dark:text-blue-400 ring-1 ring-[#2563EB]"
-                        : "border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+                        ? "border-[#2563EB] bg-blue-50/50 dark:bg-blue-950/40 text-[#2563EB] dark:text-blue-400 ring-1 ring-[#2563EB]"
+                        : "border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/60"
                     }`}
                   >
                     <Moon className="w-5 h-5 stroke-[1.8]" />
@@ -190,8 +190,8 @@ export default function SettingsPage() {
                     onClick={() => setTheme("system")}
                     className={`flex flex-col items-center gap-2 p-3.5 rounded-xs border transition-all cursor-pointer text-center ${
                       theme === "system"
-                        ? "border-[#2563EB] bg-blue-50/40 dark:bg-blue-950/40 text-[#2563EB] dark:text-blue-400 ring-1 ring-[#2563EB]"
-                        : "border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+                        ? "border-[#2563EB] bg-blue-50/50 dark:bg-blue-950/40 text-[#2563EB] dark:text-blue-400 ring-1 ring-[#2563EB]"
+                        : "border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/60"
                     }`}
                   >
                     <Laptop className="w-5 h-5 stroke-[1.8]" />
@@ -201,7 +201,7 @@ export default function SettingsPage() {
               </div>
             </div>
 
-            <div className="h-px bg-gray-100 dark:bg-gray-800 relative z-0" />
+            <div className="h-px bg-gray-200/60 dark:bg-gray-800/80 relative z-0" />
 
             {/* Password */}
             <div className="relative z-0">

@@ -69,7 +69,7 @@ export default function SearchableDropdown({
   return (
     <div className={`relative ${className}`} ref={dropdownRef}>
       {label && (
-        <label className="block text-xs font-medium text-gray-700 mb-1.5">
+        <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
           {label}
         </label>
       )}
