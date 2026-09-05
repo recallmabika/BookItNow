@@ -98,20 +98,20 @@ export default function SearchBar({ transparent = false }: SearchBarProps) {
   return (
     <form
       onSubmit={handleSearch}
-      className={`rounded-xs max-w-6xl w-full mx-auto flex flex-col md:flex-row items-stretch divide-y md:divide-y-0 md:divide-x shadow-lg transition-all ${
+      className={`rounded-xs max-w-6xl w-full mx-auto flex flex-col md:flex-row items-stretch divide-y md:divide-y-0 md:divide-x shadow-2xl transition-all ${
         transparent
-          ? "bg-white/75 dark:bg-[#111827]/75 backdrop-blur-md border border-white/40 dark:border-white/10 divide-black/10 dark:divide-white/10 shadow-2xl"
+          ? "bg-black/60 backdrop-blur-md border border-white/20 divide-white/15 shadow-black/50"
           : "bg-white dark:bg-[#111827] border border-gray-300 dark:border-gray-800 divide-gray-200 dark:divide-gray-800 shadow-xs"
       }`}
     >
       {/* City / Destination */}
       <div className={`flex-1 flex flex-col justify-center px-5 py-3.5 transition-colors ${
         transparent 
-          ? "hover:bg-white/30 dark:hover:bg-white/5 focus-within:bg-white/40 dark:focus-within:bg-white/10"
+          ? "hover:bg-white/10 focus-within:bg-white/15"
           : "hover:bg-gray-50/70 dark:hover:bg-gray-800/60 focus-within:bg-gray-50/90 dark:focus-within:bg-gray-800/80"
       }`}>
-        <div className="flex items-center gap-1.5 mb-1 text-gray-500 dark:text-gray-400">
-          <MapPin className="w-3.5 h-3.5 text-[#2563EB] dark:text-blue-400 shrink-0 stroke-[2]" />
+        <div className={`flex items-center gap-1.5 mb-1 ${transparent ? "text-blue-300" : "text-gray-500 dark:text-gray-400"}`}>
+          <MapPin className={`w-3.5 h-3.5 shrink-0 stroke-[2] ${transparent ? "text-blue-400" : "text-[#2563EB] dark:text-blue-400"}`} />
           <label className="text-[11px] font-semibold tracking-wider uppercase">
             Destination
           </label>
@@ -121,7 +121,11 @@ export default function SearchBar({ transparent = false }: SearchBarProps) {
           placeholder="Where to? (e.g. Harare)"
           value={city}
           onChange={(e) => setCity(e.target.value)}
-          className="w-full bg-transparent text-gray-900 dark:text-white text-sm font-medium outline-none focus:outline-none placeholder:text-gray-400 dark:placeholder:text-gray-500 placeholder:font-normal"
+          className={`w-full bg-transparent text-sm font-medium outline-none focus:outline-none placeholder:font-normal ${
+            transparent
+              ? "text-white placeholder:text-gray-400"
+              : "text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500"
+          }`}
         />
       </div>
 
@@ -130,12 +134,12 @@ export default function SearchBar({ transparent = false }: SearchBarProps) {
         onClick={() => fpInInstance.current?.open()}
         className={`flex-1 flex flex-col justify-center px-5 py-3.5 transition-colors cursor-pointer ${
           transparent
-            ? "hover:bg-white/30 dark:hover:bg-white/5 focus-within:bg-white/40 dark:focus-within:bg-white/10"
+            ? "hover:bg-white/10 focus-within:bg-white/15"
             : "hover:bg-gray-50/70 dark:hover:bg-gray-800/60 focus-within:bg-gray-50/90 dark:focus-within:bg-gray-800/80"
         }`}
       >
-        <div className="flex items-center gap-1.5 mb-1 text-gray-500 dark:text-gray-400 pointer-events-none">
-          <CalendarIcon className="w-3.5 h-3.5 text-[#2563EB] dark:text-blue-400 shrink-0 stroke-[2]" />
+        <div className={`flex items-center gap-1.5 mb-1 pointer-events-none ${transparent ? "text-blue-300" : "text-gray-500 dark:text-gray-400"}`}>
+          <CalendarIcon className={`w-3.5 h-3.5 shrink-0 stroke-[2] ${transparent ? "text-blue-400" : "text-[#2563EB] dark:text-blue-400"}`} />
           <label className="text-[11px] font-semibold tracking-wider uppercase">
             Check-In
           </label>
@@ -145,7 +149,11 @@ export default function SearchBar({ transparent = false }: SearchBarProps) {
           type="text"
           placeholder="Add dates"
           readOnly
-          className="w-full bg-transparent text-gray-900 dark:text-white text-sm font-medium outline-none focus:outline-none cursor-pointer placeholder:text-gray-400 dark:placeholder:text-gray-500 placeholder:font-normal"
+          className={`w-full bg-transparent text-sm font-medium outline-none focus:outline-none cursor-pointer placeholder:font-normal ${
+            transparent
+              ? "text-white placeholder:text-gray-400"
+              : "text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500"
+          }`}
         />
       </div>
 
@@ -154,12 +162,12 @@ export default function SearchBar({ transparent = false }: SearchBarProps) {
         onClick={() => fpOutInstance.current?.open()}
         className={`flex-1 flex flex-col justify-center px-5 py-3.5 transition-colors cursor-pointer ${
           transparent
-            ? "hover:bg-white/30 dark:hover:bg-white/5 focus-within:bg-white/40 dark:focus-within:bg-white/10"
+            ? "hover:bg-white/10 focus-within:bg-white/15"
             : "hover:bg-gray-50/70 dark:hover:bg-gray-800/60 focus-within:bg-gray-50/90 dark:focus-within:bg-gray-800/80"
         }`}
       >
-        <div className="flex items-center gap-1.5 mb-1 text-gray-500 dark:text-gray-400 pointer-events-none">
-          <CalendarIcon className="w-3.5 h-3.5 text-[#2563EB] dark:text-blue-400 shrink-0 stroke-[2]" />
+        <div className={`flex items-center gap-1.5 mb-1 pointer-events-none ${transparent ? "text-blue-300" : "text-gray-500 dark:text-gray-400"}`}>
+          <CalendarIcon className={`w-3.5 h-3.5 shrink-0 stroke-[2] ${transparent ? "text-blue-400" : "text-[#2563EB] dark:text-blue-400"}`} />
           <label className="text-[11px] font-semibold tracking-wider uppercase">
             Check-Out
           </label>
@@ -169,7 +177,11 @@ export default function SearchBar({ transparent = false }: SearchBarProps) {
           type="text"
           placeholder="Add dates"
           readOnly
-          className="w-full bg-transparent text-gray-900 dark:text-white text-sm font-medium outline-none focus:outline-none cursor-pointer placeholder:text-gray-400 dark:placeholder:text-gray-500 placeholder:font-normal"
+          className={`w-full bg-transparent text-sm font-medium outline-none focus:outline-none cursor-pointer placeholder:font-normal ${
+            transparent
+              ? "text-white placeholder:text-gray-400"
+              : "text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500"
+          }`}
         />
       </div>
 
@@ -178,18 +190,18 @@ export default function SearchBar({ transparent = false }: SearchBarProps) {
         ref={guestsRef}
         className={`flex-1 relative flex flex-col justify-center px-5 py-3.5 transition-colors cursor-pointer select-none ${
           transparent
-            ? "hover:bg-white/30 dark:hover:bg-white/5 focus-within:bg-white/40 dark:focus-within:bg-white/10"
+            ? "hover:bg-white/10 focus-within:bg-white/15"
             : "hover:bg-gray-50/70 dark:hover:bg-gray-800/60 focus-within:bg-gray-50/90 dark:focus-within:bg-gray-800/80"
         }`}
         onClick={() => setGuestsOpen((prev) => !prev)}
       >
-        <div className="flex items-center gap-1.5 mb-1 text-gray-500 dark:text-gray-400 pointer-events-none">
-          <Users className="w-3.5 h-3.5 text-[#2563EB] dark:text-blue-400 shrink-0 stroke-[2]" />
+        <div className={`flex items-center gap-1.5 mb-1 pointer-events-none ${transparent ? "text-blue-300" : "text-gray-500 dark:text-gray-400"}`}>
+          <Users className={`w-3.5 h-3.5 shrink-0 stroke-[2] ${transparent ? "text-blue-400" : "text-[#2563EB] dark:text-blue-400"}`} />
           <label className="text-[11px] font-semibold tracking-wider uppercase">
             Guests
           </label>
         </div>
-        <div className="text-gray-900 dark:text-white text-sm font-medium truncate">
+        <div className={`text-sm font-medium truncate ${transparent ? "text-white" : "text-gray-900 dark:text-white"}`}>
           {guests === "1" ? "1 Guest" : guests === "5" ? "5+ Guests" : `${guests} Guests`}
         </div>
 
