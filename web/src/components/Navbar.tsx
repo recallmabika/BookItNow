@@ -34,9 +34,9 @@ export default function Navbar() {
 
   return (
     <header className="bg-[#0F5132] border-b border-[#0A3622] sticky top-0 z-50 shadow-xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
         {/* Brand */}
-        <Link href="/" className="flex items-center gap-2.5 group">
+        <Link href="/" className="flex items-center gap-2.5 group py-2">
           <div className="w-8 h-8 rounded-xs bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors duration-150 border border-white/20">
             <Compass className="w-4 h-4 stroke-[1.8]" />
           </div>
@@ -54,7 +54,7 @@ export default function Navbar() {
         <div className="flex items-center gap-2">
           <Link
             href="/search"
-            className="text-xs font-normal text-white/90 hover:text-white hover:bg-white/10 active:bg-white/15 transition-all duration-150 px-3 py-1.5 rounded-xs"
+            className="text-xs font-medium text-white hover:bg-white hover:text-[#0F5132] transition-all duration-150 px-3.5 py-3 rounded-xs"
           >
             Explore Stays
           </Link>
@@ -63,13 +63,13 @@ export default function Navbar() {
             <div className="flex items-center gap-2 pl-1">
               <Link
                 href="/my-bookings"
-                className="flex items-center gap-1.5 text-xs font-normal text-white/90 hover:text-white hover:bg-white/10 active:bg-white/15 transition-all duration-150 px-3 py-1.5 rounded-xs"
+                className="group flex items-center gap-1.5 text-xs font-medium text-white hover:bg-white hover:text-[#0F5132] transition-all duration-150 px-3.5 py-3 rounded-xs"
               >
-                <Calendar className="w-3.5 h-3.5 text-green-300 stroke-[1.8]" />
+                <Calendar className="w-3.5 h-3.5 text-green-300 group-hover:text-[#0F5132] stroke-[1.8] transition-colors" />
                 <span>My Bookings</span>
               </Link>
               
-              <div className="h-3.5 w-px bg-white/20 mx-1" />
+              <div className="h-5 w-px bg-white/20 mx-1" />
               
               <div className="flex items-center gap-2 pl-1">
                 <span className="w-7 h-7 rounded-xs bg-white text-[#0F5132] flex items-center justify-center font-semibold text-[11px] shadow-xs">
@@ -79,23 +79,23 @@ export default function Navbar() {
                 <button
                   onClick={handleLogout}
                   title="Log out"
-                  className="text-white/70 hover:text-white hover:bg-white/10 p-1.5 rounded-xs transition-colors cursor-pointer"
+                  className="text-white hover:bg-white hover:text-[#0F5132] p-2.5 rounded-xs transition-all duration-150 cursor-pointer"
                 >
                   <LogOut className="w-3.5 h-3.5 stroke-[1.8]" />
                 </button>
               </div>
             </div>
           ) : (
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-2">
               <Link
                 href="/login"
-                className="text-xs font-normal text-white/90 hover:text-white hover:bg-white/10 transition-all duration-150 px-3 py-1.5 rounded-xs"
+                className="text-xs font-medium text-white hover:bg-white hover:text-[#0F5132] transition-all duration-150 px-3.5 py-3 rounded-xs"
               >
                 Sign In
               </Link>
               <Link
                 href="/register"
-                className="text-xs font-medium bg-white text-[#0F5132] hover:bg-green-50 active:bg-green-100 px-3 py-1.5 rounded-xs transition-all duration-150 shadow-xs"
+                className="text-xs font-medium bg-white text-[#0F5132] hover:bg-green-50 active:bg-green-100 px-4 py-3 rounded-xs transition-all duration-150 shadow-xs"
               >
                 Register
               </Link>
