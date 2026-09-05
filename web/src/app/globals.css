@@ -1,74 +1,61 @@
 @import "tailwindcss";
 
 :root {
-  /* Crisp White & Forest Emerald Green Palette */
-  --color-primary: #0F5132;        /* Rich British racing / forest green */
-  --color-primary-hover: #0A3622;  /* Deep dark forest green */
-  --color-primary-light: #E8F5E9;  /* Crisp light green tint */
-  --color-accent: #198754;         /* Vibrant emerald accent */
-  --color-accent-subtle: #D1E7DD;  /* Light mint border / badge */
-  
-  --color-ink: #111827;            /* Deep dark slate for text */
-  --color-slate-muted: #6B7280;    /* Muted secondary text */
-  --color-slate-border: #E5E7EB;   /* Crisp subtle border */
-  --color-surface: #FFFFFF;        /* Pure white */
-  --color-surface-subtle: #F9FAFB; /* Crisp off-white */
+  --color-primary: #0F5132;
+  --color-primary-hover: #0B3D26;
+  --color-primary-light: #F0FDF4;
+  --color-accent: #15803D;
+  --color-ink: #111827;
+  --color-slate-muted: #64748B;
+  --color-slate-border: #E2E8F0;
 
   --background: #FFFFFF;
-  --foreground: #111827;
+  --foreground: #0F172A;
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--font-jakarta), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  letter-spacing: -0.01em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom design utilities */
-.bg-primary-green {
-  background-color: #0F5132;
+/* Custom flatpickr theme adjustments to match crisp Green & White */
+.flatpickr-calendar {
+  background: #ffffff !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 4px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+  font-family: var(--font-jakarta), sans-serif !important;
 }
 
-.hover\:bg-primary-green-dark:hover {
-  background-color: #0A3622;
+.flatpickr-day.selected, 
+.flatpickr-day.startRange, 
+.flatpickr-day.endRange {
+  background: #0F5132 !important;
+  border-color: #0F5132 !important;
+  border-radius: 4px !important;
+  color: #ffffff !important;
 }
 
-.text-primary-green {
-  color: #0F5132;
+.flatpickr-day.inRange {
+  background: #F0FDF4 !important;
+  border-color: #F0FDF4 !important;
+  color: #0F5132 !important;
 }
 
-.text-accent-green {
-  color: #198754;
+.flatpickr-day:hover:not(.selected) {
+  background: #F8FAFC !important;
+  border-color: #E2E8F0 !important;
 }
 
-.bg-accent-light {
-  background-color: #E8F5E9;
+.flatpickr-months .flatpickr-month {
+  color: #0F172A !important;
 }
 
-.border-subtle {
-  border-color: #E5E7EB;
-}
-
-/* Smooth micro-interaction animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Subtle clean input styling */
-input[type="date"]::-webkit-calendar-picker-indicator {
-  cursor: pointer;
-  filter: invert(25%) sepia(30%) saturate(1500%) hue-rotate(105deg) brightness(85%) contrast(90%);
+span.flatpickr-weekday {
+  color: #64748B !important;
+  font-weight: 500 !important;
 }
