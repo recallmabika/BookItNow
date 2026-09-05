@@ -137,10 +137,10 @@ export default function Footer() {
           <div className="space-y-3">
             <h4 className="font-semibold text-white tracking-wider uppercase text-[11px]">For Hosts & Lodges</h4>
             <ul className="space-y-2 text-blue-100 font-medium">
-              <li><span className="text-blue-100 hover:text-white cursor-pointer transition-colors">List Your Property</span></li>
-              <li><span className="text-blue-100 hover:text-white cursor-pointer transition-colors">Host Dashboard</span></li>
-              <li><span className="text-blue-100 hover:text-white cursor-pointer transition-colors">Inventory Management</span></li>
-              <li><span className="text-blue-100 hover:text-white cursor-pointer transition-colors">Host Guidelines</span></li>
+              <li><Link href="/admin" className="text-blue-100 hover:text-white transition-colors">Host & Admin Dashboard</Link></li>
+              <li><Link href="/host/inventory" className="text-blue-100 hover:text-white transition-colors">Inventory Management</Link></li>
+              <li><span className="text-blue-100/70 hover:text-white cursor-pointer transition-colors">List Your Property</span></li>
+              <li><span className="text-blue-100/70 hover:text-white cursor-pointer transition-colors">Host Guidelines</span></li>
             </ul>
           </div>
 

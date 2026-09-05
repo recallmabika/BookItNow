@@ -12,7 +12,8 @@ from app.models.models import (
     RoomType, RoomAvailability, RatePlan, User
 )
 from app.schemas.schemas import BookingCreate, BookingResponse
-from app.api.deps import get_current_user
+from app.api.deps import get_current_user, require_roles
+from app.models.models import UserRole
 
 router = APIRouter(prefix="/bookings", tags=["Bookings"])
 
@@ -177,3 +178,15 @@ async def get_my_bookings(
     result = await db.execute(stmt)
     bookings = result.scalars().all()
     return bookings
+
+
+@router.get("/manage")
+async def get_manage_bookings(
+    current_user: User = Depends(require_roles(UserRole.HOST, UserRole.ADMIN)),
+    db: AsyncSession = Depends(get_db)
+):
+    stmt = select(Booking).order_by(Booking.created_at.desc())
+    result = await db.execute(stmt)
+    bookings = result.scalars().all()
+    return bookings
+

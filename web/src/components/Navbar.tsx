@@ -13,7 +13,9 @@ import {
   Sun,
   Moon,
   Laptop,
-  CalendarCheck
+  CalendarCheck,
+  LayoutDashboard,
+  Layers
 } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
 
@@ -183,6 +185,40 @@ export default function Navbar() {
 
                     {/* Menu Links */}
                     <div className="p-2 space-y-0.5">
+                      {(user.role === "admin" || user.role === "host") && (
+                        <>
+                          <div className="px-3 py-1 text-[9px] font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider">
+                            Operations
+                          </div>
+                          <Link
+                            href="/admin"
+                            onClick={() => setDropdownOpen(false)}
+                            className={`flex items-center gap-2.5 px-3 py-2 text-xs rounded-xs transition-colors active:bg-[#EFF6FF] dark:active:bg-blue-950/50 ${
+                              pathname === "/admin"
+                                ? "bg-[#EFF6FF] dark:bg-blue-950/50 text-[#2563EB] dark:text-blue-400 font-semibold"
+                                : "text-gray-700 dark:text-gray-200 hover:text-[#2563EB] dark:hover:text-blue-400 hover:bg-[#EFF6FF]/50 dark:hover:bg-gray-800"
+                            }`}
+                          >
+                            <LayoutDashboard className={`w-3.5 h-3.5 stroke-[1.8] ${pathname === "/admin" ? "text-[#2563EB] dark:text-blue-400" : "text-gray-400"}`} />
+                            <span>Admin Dashboard</span>
+                          </Link>
+
+                          <Link
+                            href="/host/inventory"
+                            onClick={() => setDropdownOpen(false)}
+                            className={`flex items-center gap-2.5 px-3 py-2 text-xs rounded-xs transition-colors active:bg-[#EFF6FF] dark:active:bg-blue-950/50 ${
+                              pathname.startsWith("/host/inventory")
+                                ? "bg-[#EFF6FF] dark:bg-blue-950/50 text-[#2563EB] dark:text-blue-400 font-semibold"
+                                : "text-gray-700 dark:text-gray-200 hover:text-[#2563EB] dark:hover:text-blue-400 hover:bg-[#EFF6FF]/50 dark:hover:bg-gray-800"
+                            }`}
+                          >
+                            <Layers className={`w-3.5 h-3.5 stroke-[1.8] ${pathname.startsWith("/host/inventory") ? "text-[#2563EB] dark:text-blue-400" : "text-gray-400"}`} />
+                            <span>Inventory & Rates</span>
+                          </Link>
+                          <div className="my-1 border-t border-gray-100 dark:border-gray-800" />
+                        </>
+                      )}
+
                       <Link
                         href="/my-bookings"
                         onClick={() => setDropdownOpen(false)}

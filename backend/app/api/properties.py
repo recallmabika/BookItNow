@@ -202,6 +202,68 @@ async def get_property(slug_or_id: str, db: AsyncSession = Depends(get_db)):
 
 
 # ---------------- Host & Admin Property Management ----------------
+@router.get("/manage")
+async def get_managed_properties(
+    current_user: User = Depends(require_roles(UserRole.HOST, UserRole.ADMIN)),
+    db: AsyncSession = Depends(get_db)
+):
+    query = (
+        select(Property)
+        .options(
+            selectinload(Property.room_types).selectinload(RoomType.rate_plans),
+            selectinload(Property.room_types).selectinload(RoomType.availabilities)
+        )
+        .order_by(Property.created_at.desc())
+    )
+    if current_user.role != UserRole.ADMIN:
+        query = query.where(Property.host_id == current_user.id)
+
+    result = await db.execute(query)
+    properties = result.scalars().all()
+
+    return [
+        {
+            "id": str(p.id),
+            "title": p.title,
+            "slug": p.slug,
+            "property_type": p.property_type,
+            "city": p.city,
+            "country": p.country,
+            "status": p.status.value,
+            "created_at": p.created_at.isoformat(),
+            "room_types": [
+                {
+                    "id": str(r.id),
+                    "name": r.name,
+                    "total_rooms": r.total_rooms,
+                    "base_price_per_night": float(r.base_price_per_night),
+                    "currency": r.currency
+                }
+                for r in p.room_types
+            ]
+        }
+        for p in properties
+    ]
+
+
+@router.patch("/{property_id}/status")
+async def update_property_status(
+    property_id: uuid.UUID,
+    status_val: str = Query(..., description="active, pending_approval, or suspended"),
+    current_user: User = Depends(require_roles(UserRole.ADMIN)),
+    db: AsyncSession = Depends(get_db)
+):
+    prop = await db.get(Property, property_id)
+    if not prop:
+        raise HTTPException(status_code=404, detail="Property not found")
+    try:
+        prop.status = PropertyStatus(status_val.lower())
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid status value")
+    await db.commit()
+    return {"id": str(prop.id), "status": prop.status.value}
+
+
 @router.post("/", status_code=status.HTTP_201_CREATED)
 async def create_property(
     prop_in: PropertyCreate,

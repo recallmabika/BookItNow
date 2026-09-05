@@ -99,3 +99,62 @@ export async function createRealBooking(payload: {
   }
   return await res.json();
 }
+
+export async function fetchManagedProperties(token: string) {
+  const res = await fetch(`${API_BASE_URL}/properties/manage`, {
+    headers: {
+      "Authorization": `Bearer ${token}`
+    },
+    cache: "no-store"
+  });
+  if (!res.ok) return [];
+  return await res.json();
+}
+
+export async function updatePropertyStatus(propertyId: string, statusVal: string, token: string) {
+  const res = await fetch(`${API_BASE_URL}/properties/${propertyId}/status?status_val=${statusVal}`, {
+    method: "PATCH",
+    headers: {
+      "Authorization": `Bearer ${token}`
+    }
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || "Failed to update property status");
+  }
+  return await res.json();
+}
+
+export async function updateRoomAvailability(roomTypeId: string, payload: {
+  start_date: string;
+  end_date: string;
+  available_count: number;
+  price_override?: number;
+  is_blocked?: boolean;
+}, token: string) {
+  const res = await fetch(`${API_BASE_URL}/properties/rooms/${roomTypeId}/availability`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify(payload)
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || "Failed to update room availability");
+  }
+  return await res.json();
+}
+
+export async function fetchManagedBookings(token: string) {
+  const res = await fetch(`${API_BASE_URL}/bookings/manage`, {
+    headers: {
+      "Authorization": `Bearer ${token}`
+    },
+    cache: "no-store"
+  });
+  if (!res.ok) return [];
+  return await res.json();
+}
+
