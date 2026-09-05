@@ -64,13 +64,13 @@ export default function HomePage() {
         {/* Background Image & Ambient Overlays */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/pillars-bg.jpg"
+            src="/vicfalls-pillars.jpg"
             alt="Victoria Falls mist and gorges"
             fill
             className="object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gray-950/75 backdrop-blur-[1px]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/80" />
+          {/* Subtle gradient scrim so the waterfall landscape shines through clearly */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/75" />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
