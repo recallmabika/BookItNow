@@ -33,67 +33,69 @@ export default function Navbar() {
   };
 
   return (
-    <header className="border-b border-gray-200/80 bg-white/95 backdrop-blur-md sticky top-0 z-50">
+    <header className="bg-[#0F5132] border-b border-[#0A3622] sticky top-0 z-50 shadow-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand */}
-        <Link href="/" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 rounded-xs bg-[#0F5132] flex items-center justify-center text-white transition-transform duration-150 group-hover:scale-105">
+        <Link href="/" className="flex items-center gap-2.5 group">
+          <div className="w-8 h-8 rounded-xs bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors duration-150 border border-white/20">
             <Compass className="w-4 h-4 stroke-[1.8]" />
           </div>
           <div>
-            <span className="font-semibold text-lg tracking-tight text-gray-900 block leading-none">
-              BookIt<span className="text-[#15803D]">Now</span>
+            <span className="font-semibold text-lg tracking-tight text-white block leading-none">
+              BookIt<span className="text-green-300">Now</span>
             </span>
-            <span className="text-[9px] tracking-wider uppercase text-gray-400 font-normal">
+            <span className="text-[9px] tracking-wider uppercase text-green-100/70 font-normal">
               Lodging & Stays
             </span>
           </div>
         </Link>
 
         {/* Navigation / Actions */}
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2">
           <Link
             href="/search"
-            className="text-xs font-normal text-gray-600 hover:text-[#0F5132] transition-colors px-2.5 py-1.5 rounded-xs hover:bg-gray-50"
+            className="text-xs font-normal text-white/90 hover:text-white hover:bg-white/10 active:bg-white/15 transition-all duration-150 px-3 py-1.5 rounded-xs"
           >
             Explore Stays
           </Link>
 
           {user ? (
-            <div className="flex items-center gap-2.5 pl-2">
+            <div className="flex items-center gap-2 pl-1">
               <Link
                 href="/my-bookings"
-                className="flex items-center gap-1.5 text-xs font-normal text-gray-600 hover:text-[#0F5132] px-2.5 py-1.5 rounded-xs hover:bg-gray-50 transition-colors"
+                className="flex items-center gap-1.5 text-xs font-normal text-white/90 hover:text-white hover:bg-white/10 active:bg-white/15 transition-all duration-150 px-3 py-1.5 rounded-xs"
               >
-                <Calendar className="w-3.5 h-3.5 text-[#0F5132] stroke-[1.8]" />
+                <Calendar className="w-3.5 h-3.5 text-green-300 stroke-[1.8]" />
                 <span>My Bookings</span>
               </Link>
-              <div className="h-3 w-px bg-gray-200" />
-              <div className="flex items-center gap-2 text-xs text-gray-900 pl-1 font-normal">
-                <span className="w-7 h-7 rounded-xs bg-[#F0FDF4] text-[#0F5132] flex items-center justify-center font-medium text-[11px] border border-green-200/60">
+              
+              <div className="h-3.5 w-px bg-white/20 mx-1" />
+              
+              <div className="flex items-center gap-2 pl-1">
+                <span className="w-7 h-7 rounded-xs bg-white text-[#0F5132] flex items-center justify-center font-semibold text-[11px] shadow-xs">
                   {user.first_name[0]?.toUpperCase()}
                 </span>
-                <span className="hidden sm:inline font-normal">{user.first_name}</span>
+                <span className="hidden sm:inline text-xs font-normal text-white">{user.first_name}</span>
                 <button
                   onClick={handleLogout}
                   title="Log out"
-                  className="text-gray-400 hover:text-red-600 transition-colors p-1 cursor-pointer"
+                  className="text-white/70 hover:text-white hover:bg-white/10 p-1.5 rounded-xs transition-colors cursor-pointer"
                 >
                   <LogOut className="w-3.5 h-3.5 stroke-[1.8]" />
                 </button>
               </div>
             </div>
           ) : (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5">
               <Link
                 href="/login"
-                className="text-xs font-normal text-gray-600 hover:text-[#0F5132] transition-colors px-2.5 py-1.5 rounded-xs hover:bg-gray-50"
+                className="text-xs font-normal text-white/90 hover:text-white hover:bg-white/10 transition-all duration-150 px-3 py-1.5 rounded-xs"
               >
                 Sign In
               </Link>
               <Link
                 href="/register"
-                className="text-xs font-medium bg-[#0F5132] text-white hover:bg-[#0B3D26] px-3 py-1.5 rounded-xs transition-colors duration-150"
+                className="text-xs font-medium bg-white text-[#0F5132] hover:bg-green-50 active:bg-green-100 px-3 py-1.5 rounded-xs transition-all duration-150 shadow-xs"
               >
                 Register
               </Link>
