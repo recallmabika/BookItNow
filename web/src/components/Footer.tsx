@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Mail, Check, ArrowRight, Shield, Sparkles } from "lucide-react";
+import { Mail, Check, ArrowRight } from "lucide-react";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -30,12 +30,11 @@ export default function Footer() {
     <footer className="bg-[#0A2540] dark:bg-[#061527] text-white pt-14 pb-10 mt-16 border-t border-[#0D3256] transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Newsletter Subscription Row */}
-        <div className="rounded-xs p-6 sm:p-8 bg-white/5 border border-white/10 backdrop-blur-sm flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-          <div className="space-y-1.5 max-w-xl">
-            <div className="flex items-center gap-2 text-blue-400 text-xs font-semibold uppercase tracking-wider">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Travel Insider & Exclusive Perks</span>
-            </div>
+        <div className="rounded-xs p-6 sm:p-8 bg-white/5 border border-white/10 backdrop-blur-sm flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+          <div className="space-y-1.5 max-w-lg">
+            <span className="text-blue-400 text-xs font-semibold uppercase tracking-wider block">
+              Travel Insider & Exclusive Perks
+            </span>
             <h3 className="text-xl sm:text-2xl font-medium text-white tracking-tight">
               Stay ahead with curated travel deals & new lodgings
             </h3>
@@ -44,7 +43,7 @@ export default function Footer() {
             </p>
           </div>
 
-          <div className="w-full lg:w-auto min-w-[300px] sm:min-w-[400px]">
+          <div className="w-full lg:flex-1 lg:max-w-xl">
             {status === "success" ? (
               <div className="flex items-center gap-3 p-3.5 rounded-xs bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-medium">
                 <Check className="w-4 h-4 shrink-0 text-emerald-400" />
@@ -52,7 +51,7 @@ export default function Footer() {
               </div>
             ) : (
               <form onSubmit={handleSubscribe} className="space-y-2">
-                <div className="flex flex-col sm:flex-row items-stretch gap-2">
+                <div className="flex flex-col sm:flex-row items-stretch gap-2.5">
                   <div className="relative flex-1">
                     <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                     <input
@@ -63,14 +62,14 @@ export default function Footer() {
                         if (status === "error") setStatus("idle");
                       }}
                       placeholder="Enter your email address"
-                      className="w-full pl-10 pr-4 py-3 text-xs sm:text-sm bg-white/10 hover:bg-white/15 focus:bg-white/15 border border-white/15 focus:border-blue-400 rounded-xs text-white placeholder:text-slate-400 outline-none transition-colors"
+                      className="w-full pl-10 pr-4 py-3.5 text-xs sm:text-sm bg-white/10 hover:bg-white/15 focus:bg-white/15 border border-white/15 focus:border-blue-400 rounded-xs text-white placeholder:text-slate-400 outline-none transition-colors"
                       required
                     />
                   </div>
                   <button
                     type="submit"
                     disabled={status === "loading"}
-                    className="px-6 py-3 bg-[#2563EB] hover:bg-[#1D4ED8] active:scale-95 text-white text-xs sm:text-sm font-semibold rounded-xs flex items-center justify-center gap-2 transition-all duration-150 cursor-pointer whitespace-nowrap shadow-sm"
+                    className="px-7 py-3.5 bg-[#2563EB] hover:bg-[#1D4ED8] active:scale-95 text-white text-xs sm:text-sm font-semibold rounded-xs flex items-center justify-center gap-2 transition-all duration-150 cursor-pointer whitespace-nowrap shadow-sm"
                   >
                     <span>{status === "loading" ? "Subscribing..." : "Subscribe"}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -79,10 +78,9 @@ export default function Footer() {
                 {status === "error" && (
                   <p className="text-[11px] text-rose-400 font-normal pl-1">{message}</p>
                 )}
-                <div className="flex items-center gap-1.5 text-[11px] text-slate-400 font-normal pl-1">
-                  <Shield className="w-3 h-3 text-slate-500 shrink-0" />
-                  <span>Your email is securely stored. Unsubscribe at any time.</span>
-                </div>
+                <p className="text-[11px] text-slate-400 font-normal pl-1">
+                  Your email is securely stored. Unsubscribe at any time.
+                </p>
               </form>
             )}
           </div>
