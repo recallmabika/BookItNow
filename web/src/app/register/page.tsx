@@ -26,11 +26,11 @@ export default function RegisterPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          email,
-          password,
-          first_name: firstName,
-          last_name: lastName,
-          phone_number: phoneNumber || null,
+          email: email.trim(),
+          password: password,
+          first_name: firstName.trim(),
+          last_name: lastName.trim(),
+          phone_number: phoneNumber.trim() || null,
           role: "guest",
         }),
       });
@@ -42,15 +42,21 @@ export default function RegisterPage() {
 
       const data = await res.json();
       localStorage.setItem("bookitnow_token", data.access_token);
-      localStorage.setItem("bookitnow_user", JSON.stringify({
-        id: data.user_id,
-        email: data.email,
-        first_name: data.first_name,
-        last_name: data.last_name,
-        role: data.role,
-      }));
+      localStorage.setItem(
+        "bookitnow_user",
+        JSON.stringify({
+          id: data.user_id,
+          email: data.email,
+          first_name: data.first_name,
+          last_name: data.last_name,
+          role: data.role,
+        })
+      );
 
       router.push("/");
+      setTimeout(() => {
+        window.location.reload();
+      }, 100);
     } catch (err: any) {
       setError(err.message || "Registration failed");
     } finally {
@@ -59,26 +65,26 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-[75vh] flex items-center justify-center px-4 py-12">
-      <div className="w-full max-w-md bg-parchment-light p-8 rounded-3xl border border-slate-subtle shadow-lg space-y-6">
-        <div className="text-center space-y-2">
-          <div className="w-12 h-12 rounded-xl bg-deep-teal text-[#EFEAE1] flex items-center justify-center mx-auto shadow-sm">
-            <Compass className="w-6 h-6" />
+    <div className="min-h-[70vh] flex items-center justify-center px-4 py-8">
+      <div className="w-full max-w-sm bg-white p-7 rounded-xl border border-gray-200/90 shadow-xs space-y-5">
+        <div className="text-center space-y-1.5">
+          <div className="w-10 h-10 rounded-lg bg-[#0F5132] text-white flex items-center justify-center mx-auto shadow-xs">
+            <Compass className="w-5 h-5" />
           </div>
-          <h1 className="text-2xl font-serif font-bold text-ink">Create Guest Account</h1>
-          <p className="text-xs text-slate-muted">Instant bookings, digital e-vouchers, and verified reviews</p>
+          <h1 className="text-xl font-serif font-bold text-gray-900">Create Guest Account</h1>
+          <p className="text-xs text-gray-500">Instant bookings and digital check-in e-vouchers</p>
         </div>
 
         {error && (
-          <div className="p-3 bg-alert-red/10 border border-alert-red/20 text-alert-red rounded-xl text-xs font-medium">
+          <div className="p-2.5 bg-red-50 border border-red-200 text-red-700 rounded-lg text-xs font-medium">
             {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="grid grid-cols-2 gap-3">
+        <form onSubmit={handleSubmit} className="space-y-3">
+          <div className="grid grid-cols-2 gap-2">
             <div className="space-y-1">
-              <label className="block text-[11px] font-semibold uppercase tracking-wider text-slate-muted">
+              <label className="block text-[10px] font-semibold uppercase tracking-wider text-gray-500">
                 First Name
               </label>
               <input
@@ -86,12 +92,12 @@ export default function RegisterPage() {
                 required
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
-                placeholder="John"
-                className="w-full bg-parchment px-3.5 py-2.5 rounded-xl border border-slate-subtle text-sm text-ink font-medium focus:outline-none focus:border-deep-teal"
+                placeholder="Tatenda"
+                className="w-full bg-gray-50 px-3 py-2 rounded-lg border border-gray-200 text-xs sm:text-sm text-gray-900 font-medium focus:outline-none focus:border-[#0F5132] focus:bg-white transition-all"
               />
             </div>
             <div className="space-y-1">
-              <label className="block text-[11px] font-semibold uppercase tracking-wider text-slate-muted">
+              <label className="block text-[10px] font-semibold uppercase tracking-wider text-gray-500">
                 Last Name
               </label>
               <input
@@ -99,14 +105,14 @@ export default function RegisterPage() {
                 required
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
-                placeholder="Doe"
-                className="w-full bg-parchment px-3.5 py-2.5 rounded-xl border border-slate-subtle text-sm text-ink font-medium focus:outline-none focus:border-deep-teal"
+                placeholder="Moyo"
+                className="w-full bg-gray-50 px-3 py-2 rounded-lg border border-gray-200 text-xs sm:text-sm text-gray-900 font-medium focus:outline-none focus:border-[#0F5132] focus:bg-white transition-all"
               />
             </div>
           </div>
 
           <div className="space-y-1">
-            <label className="block text-[11px] font-semibold uppercase tracking-wider text-slate-muted">
+            <label className="block text-[10px] font-semibold uppercase tracking-wider text-gray-500">
               Email Address
             </label>
             <input
@@ -115,26 +121,26 @@ export default function RegisterPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@example.com"
-              className="w-full bg-parchment px-3.5 py-2.5 rounded-xl border border-slate-subtle text-sm text-ink font-medium focus:outline-none focus:border-deep-teal"
+              className="w-full bg-gray-50 px-3 py-2 rounded-lg border border-gray-200 text-xs sm:text-sm text-gray-900 font-medium focus:outline-none focus:border-[#0F5132] focus:bg-white transition-all"
             />
           </div>
 
           <div className="space-y-1">
-            <label className="block text-[11px] font-semibold uppercase tracking-wider text-slate-muted">
-              Phone Number (Optional)
+            <label className="block text-[10px] font-semibold uppercase tracking-wider text-gray-500">
+              Phone (Optional)
             </label>
             <input
               type="tel"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
               placeholder="+263 77 123 4567"
-              className="w-full bg-parchment px-3.5 py-2.5 rounded-xl border border-slate-subtle text-sm text-ink font-medium focus:outline-none focus:border-deep-teal"
+              className="w-full bg-gray-50 px-3 py-2 rounded-lg border border-gray-200 text-xs sm:text-sm text-gray-900 font-medium focus:outline-none focus:border-[#0F5132] focus:bg-white transition-all"
             />
           </div>
 
           <div className="space-y-1">
-            <label className="block text-[11px] font-semibold uppercase tracking-wider text-slate-muted">
-              Password (Min. 6 characters)
+            <label className="block text-[10px] font-semibold uppercase tracking-wider text-gray-500">
+              Password (Min. 6 chars)
             </label>
             <input
               type="password"
@@ -143,22 +149,22 @@ export default function RegisterPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
-              className="w-full bg-parchment px-3.5 py-2.5 rounded-xl border border-slate-subtle text-sm text-ink font-medium focus:outline-none focus:border-deep-teal"
+              className="w-full bg-gray-50 px-3 py-2 rounded-lg border border-gray-200 text-xs sm:text-sm text-gray-900 font-medium focus:outline-none focus:border-[#0F5132] focus:bg-white transition-all"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-deep-teal hover:bg-deep-teal-hover disabled:opacity-50 text-[#EFEAE1] py-3 rounded-xl font-semibold text-sm shadow-md hover:shadow-lg transition-all"
+            className="w-full bg-[#0F5132] hover:bg-[#0A3622] disabled:opacity-50 text-white py-2.5 rounded-lg font-semibold text-xs shadow-xs transition-all duration-150"
           >
             {loading ? "Creating Account..." : "Create Account"}
           </button>
         </form>
 
-        <p className="text-center text-xs text-slate-muted">
+        <p className="text-center text-xs text-gray-500">
           Already have an account?{" "}
-          <Link href="/login" className="font-semibold text-deep-teal hover:underline">
+          <Link href="/login" className="font-semibold text-[#0F5132] hover:underline">
             Sign In
           </Link>
         </p>

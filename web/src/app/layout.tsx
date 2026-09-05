@@ -14,16 +14,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="min-h-screen flex flex-col bg-parchment text-ink antialiased">
+      <body className="min-h-screen flex flex-col bg-white text-gray-900 antialiased selection:bg-[#E8F5E9] selection:text-[#0F5132]">
         <Navbar />
         <main className="flex-1">{children}</main>
-        <footer className="border-t border-slate-subtle bg-parchment-light py-10 mt-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-muted">
+        <footer className="border-t border-gray-200 bg-gray-50/60 py-8 mt-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
             <p>© 2026 BookItNow Lodging Platform. All rights reserved.</p>
             <div className="flex gap-6">
-              <span className="hover:text-deep-teal cursor-pointer">Terms & Policies</span>
-              <span className="hover:text-deep-teal cursor-pointer">Privacy Notice</span>
-              <span className="hover:text-deep-teal cursor-pointer">Host Support</span>
+              <span className="hover:text-[#0F5132] cursor-pointer transition-colors">Terms & Policies</span>
+              <span className="hover:text-[#0F5132] cursor-pointer transition-colors">Privacy Notice</span>
+              <span className="hover:text-[#0F5132] cursor-pointer transition-colors">Host Support</span>
             </div>
           </div>
         </footer>

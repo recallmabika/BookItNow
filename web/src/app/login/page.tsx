@@ -46,6 +46,9 @@ function LoginForm() {
       );
 
       router.push(redirectUrl);
+      setTimeout(() => {
+        window.location.reload();
+      }, 100);
     } catch (err: any) {
       setError(err.message || "Invalid email or password");
     } finally {
@@ -54,24 +57,24 @@ function LoginForm() {
   };
 
   return (
-    <div className="w-full max-w-md bg-parchment-light p-8 rounded-3xl border border-slate-subtle shadow-lg space-y-6">
-      <div className="text-center space-y-2">
-        <div className="w-12 h-12 rounded-xl bg-deep-teal text-[#EFEAE1] flex items-center justify-center mx-auto shadow-sm">
-          <Compass className="w-6 h-6" />
+    <div className="w-full max-w-sm bg-white p-7 rounded-xl border border-gray-200/90 shadow-xs space-y-5">
+      <div className="text-center space-y-1.5">
+        <div className="w-10 h-10 rounded-lg bg-[#0F5132] text-white flex items-center justify-center mx-auto shadow-xs">
+          <Compass className="w-5 h-5" />
         </div>
-        <h1 className="text-2xl font-serif font-bold text-ink">Welcome Back</h1>
-        <p className="text-xs text-slate-muted">Sign in to manage your bookings and saved lodgings</p>
+        <h1 className="text-xl font-serif font-bold text-gray-900">Welcome Back</h1>
+        <p className="text-xs text-gray-500">Sign in to manage your bookings and saved lodgings</p>
       </div>
 
       {error && (
-        <div className="p-3 bg-alert-red/10 border border-alert-red/20 text-alert-red rounded-xl text-xs font-medium">
+        <div className="p-2.5 bg-red-50 border border-red-200 text-red-700 rounded-lg text-xs font-medium">
           {error}
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-3.5">
         <div className="space-y-1">
-          <label className="block text-xs font-semibold uppercase tracking-wider text-slate-muted">
+          <label className="block text-[11px] font-semibold uppercase tracking-wider text-gray-500">
             Email Address
           </label>
           <input
@@ -80,12 +83,12 @@ function LoginForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@example.com"
-            className="w-full bg-parchment px-4 py-2.5 rounded-xl border border-slate-subtle text-sm text-ink font-medium focus:outline-none focus:border-deep-teal"
+            className="w-full bg-gray-50 px-3 py-2 rounded-lg border border-gray-200 text-xs sm:text-sm text-gray-900 font-medium focus:outline-none focus:border-[#0F5132] focus:bg-white transition-all"
           />
         </div>
 
         <div className="space-y-1">
-          <label className="block text-xs font-semibold uppercase tracking-wider text-slate-muted">
+          <label className="block text-[11px] font-semibold uppercase tracking-wider text-gray-500">
             Password
           </label>
           <input
@@ -94,22 +97,22 @@ function LoginForm() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="••••••••"
-            className="w-full bg-parchment px-4 py-2.5 rounded-xl border border-slate-subtle text-sm text-ink font-medium focus:outline-none focus:border-deep-teal"
+            className="w-full bg-gray-50 px-3 py-2 rounded-lg border border-gray-200 text-xs sm:text-sm text-gray-900 font-medium focus:outline-none focus:border-[#0F5132] focus:bg-white transition-all"
           />
         </div>
 
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-deep-teal hover:bg-deep-teal-hover disabled:opacity-50 text-[#EFEAE1] py-3 rounded-xl font-semibold text-sm shadow-md hover:shadow-lg transition-all"
+          className="w-full bg-[#0F5132] hover:bg-[#0A3622] disabled:opacity-50 text-white py-2.5 rounded-lg font-semibold text-xs shadow-xs transition-all duration-150"
         >
           {loading ? "Signing In..." : "Sign In"}
         </button>
       </form>
 
-      <p className="text-center text-xs text-slate-muted">
+      <p className="text-center text-xs text-gray-500">
         Don't have an account?{" "}
-        <Link href="/register" className="font-semibold text-deep-teal hover:underline">
+        <Link href="/register" className="font-semibold text-[#0F5132] hover:underline">
           Register as a Guest
         </Link>
       </p>
@@ -119,8 +122,8 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <div className="min-h-[75vh] flex items-center justify-center px-4 py-12">
-      <Suspense fallback={<div className="text-xs text-slate-muted">Loading sign in...</div>}>
+    <div className="min-h-[70vh] flex items-center justify-center px-4 py-8">
+      <Suspense fallback={<div className="text-xs text-gray-500">Loading sign in...</div>}>
         <LoginForm />
       </Suspense>
     </div>
