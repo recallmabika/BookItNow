@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { Calendar, QrCode, CheckCircle2, ArrowRight } from "lucide-react";
 import { SkeletonTable } from "@/components/Skeleton";
 
@@ -52,13 +53,20 @@ export default function MyBookingsPage() {
           <SkeletonTable rows={7} />
         </div>
       ) : bookings.length === 0 ? (
-        <div className="text-center py-16 bg-white dark:bg-[#111827] rounded-xs border border-gray-200/80 dark:border-gray-800 space-y-4 shadow-xs transition-colors">
-          <div className="w-12 h-12 rounded-full bg-[#EFF6FF] dark:bg-blue-950/40 text-[#2563EB] dark:text-blue-400 flex items-center justify-center mx-auto">
-            <Calendar className="w-6 h-6 stroke-[1.8]" />
+        <div className="text-center py-12 px-4 bg-transparent flex flex-col items-center justify-center">
+          <div className="relative w-64 h-64 sm:w-80 sm:h-80 mb-6 bg-transparent">
+            <Image
+              src="/empty-bookings.png"
+              alt="No bookings yet"
+              fill
+              unoptimized
+              className="object-contain bg-transparent"
+              priority
+            />
           </div>
           <div>
-            <h3 className="font-semibold text-lg text-gray-900 dark:text-white">No bookings yet</h3>
-            <p className="text-xs text-gray-500 dark:text-gray-400 max-w-sm mx-auto mt-1 leading-relaxed">
+            <h3 className="font-semibold text-lg sm:text-xl text-gray-900 dark:text-white mb-2">No bookings yet</h3>
+            <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 max-w-sm mx-auto leading-relaxed mb-6">
               You haven't made any reservations yet. Browse active lodgings and book instantly.
             </p>
           </div>
