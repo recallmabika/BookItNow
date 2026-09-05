@@ -189,6 +189,8 @@ export default function SearchBar({ transparent = false }: SearchBarProps) {
       <div
         ref={guestsRef}
         className={`flex-1 relative flex flex-col justify-center px-5 py-3.5 transition-colors cursor-pointer select-none ${
+          guestsOpen ? "z-50" : "z-10"
+        } ${
           transparent
             ? "hover:bg-white/10 focus-within:bg-white/15"
             : "hover:bg-gray-50/70 dark:hover:bg-gray-800/60 focus-within:bg-gray-50/90 dark:focus-within:bg-gray-800/80"
@@ -207,7 +209,7 @@ export default function SearchBar({ transparent = false }: SearchBarProps) {
 
         {/* Custom Dropdown Menu matching user reference image */}
         {guestsOpen && (
-          <div className="absolute left-0 right-0 top-full mt-1 bg-white dark:bg-[#111827] border border-gray-200 dark:border-gray-800 rounded-xs shadow-xl z-[9999] py-1 divide-y divide-gray-50 dark:divide-gray-800 animate-fade-in">
+          <div className="absolute left-0 right-0 top-full mt-1.5 bg-white dark:bg-[#111827] border border-gray-200 dark:border-gray-800 rounded-xs shadow-2xl z-[9999] py-1 divide-y divide-gray-50 dark:divide-gray-800 animate-fade-in">
             {[
               { val: "1", label: "1 Guest" },
               { val: "2", label: "2 Guests" },

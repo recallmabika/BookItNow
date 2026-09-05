@@ -7,7 +7,7 @@ export default function HomePage() {
   return (
     <div className="space-y-16 sm:space-y-20 bg-white dark:bg-[#0B0F19] overflow-x-hidden transition-colors">
       {/* Hero Section - Full Screen Viewport Fit */}
-      <section className="relative min-h-[calc(100vh-4.5rem)] flex flex-col justify-center px-4 sm:px-6 lg:px-8 py-10 sm:py-14 overflow-hidden">
+      <section className="relative z-30 min-h-[calc(100vh-4.5rem)] flex flex-col justify-center px-4 sm:px-6 lg:px-8 py-10 sm:py-14 overflow-visible">
         {/* Background Resort Pool Image with Rich Overlay */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <Image
@@ -22,7 +22,7 @@ export default function HomePage() {
         </div>
 
         {/* Hero Content Container */}
-        <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col justify-center gap-8 lg:gap-10">
+        <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col justify-center gap-8 lg:gap-10 overflow-visible">
           {/* Top Row: Left-aligned Text + Right-aligned Triangle Notched Image */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Left Content: Text reveals smoothly from right to left */}
@@ -53,14 +53,14 @@ export default function HomePage() {
           </div>
 
           {/* Bottom Row: Search Widget reveals smoothly from bottom to center */}
-          <div className="w-full pt-2 animate-hero-search">
+          <div className="w-full pt-2 relative z-50 animate-hero-search">
             <SearchBar transparent />
           </div>
         </div>
       </section>
 
       {/* Value Pillars */}
-      <section className="bg-gray-50/50 dark:bg-gray-900/40 py-12 border-y border-gray-200/60 dark:border-gray-800">
+      <section className="relative z-10 bg-gray-50/50 dark:bg-gray-900/40 py-12 border-y border-gray-200/60 dark:border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="p-4 rounded-xs bg-white dark:bg-[#111827] border border-gray-200/80 dark:border-gray-800 space-y-1.5 hover:border-[#2563EB]/40 dark:hover:border-blue-500/40 transition-colors duration-150">
