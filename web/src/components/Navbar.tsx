@@ -83,7 +83,7 @@ export default function Navbar() {
         <div className="flex items-center gap-2">
           <Link
             href="/search"
-            className="text-xs font-medium text-white hover:bg-white hover:text-[#0F5132] transition-all duration-150 px-3.5 py-3 rounded-xs"
+            className="text-xs font-medium text-white hover:bg-white hover:text-[#0F5132] focus-visible:bg-white focus-visible:text-[#0F5132] focus-visible:ring-2 focus-visible:ring-white/80 transition-all duration-150 px-3.5 py-3 rounded-xs outline-none"
           >
             Explore Stays
           </Link>
@@ -93,7 +93,7 @@ export default function Navbar() {
               {/* Clean My Bookings text button without awkward icon */}
               <Link
                 href="/my-bookings"
-                className="text-xs font-medium text-white hover:bg-white hover:text-[#0F5132] transition-all duration-150 px-3.5 py-3 rounded-xs"
+                className="text-xs font-medium text-white hover:bg-white hover:text-[#0F5132] focus-visible:bg-white focus-visible:text-[#0F5132] focus-visible:ring-2 focus-visible:ring-white/80 transition-all duration-150 px-3.5 py-3 rounded-xs outline-none"
               >
                 My Bookings
               </Link>
@@ -198,13 +198,13 @@ export default function Navbar() {
             <div className="flex items-center gap-2">
               <Link
                 href="/login"
-                className="text-xs font-medium text-white hover:bg-white hover:text-[#0F5132] transition-all duration-150 px-3.5 py-3 rounded-xs"
+                className="text-xs font-medium text-white hover:bg-white hover:text-[#0F5132] focus-visible:bg-white focus-visible:text-[#0F5132] focus-visible:ring-2 focus-visible:ring-white/80 transition-all duration-150 px-3.5 py-3 rounded-xs outline-none"
               >
                 Sign In
               </Link>
               <Link
                 href="/register"
-                className="text-xs font-medium bg-white text-[#0F5132] hover:bg-green-50 active:bg-green-100 px-4 py-3 rounded-xs transition-all duration-150 shadow-xs"
+                className="text-xs font-medium bg-white text-[#0F5132] hover:bg-green-50 active:bg-green-100 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0F5132] px-4 py-3 rounded-xs transition-all duration-150 shadow-xs outline-none"
               >
                 Register
               </Link>
