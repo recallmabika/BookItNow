@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, Suspense } from "react";
+import { useEffect, useState, useRef, Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -20,6 +20,7 @@ import {
   Building2,
   ArrowLeft,
   ChevronRight,
+  ChevronDown,
   ShieldCheck,
   BedDouble,
   Search,
@@ -31,6 +32,7 @@ import {
   Menu,
   LayoutDashboard,
   Users,
+  Settings,
   LogOut
 } from "lucide-react";
 
@@ -55,6 +57,22 @@ function InventoryContent() {
   const [isBlocked, setIsBlocked] = useState<boolean>(false);
   const [submitting, setSubmitting] = useState(false);
   const [statusMessage, setStatusMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+
+  // Profile Dropdown state
+  const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
+  const profileDropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (profileDropdownRef.current && !profileDropdownRef.current.contains(event.target as Node)) {
+        setProfileDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   useEffect(() => {
     const rawUser = localStorage.getItem("bookitnow_user");
@@ -325,12 +343,6 @@ function InventoryContent() {
               </button>
 
               <div>
-                <div className="flex items-center gap-2">
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wider bg-cyan-100 text-cyan-800 dark:bg-cyan-900/40 dark:text-cyan-300">
-                    Live Rates Engine
-                  </span>
-                  <span className="text-xs text-gray-500 hidden sm:inline">· Availability & Quota Override</span>
-                </div>
                 <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                   {selectedProperty ? selectedProperty.title : "Live Inventory & Rates Manager"}
                 </h1>
@@ -347,30 +359,75 @@ function InventoryContent() {
                 <span className="hidden sm:inline">Admin Overview</span>
               </Link>
 
-              {/* User Profile Pill */}
-              <div className="flex items-center gap-2.5 pl-3 border-l border-gray-200 dark:border-gray-800">
-                <div className="w-8 h-8 rounded-full bg-[#2563EB] text-white font-bold flex items-center justify-center text-xs shadow-xs ring-2 ring-blue-100 dark:ring-blue-900/40 shrink-0">
-                  {user?.first_name ? user.first_name[0].toUpperCase() : "M"}
-                </div>
-                <div className="hidden sm:block text-left min-w-0">
-                  <span className="text-xs font-bold text-gray-900 dark:text-white truncate block">
-                    {user?.first_name} {user?.last_name}
-                  </span>
-                  <span className="text-[10px] text-gray-500 dark:text-gray-400 block truncate">
-                    {user?.email}
-                  </span>
-                </div>
+              {/* User Profile Clickable Dropdown */}
+              <div className="relative pl-3 border-l border-gray-200 dark:border-gray-800" ref={profileDropdownRef}>
                 <button
-                  onClick={() => {
-                    localStorage.removeItem("bookitnow_token");
-                    localStorage.removeItem("bookitnow_user");
-                    router.push("/login");
-                  }}
-                  className="p-1.5 text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 rounded-xs transition-colors cursor-pointer"
-                  title="Sign out"
+                  onClick={() => setProfileDropdownOpen((prev) => !prev)}
+                  className="flex items-center gap-2.5 p-1.5 hover:bg-gray-100 dark:hover:bg-gray-800/80 rounded-xs transition-colors cursor-pointer text-left focus:outline-none"
+                  aria-haspopup="true"
+                  aria-expanded={profileDropdownOpen}
                 >
-                  <ArrowLeft className="w-4 h-4 rotate-180" />
+                  <div className="w-8 h-8 rounded-full bg-[#2563EB] text-white font-bold flex items-center justify-center text-xs shadow-xs ring-2 ring-blue-100 dark:ring-blue-900/40 shrink-0">
+                    {user?.first_name ? user.first_name[0].toUpperCase() : "M"}
+                  </div>
+                  <div className="hidden sm:block text-left min-w-0">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-xs font-bold text-gray-900 dark:text-white truncate block">
+                        {user?.first_name} {user?.last_name}
+                      </span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" title="Active"></span>
+                    </div>
+                    <span className="text-[10px] text-gray-500 dark:text-gray-400 block truncate">
+                      {user?.email}
+                    </span>
+                  </div>
+                  <ChevronDown className={`w-3.5 h-3.5 text-gray-500 transition-transform duration-150 ${profileDropdownOpen ? "rotate-180" : ""}`} />
                 </button>
+
+                {/* Dropdown Menu */}
+                {profileDropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-64 rounded-xs bg-white dark:bg-[#0f172a] shadow-xl border border-gray-200 dark:border-gray-800 py-1 z-50 animate-in fade-in-50 zoom-in-95 duration-100">
+                    {/* User Info Header */}
+                    <div className="px-4 py-3 border-b border-gray-100 dark:border-gray-800/80 bg-gray-50/50 dark:bg-gray-900/30">
+                      <div className="flex items-center justify-between gap-2 mb-1">
+                        <span className="text-xs font-bold text-gray-900 dark:text-white truncate">
+                          {user?.first_name} {user?.last_name}
+                        </span>
+                        <span className="px-1.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-blue-100 text-blue-800 dark:bg-blue-900/60 dark:text-blue-300 shrink-0">
+                          {user?.role || "Host"}
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-gray-500 dark:text-gray-400 truncate">
+                        {user?.email}
+                      </p>
+                    </div>
+
+                    {/* Menu Actions */}
+                    <div className="p-1 space-y-0.5">
+                      <Link
+                        href="/profile"
+                        onClick={() => setProfileDropdownOpen(false)}
+                        className="w-full flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xs transition-colors cursor-pointer"
+                      >
+                        <Settings className="w-4 h-4 text-gray-500 dark:text-gray-400" />
+                        <span>Settings</span>
+                      </Link>
+
+                      <button
+                        onClick={() => {
+                          setProfileDropdownOpen(false);
+                          localStorage.removeItem("bookitnow_token");
+                          localStorage.removeItem("bookitnow_user");
+                          router.push("/login");
+                        }}
+                        className="w-full flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 rounded-xs transition-colors cursor-pointer"
+                      >
+                        <LogOut className="w-4 h-4 text-red-500" />
+                        <span>Logout</span>
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
