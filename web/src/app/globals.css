@@ -76,3 +76,26 @@ span.flatpickr-weekday {
   color: #64748B !important;
   font-weight: 500 !important;
 }
+
+/* Ensure flatpickr altInput replaces the target input cleanly without duplicate labels */
+input.flatpickr-input {
+  display: none !important;
+}
+input.flatpickr-input.form-control,
+input.flatpickr-input[type="text"] {
+  display: block !important;
+}
+.flatpickr-input.form-control {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+  color: #111827 !important;
+  width: 100% !important;
+}
+.flatpickr-input.form-control:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
