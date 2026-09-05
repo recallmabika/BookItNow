@@ -59,48 +59,78 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Value Pillars */}
-      <section className="relative z-10 bg-gray-50/50 dark:bg-gray-900/40 py-12 border-y border-gray-200/60 dark:border-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div className="p-4 rounded-xs bg-white dark:bg-[#111827] border border-gray-200/80 dark:border-gray-800 space-y-1.5 hover:border-[#2563EB]/40 dark:hover:border-blue-500/40 transition-colors duration-150">
-              <div className="w-8 h-8 rounded-xs bg-[#EFF6FF] dark:bg-blue-950/50 text-[#2563EB] dark:text-blue-400 flex items-center justify-center">
-                <Zap className="w-4 h-4 stroke-[1.6]" />
+      {/* Value Pillars with rich hospitality background */}
+      <section className="relative z-10 py-16 sm:py-20 border-y border-gray-200/60 dark:border-gray-800/80 overflow-hidden">
+        {/* Background Image & Ambient Overlays */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/pillars-bg.jpg"
+            alt="Hospitality interior"
+            fill
+            className="object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gray-950/80 backdrop-blur-[2px]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/60" />
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
+            <span className="text-[11px] font-medium tracking-widest uppercase text-blue-400">Why Book With Us</span>
+            <h2 className="text-2xl sm:text-3xl font-medium text-white tracking-tight">Seamless Travel, Zero Uncertainty</h2>
+            <p className="text-xs sm:text-sm text-gray-300 font-normal">Every booking backed by direct host coordination, transparent terms, and local support.</p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-5">
+            {/* Instant Confirmation */}
+            <div className="group p-5 rounded-xs bg-white/10 dark:bg-black/30 backdrop-blur-md border border-white/15 hover:border-blue-400/50 hover:bg-white/[0.14] transition-all duration-300 space-y-3 shadow-lg">
+              <div className="w-10 h-10 rounded-xs bg-blue-500/20 border border-blue-400/30 text-blue-300 flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-500 group-hover:text-white transition-all duration-300">
+                <Zap className="w-5 h-5 stroke-[1.8]" />
               </div>
-              <h3 className="font-medium text-sm text-gray-900 dark:text-white">Instant Confirmation</h3>
-              <p className="text-[11px] text-gray-500 dark:text-gray-400 leading-relaxed font-normal">
-                No waiting on host callbacks. Your dates are locked immediately in the inventory calendar.
-              </p>
+              <div>
+                <h3 className="font-medium text-sm text-white">Instant Confirmation</h3>
+                <p className="text-xs text-gray-300 leading-relaxed font-normal mt-1">
+                  No waiting on host callbacks. Your dates are locked immediately in the inventory calendar.
+                </p>
+              </div>
             </div>
 
-            <div className="p-4 rounded-xs bg-white dark:bg-[#111827] border border-gray-200/80 dark:border-gray-800 space-y-1.5 hover:border-[#2563EB]/40 dark:hover:border-blue-500/40 transition-colors duration-150">
-              <div className="w-8 h-8 rounded-xs bg-[#EFF6FF] dark:bg-blue-950/50 text-[#2563EB] dark:text-blue-400 flex items-center justify-center">
-                <Wallet className="w-4 h-4 stroke-[1.6]" />
+            {/* Transparent Pricing */}
+            <div className="group p-5 rounded-xs bg-white/10 dark:bg-black/30 backdrop-blur-md border border-white/15 hover:border-blue-400/50 hover:bg-white/[0.14] transition-all duration-300 space-y-3 shadow-lg">
+              <div className="w-10 h-10 rounded-xs bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 flex items-center justify-center group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300">
+                <Wallet className="w-5 h-5 stroke-[1.8]" />
               </div>
-              <h3 className="font-medium text-sm text-gray-900 dark:text-white">Transparent Pricing</h3>
-              <p className="text-[11px] text-gray-500 dark:text-gray-400 leading-relaxed font-normal">
-                Clear room rate, taxes, and fees breakdown. What you see is exactly what you pay.
-              </p>
+              <div>
+                <h3 className="font-medium text-sm text-white">Transparent Pricing</h3>
+                <p className="text-xs text-gray-300 leading-relaxed font-normal mt-1">
+                  Clear room rate, taxes, and fees breakdown. What you see is exactly what you pay.
+                </p>
+              </div>
             </div>
 
-            <div className="p-4 rounded-xs bg-white dark:bg-[#111827] border border-gray-200/80 dark:border-gray-800 space-y-1.5 hover:border-[#2563EB]/40 dark:hover:border-blue-500/40 transition-colors duration-150">
-              <div className="w-8 h-8 rounded-xs bg-[#EFF6FF] dark:bg-blue-950/50 text-[#2563EB] dark:text-blue-400 flex items-center justify-center">
-                <ShieldCheck className="w-4 h-4 stroke-[1.6]" />
+            {/* Verified Stays Only */}
+            <div className="group p-5 rounded-xs bg-white/10 dark:bg-black/30 backdrop-blur-md border border-white/15 hover:border-blue-400/50 hover:bg-white/[0.14] transition-all duration-300 space-y-3 shadow-lg">
+              <div className="w-10 h-10 rounded-xs bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 flex items-center justify-center group-hover:scale-110 group-hover:bg-indigo-500 group-hover:text-white transition-all duration-300">
+                <ShieldCheck className="w-5 h-5 stroke-[1.8]" />
               </div>
-              <h3 className="font-medium text-sm text-gray-900 dark:text-white">Verified Stays Only</h3>
-              <p className="text-[11px] text-gray-500 dark:text-gray-400 leading-relaxed font-normal">
-                Zero fake reviews. Only guests with checked-out completed stays can write reviews.
-              </p>
+              <div>
+                <h3 className="font-medium text-sm text-white">Verified Stays Only</h3>
+                <p className="text-xs text-gray-300 leading-relaxed font-normal mt-1">
+                  Zero fake reviews. Only guests with checked-out completed stays can write reviews.
+                </p>
+              </div>
             </div>
 
-            <div className="p-4 rounded-xs bg-white dark:bg-[#111827] border border-gray-200/80 dark:border-gray-800 space-y-1.5 hover:border-[#2563EB]/40 dark:hover:border-blue-500/40 transition-colors duration-150">
-              <div className="w-8 h-8 rounded-xs bg-[#EFF6FF] dark:bg-blue-950/50 text-[#2563EB] dark:text-blue-400 flex items-center justify-center">
-                <QrCode className="w-4 h-4 stroke-[1.6]" />
+            {/* Instant E-Voucher */}
+            <div className="group p-5 rounded-xs bg-white/10 dark:bg-black/30 backdrop-blur-md border border-white/15 hover:border-blue-400/50 hover:bg-white/[0.14] transition-all duration-300 space-y-3 shadow-lg">
+              <div className="w-10 h-10 rounded-xs bg-amber-500/20 border border-amber-400/30 text-amber-300 flex items-center justify-center group-hover:scale-110 group-hover:bg-amber-500 group-hover:text-white transition-all duration-300">
+                <QrCode className="w-5 h-5 stroke-[1.8]" />
               </div>
-              <h3 className="font-medium text-sm text-gray-900 dark:text-white">Instant E-Voucher</h3>
-              <p className="text-[11px] text-gray-500 dark:text-gray-400 leading-relaxed font-normal">
-                Receive an immediate digital voucher with a check-in QR code sent right to your device.
-              </p>
+              <div>
+                <h3 className="font-medium text-sm text-white">Instant E-Voucher</h3>
+                <p className="text-xs text-gray-300 leading-relaxed font-normal mt-1">
+                  Receive an immediate digital voucher with a check-in QR code sent right to your device.
+                </p>
+              </div>
             </div>
           </div>
         </div>
