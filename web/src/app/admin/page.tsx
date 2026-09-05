@@ -469,13 +469,6 @@ export default function AdminDashboardPage() {
                 <LayoutDashboard className="w-4 h-4" />
                 <span>Dashboard Overview</span>
               </div>
-              <span
-                className={`text-[10px] px-1.5 py-0.5 rounded-full font-mono ${
-                  activeTab === "overview" ? "bg-blue-100 text-[#2563EB]" : "bg-[#1D4ED8] text-white"
-                }`}
-              >
-                {totalProperties}
-              </span>
             </button>
 
             <button
@@ -644,19 +637,8 @@ export default function AdminDashboardPage() {
               </div>
             </div>
 
-            {/* Topbar Right Profile & Status */}
+            {/* Topbar Right Profile */}
             <div className="flex items-center gap-3">
-              <button
-                onClick={() => {
-                  const token = localStorage.getItem("bookitnow_token");
-                  if (token) loadData(token);
-                }}
-                className="p-2 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xs transition-colors cursor-pointer border border-gray-200 dark:border-gray-800"
-                title="Refresh central ledger"
-              >
-                <RefreshCw className="w-4 h-4" />
-              </button>
-
               {/* User Profile Clickable Dropdown */}
               <div className="relative pl-3 border-l border-gray-200 dark:border-gray-800" ref={profileDropdownRef}>
                 <button
@@ -810,9 +792,143 @@ export default function AdminDashboardPage() {
           </div>
 
           {/* ======================================================== */}
-          {/* TAB 1 & 2: OVERVIEW & PROPERTIES CATALOG                  */}
+          {/* TAB 1: EXECUTIVE DASHBOARD OVERVIEW                       */}
           {/* ======================================================== */}
-          {(activeTab === "overview" || activeTab === "properties") && (
+          {activeTab === "overview" && (
+            <div className="space-y-6">
+              {/* Quick Navigation Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <button
+                  onClick={() => setActiveTab("properties")}
+                  className="p-4 rounded-xs border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#0B101E] hover:border-blue-500/50 hover:shadow-xs transition-all text-left flex items-start justify-between group cursor-pointer"
+                >
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <Building2 className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                      <span className="text-xs font-bold text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors">
+                        Lodging Inventory
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-gray-500">
+                      Manage {properties.length} lodgings, edit descriptions, add room types, and control status.
+                    </p>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-gray-400 group-hover:translate-x-0.5 transition-transform" />
+                </button>
+
+                <button
+                  onClick={() => setActiveTab("bookings")}
+                  className="p-4 rounded-xs border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#0B101E] hover:border-blue-500/50 hover:shadow-xs transition-all text-left flex items-start justify-between group cursor-pointer"
+                >
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <CalendarCheck className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+                      <span className="text-xs font-bold text-gray-900 dark:text-white group-hover:text-indigo-600 transition-colors">
+                        Guest Bookings
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-gray-500">
+                      View all {bookings.length} reservations, e-vouchers, confirmed dates, and guest payments.
+                    </p>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-gray-400 group-hover:translate-x-0.5 transition-transform" />
+                </button>
+
+                <button
+                  onClick={() => setActiveTab("users")}
+                  className="p-4 rounded-xs border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#0B101E] hover:border-blue-500/50 hover:shadow-xs transition-all text-left flex items-start justify-between group cursor-pointer"
+                >
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <Users className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                      <span className="text-xs font-bold text-gray-900 dark:text-white group-hover:text-emerald-600 transition-colors">
+                        Staff & User Accounts
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-gray-500">
+                      Provision inventory managers, audit access levels, and toggle staff status.
+                    </p>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-gray-400 group-hover:translate-x-0.5 transition-transform" />
+                </button>
+              </div>
+
+              {/* Recent Activity & Recent Bookings Summary */}
+              <div className="border border-gray-200 dark:border-gray-800 rounded-xs bg-white dark:bg-[#0B101E] overflow-hidden">
+                <div className="p-4 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between">
+                  <div>
+                    <h3 className="text-xs font-bold uppercase tracking-wider text-gray-900 dark:text-white">
+                      Recent Reservations & Vouchers
+                    </h3>
+                    <p className="text-[11px] text-gray-500 mt-0.5">
+                      Latest guest bookings recorded across live central ledger.
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => setActiveTab("bookings")}
+                    className="text-xs text-blue-600 hover:text-blue-700 font-semibold inline-flex items-center gap-1 cursor-pointer"
+                  >
+                    <span>View All</span>
+                    <ChevronRight className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-xs">
+                    <thead className="bg-gray-50 dark:bg-gray-900/50 border-b border-gray-200 dark:border-gray-800 text-[11px] uppercase tracking-wider text-gray-500 font-semibold">
+                      <tr>
+                        <th className="px-5 py-3">Reference</th>
+                        <th className="px-5 py-3">Dates</th>
+                        <th className="px-5 py-3">Guests</th>
+                        <th className="px-5 py-3">Total</th>
+                        <th className="px-5 py-3">Status</th>
+                        <th className="px-5 py-3 text-right">Booked Date</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-100 dark:divide-gray-800/60">
+                      {bookings.length === 0 ? (
+                        <tr>
+                          <td colSpan={6} className="px-5 py-8 text-center text-gray-500">
+                            No reservations recorded yet.
+                          </td>
+                        </tr>
+                      ) : (
+                        bookings.slice(0, 5).map((b) => (
+                          <tr key={b.id} className="hover:bg-gray-50/50 dark:hover:bg-gray-900/30 transition-colors">
+                            <td className="px-5 py-3 font-mono font-semibold text-blue-600 dark:text-blue-400">
+                              {b.booking_reference}
+                            </td>
+                            <td className="px-5 py-3 text-gray-700 dark:text-gray-300 font-medium">
+                              {b.check_in_date} → {b.check_out_date}
+                            </td>
+                            <td className="px-5 py-3 text-gray-600 dark:text-gray-400">
+                              {b.rooms_count} room · {b.adults_count} adults
+                            </td>
+                            <td className="px-5 py-3 font-semibold text-gray-900 dark:text-white">
+                              ${parseFloat(b.total_amount).toFixed(2)} {b.currency}
+                            </td>
+                            <td className="px-5 py-3">
+                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-blue-100 text-blue-800 dark:bg-blue-950/60 dark:text-blue-300 uppercase">
+                                {b.status}
+                              </span>
+                            </td>
+                            <td className="px-5 py-3 text-right text-gray-500 text-[11px]">
+                              {new Date(b.created_at).toLocaleDateString()}
+                            </td>
+                          </tr>
+                        ))
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* ======================================================== */}
+          {/* TAB 2: PROPERTIES / LODGING INVENTORY                    */}
+          {/* ======================================================== */}
+          {activeTab === "properties" && (
             <div className="space-y-4">
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
                 <div className="relative flex-1 max-w-sm">
