@@ -121,24 +121,25 @@ export default function Navbar() {
                 <button
                   type="button"
                   onClick={() => setDropdownOpen((prev) => !prev)}
-                  className="flex items-center h-8 sm:h-10 pl-0 pr-2 sm:pr-3.5 bg-white text-[#2563EB] rounded-xs shadow-xs border border-white/80 hover:bg-blue-50/50 hover:border-white active:scale-[0.98] transition-all duration-150 cursor-pointer overflow-hidden group"
+                  className="flex items-center h-8 sm:h-10 pl-0 pr-0 sm:pr-3.5 bg-white text-[#2563EB] rounded-xs shadow-xs border border-white/80 hover:bg-blue-50/50 hover:border-white active:scale-[0.98] transition-all duration-150 cursor-pointer overflow-hidden group"
+                  aria-label="User profile and navigation menu"
                 >
                   {user.avatar ? (
                     <img
                       src={user.avatar}
                       alt={user.first_name}
-                      className="h-full aspect-square object-cover border-r border-gray-200 shrink-0"
+                      className="h-full aspect-square object-cover sm:border-r border-gray-200 shrink-0"
                     />
                   ) : (
-                    <span className="h-full aspect-square bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center font-bold text-xs border-r border-blue-200 shrink-0 group-hover:bg-[#DBEAFE] transition-colors">
+                    <span className="h-full aspect-square bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center font-bold text-xs sm:border-r border-blue-200 shrink-0 group-hover:bg-[#DBEAFE] transition-colors">
                       {user.first_name[0]?.toUpperCase()}
                     </span>
                   )}
-                  <span className="text-xs font-semibold px-1.5 sm:px-3 max-w-[5rem] sm:max-w-none truncate">
+                  <span className="hidden sm:inline text-xs font-semibold px-2 sm:px-3 truncate">
                     {user.first_name}
                   </span>
                   <ChevronDown
-                    className={`w-3 h-3 sm:w-3.5 sm:h-3.5 stroke-[2] transition-transform duration-200 text-[#2563EB] shrink-0 ${
+                    className={`hidden sm:inline w-3.5 h-3.5 stroke-[2] transition-transform duration-200 text-[#2563EB] shrink-0 ${
                       dropdownOpen ? "rotate-180" : ""
                     }`}
                   />
