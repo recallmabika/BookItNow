@@ -100,11 +100,11 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Quick Links & Brand Navigation */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 pt-4 border-t border-white/15 text-xs">
+        {/* Quick Links & Brand Navigation - Translucent Frosted Glass */}
+        <div className="rounded-xs p-6 sm:p-8 bg-black/25 dark:bg-black/35 backdrop-blur-md border-0 grid grid-cols-2 sm:grid-cols-4 gap-8 text-xs">
           <div className="space-y-3">
             <h4 className="font-semibold text-white tracking-wider uppercase text-[11px]">Destinations</h4>
-            <ul className="space-y-2 text-blue-100 font-normal">
+            <ul className="space-y-2 text-blue-100 font-medium">
               <li><Link href="/search?city=Harare" className="hover:text-white transition-colors">Harare Lodgings</Link></li>
               <li><Link href="/search?city=Victoria+Falls" className="hover:text-white transition-colors">Victoria Falls Lodges</Link></li>
               <li><Link href="/search?city=Bulawayo" className="hover:text-white transition-colors">Bulawayo Guesthouses</Link></li>
@@ -114,7 +114,7 @@ export default function Footer() {
 
           <div className="space-y-3">
             <h4 className="font-semibold text-white tracking-wider uppercase text-[11px]">Guest Services</h4>
-            <ul className="space-y-2 text-blue-100 font-normal">
+            <ul className="space-y-2 text-blue-100 font-medium">
               <li><Link href="/my-bookings" className="hover:text-white transition-colors">My Bookings</Link></li>
               <li><Link href="/search" className="hover:text-white transition-colors">Instant E-Vouchers</Link></li>
               <li><Link href="/profile" className="hover:text-white transition-colors">Account Profile</Link></li>
@@ -124,17 +124,17 @@ export default function Footer() {
 
           <div className="space-y-3">
             <h4 className="font-semibold text-white tracking-wider uppercase text-[11px]">For Hosts & Lodges</h4>
-            <ul className="space-y-2 text-blue-100 font-normal">
-              <li><span className="text-blue-200">List Your Property</span></li>
-              <li><span className="text-blue-200">Host Dashboard</span></li>
-              <li><span className="text-blue-200">Inventory Management</span></li>
-              <li><span className="text-blue-200">Host Guidelines</span></li>
+            <ul className="space-y-2 text-blue-100 font-medium">
+              <li><span className="text-blue-100 hover:text-white cursor-pointer transition-colors">List Your Property</span></li>
+              <li><span className="text-blue-100 hover:text-white cursor-pointer transition-colors">Host Dashboard</span></li>
+              <li><span className="text-blue-100 hover:text-white cursor-pointer transition-colors">Inventory Management</span></li>
+              <li><span className="text-blue-100 hover:text-white cursor-pointer transition-colors">Host Guidelines</span></li>
             </ul>
           </div>
 
           <div className="space-y-3">
             <h4 className="font-semibold text-white tracking-wider uppercase text-[11px]">Trust & Legal</h4>
-            <ul className="space-y-2 text-blue-100 font-normal">
+            <ul className="space-y-2 text-blue-100 font-medium">
               <li><span className="hover:text-white cursor-pointer transition-colors">Terms of Service</span></li>
               <li><span className="hover:text-white cursor-pointer transition-colors">Privacy Notice</span></li>
               <li><span className="hover:text-white cursor-pointer transition-colors">Cancellation Policies</span></li>
@@ -144,9 +144,9 @@ export default function Footer() {
         </div>
 
         {/* Bottom Copyright Row */}
-        <div className="pt-8 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-normal">
-          <p className="text-blue-200">© 2026 BookItNow Lodging Platform. All rights reserved.</p>
-          <div className="flex gap-6 text-blue-200">
+        <div className="pt-8 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-medium">
+          <p className="text-blue-100 drop-shadow-xs">© 2026 BookItNow Lodging Platform. All rights reserved.</p>
+          <div className="flex gap-6 text-blue-100 drop-shadow-xs">
             <span className="hover:text-white cursor-pointer transition-colors">Terms & Policies</span>
             <span className="hover:text-white cursor-pointer transition-colors">Privacy Notice</span>
             <span className="hover:text-white cursor-pointer transition-colors">Host Support</span>
