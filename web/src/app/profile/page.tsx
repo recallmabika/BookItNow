@@ -265,6 +265,7 @@ export default function ProfilePage() {
                       onChange={(e) => setPhoneNumber(e.target.value)}
                       className="w-full pl-9 pr-3 py-2 text-xs border border-gray-300 rounded-xs outline-none focus:outline-none focus:border-[#0F5132] transition-colors focus:ring-0"
                     />
+                  </div>
                 </div>
               </div>
 
