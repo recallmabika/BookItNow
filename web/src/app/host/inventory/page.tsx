@@ -198,19 +198,28 @@ function InventoryContent() {
         }`}
       >
         <div className="flex flex-col h-full">
-          {/* Header */}
-          <div className="p-5 border-b border-gray-800 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-md bg-cyan-600/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
-                <Layers className="w-5 h-5" />
+          {/* Header with real BookItNow logo */}
+          <div className="p-4 border-b border-gray-800 flex items-center justify-between">
+            <Link href="/" className="flex items-center gap-3 group">
+              <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 shadow-md ring-1 ring-white/20 bg-white/5">
+                <Image
+                  src="/logo.png"
+                  alt="BookItNow Logo"
+                  fill
+                  sizes="40px"
+                  className="object-contain"
+                  priority
+                />
               </div>
-              <div>
-                <span className="text-[10px] font-mono uppercase tracking-widest text-cyan-400 block font-semibold">
-                  CENTRAL LEDGER
+              <div className="min-w-0">
+                <span className="text-sm font-bold text-white tracking-tight block">
+                  BookItNow
                 </span>
-                <span className="text-sm font-bold text-white tracking-tight">Inventory Console</span>
+                <span className="text-[10px] font-semibold text-cyan-400 uppercase tracking-wider block">
+                  Inventory Console
+                </span>
               </div>
-            </div>
+            </Link>
             <button
               onClick={() => setSidebarOpen(false)}
               className="lg:hidden p-1.5 text-gray-400 hover:text-white rounded-xs"

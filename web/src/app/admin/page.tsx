@@ -404,19 +404,28 @@ export default function AdminDashboardPage() {
         }`}
       >
         <div className="flex flex-col h-full">
-          {/* Workspace & Portal Header */}
-          <div className="p-5 border-b border-gray-800/80 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-md bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400">
-                <ShieldCheck className="w-5 h-5" />
+          {/* Workspace & Portal Header with real BookItNow Logo */}
+          <div className="p-4 border-b border-gray-800 flex items-center justify-between">
+            <Link href="/" className="flex items-center gap-3 group">
+              <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 shadow-md ring-1 ring-white/20 bg-white/5">
+                <Image
+                  src="/logo.png"
+                  alt="BookItNow Logo"
+                  fill
+                  sizes="40px"
+                  className="object-contain"
+                  priority
+                />
               </div>
-              <div>
-                <span className="text-[10px] font-mono uppercase tracking-widest text-blue-400 block font-semibold">
-                  CENTRAL CONSOLE
+              <div className="min-w-0">
+                <span className="text-sm font-bold text-white tracking-tight block">
+                  BookItNow
                 </span>
-                <span className="text-sm font-bold text-white tracking-tight">BookItNow Admin</span>
+                <span className="text-[10px] font-semibold text-blue-400 uppercase tracking-wider block">
+                  Admin Console
+                </span>
               </div>
-            </div>
+            </Link>
             <button
               onClick={() => setSidebarOpen(false)}
               className="lg:hidden p-1.5 text-gray-400 hover:text-white rounded-xs"
@@ -570,17 +579,17 @@ export default function AdminDashboardPage() {
           </nav>
 
           {/* User Profile Pill & System Status */}
-          <div className="p-4 border-t border-gray-800 bg-[#070B14] space-y-3">
+          <div className="p-4 border-t border-gray-800 bg-[#070B14] space-y-2.5 pb-6">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center text-xs shrink-0">
+              <div className="w-8 h-8 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center text-xs shrink-0 shadow-xs">
                 {user?.first_name ? user.first_name[0].toUpperCase() : "A"}
               </div>
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-1.5">
-                  <span className="text-xs font-semibold text-white truncate">
+                  <span className="text-xs font-semibold text-white truncate block">
                     {user?.first_name} {user?.last_name}
                   </span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" title="Online"></span>
                 </div>
                 <span className="text-[10px] text-gray-400 block truncate">{user?.email}</span>
               </div>
@@ -596,7 +605,7 @@ export default function AdminDashboardPage() {
                   localStorage.removeItem("bookitnow_user");
                   router.push("/login");
                 }}
-                className="text-gray-400 hover:text-red-400 transition-colors flex items-center gap-1 cursor-pointer"
+                className="text-gray-400 hover:text-red-400 transition-colors flex items-center gap-1 cursor-pointer text-xs"
                 title="Sign out"
               >
                 <LogOut className="w-3.5 h-3.5" />
