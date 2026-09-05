@@ -29,22 +29,22 @@ export default function Footer() {
 
   return (
     <footer className="relative bg-[#0D76BD] text-white pt-14 pb-10 border-t border-white/15 overflow-hidden">
-      {/* Africa Dotted Map Background - Highly Visible */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
+      {/* Africa Dotted Map Background - Blurred Directly */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <Image
           src="/africa-dotted-map.png"
           alt="Africa continent dotted map"
           fill
           priority
-          className="object-cover object-center"
+          className="object-cover object-center blur-sm sm:blur-[6px] scale-105"
         />
-        {/* Very subtle scrim to keep the dotted map prominent and vibrant */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30" />
+        {/* Subtle gradient overlay ensuring high text readability over the blurred map */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#072448]/60 via-[#0D76BD]/40 to-[#072448]/75" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        {/* Newsletter Subscription Row - Translucent Frosted Glass without Border */}
-        <div className="rounded-xs p-6 sm:p-8 bg-black/25 dark:bg-black/35 backdrop-blur-md border-0 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+        {/* Newsletter Subscription Row - Clean Transparent without BG or Box */}
+        <div className="p-0 bg-transparent border-0 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
           <div className="space-y-1.5 max-w-lg">
             <span className="text-blue-200 text-xs font-semibold uppercase tracking-wider block">
               Travel Insider & Exclusive Perks
@@ -76,7 +76,7 @@ export default function Footer() {
                         if (status === "error") setStatus("idle");
                       }}
                       placeholder="Enter your email address"
-                      className="w-full pl-10 pr-4 py-3.5 text-xs sm:text-sm bg-black/25 hover:bg-black/30 focus:bg-black/35 border border-white/20 focus:border-white/50 rounded-xs text-white placeholder:text-blue-100/75 outline-none focus:outline-none focus:ring-0 transition-colors"
+                      className="w-full pl-10 pr-4 py-3.5 text-xs sm:text-sm bg-white/10 hover:bg-white/15 focus:bg-white/15 border border-white/20 focus:border-white/50 rounded-xs text-white placeholder:text-blue-100/75 outline-none focus:outline-none focus:ring-0 transition-colors"
                       required
                     />
                   </div>
@@ -100,8 +100,8 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Quick Links & Brand Navigation - Translucent Frosted Glass */}
-        <div className="rounded-xs p-6 sm:p-8 bg-black/25 dark:bg-black/35 backdrop-blur-md border-0 grid grid-cols-2 sm:grid-cols-4 gap-8 text-xs">
+        {/* Quick Links & Brand Navigation - Clean Transparent without BG or Box */}
+        <div className="pt-8 border-t border-white/15 grid grid-cols-2 sm:grid-cols-4 gap-8 text-xs">
           <div className="space-y-3">
             <h4 className="font-semibold text-white tracking-wider uppercase text-[11px]">Destinations</h4>
             <ul className="space-y-2 text-blue-100 font-medium">
