@@ -262,7 +262,7 @@ export default function Navbar() {
                       </div>
                     </div>
 
-                    <div className="h-px bg-gray-100 dark:border-gray-800" />
+                    <div className="h-px bg-gray-100 dark:bg-gray-800" />
 
                     {/* Logout Option */}
                     <div className="p-2">
