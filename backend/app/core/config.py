@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     API_V1_PREFIX: str = "/api/v1"
     
     # Real PostgreSQL Connection with dedicated schema search_path
-    DATABASE_URL: str = "postgresql+asyncpg://system_admin:system%40123.Pass@127.0.0.1:5432/schoolms_db"
+    DATABASE_URL: str = "postgresql+asyncpg://postgres:Cyber%402029@127.0.0.1:5433/bookitnow_db"
     DB_SCHEMA: str = "bookitnow"
     
     # Real Redis Connection
