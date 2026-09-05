@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { Search, MapPin, Calendar as CalendarIcon, Users, ChevronDown } from "lucide-react";
+import { Search, MapPin, Calendar as CalendarIcon, Users } from "lucide-react";
 import flatpickr from "flatpickr";
 
 export default function SearchBar() {
@@ -11,9 +11,21 @@ export default function SearchBar() {
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
   const [guests, setGuests] = useState("2");
+  const [guestsOpen, setGuestsOpen] = useState(false);
   
   const checkInRef = useRef<HTMLInputElement | null>(null);
   const checkOutRef = useRef<HTMLInputElement | null>(null);
+  const guestsRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (guestsRef.current && !guestsRef.current.contains(e.target as Node)) {
+        setGuestsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   useEffect(() => {
     let fpIn: any = null;
@@ -22,10 +34,8 @@ export default function SearchBar() {
     if (checkInRef.current) {
       fpIn = flatpickr(checkInRef.current, {
         minDate: "today",
-        dateFormat: "Y-m-d",
-        altInput: true,
-        altFormat: "M j, Y",
-        altInputClass: "w-full bg-transparent text-gray-900 text-sm font-medium outline-none focus:outline-none cursor-pointer placeholder:text-gray-400 placeholder:font-normal",
+        dateFormat: "M j, Y",
+        allowInput: false,
         onChange: (selectedDates) => {
           if (selectedDates.length > 0) {
             const dStr = selectedDates[0].toISOString().split("T")[0];
@@ -43,10 +53,8 @@ export default function SearchBar() {
     if (checkOutRef.current) {
       fpOut = flatpickr(checkOutRef.current, {
         minDate: "today",
-        dateFormat: "Y-m-d",
-        altInput: true,
-        altFormat: "M j, Y",
-        altInputClass: "w-full bg-transparent text-gray-900 text-sm font-medium outline-none focus:outline-none cursor-pointer placeholder:text-gray-400 placeholder:font-normal",
+        dateFormat: "M j, Y",
+        allowInput: false,
         onChange: (selectedDates) => {
           if (selectedDates.length > 0) {
             const dStr = selectedDates[0].toISOString().split("T")[0];
@@ -129,25 +137,49 @@ export default function SearchBar() {
       </div>
 
       {/* Guests */}
-      <div className="w-full md:w-52 flex items-center gap-3.5 px-5 py-3.5 hover:bg-gray-50/70 focus-within:bg-gray-50/90 transition-colors">
+      <div
+        ref={guestsRef}
+        className="w-full md:w-52 relative flex items-center gap-3.5 px-5 py-3.5 hover:bg-gray-50/70 focus-within:bg-gray-50/90 transition-colors cursor-pointer"
+        onClick={() => setGuestsOpen((prev) => !prev)}
+      >
         <Users className="w-5 h-5 text-[#0F5132] shrink-0 stroke-[1.5]" />
-        <div className="w-full text-left relative">
-          <label className="block text-[11px] font-semibold tracking-wider text-gray-500 uppercase mb-0.5">
+        <div className="w-full text-left select-none">
+          <label className="block text-[11px] font-semibold tracking-wider text-gray-500 uppercase mb-0.5 pointer-events-none">
             Guests
           </label>
-          <select
-            value={guests}
-            onChange={(e) => setGuests(e.target.value)}
-            className="w-full bg-transparent text-gray-900 text-sm font-medium outline-none focus:outline-none cursor-pointer appearance-none pr-5"
-          >
-            <option value="1">1 Guest</option>
-            <option value="2">2 Guests</option>
-            <option value="3">3 Guests</option>
-            <option value="4">4 Guests</option>
-            <option value="5">5+ Guests</option>
-          </select>
-          <ChevronDown className="w-4 h-4 text-gray-400 absolute right-0 bottom-1 pointer-events-none stroke-[1.5]" />
+          <div className="text-gray-900 text-sm font-medium">
+            {guests === "1" ? "1 Guest" : guests === "5" ? "5+ Guests" : `${guests} Guests`}
+          </div>
         </div>
+
+        {/* Custom Dropdown Menu matching user reference image */}
+        {guestsOpen && (
+          <div className="absolute left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-xs shadow-xl z-[9999] py-1 divide-y divide-gray-50 animate-fade-in">
+            {[
+              { val: "1", label: "1 Guest" },
+              { val: "2", label: "2 Guests" },
+              { val: "3", label: "3 Guests" },
+              { val: "4", label: "4 Guests" },
+              { val: "5", label: "5+ Guests" },
+            ].map((item) => (
+              <div
+                key={item.val}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setGuests(item.val);
+                  setGuestsOpen(false);
+                }}
+                className={`px-4 py-2.5 text-xs sm:text-sm font-medium transition-colors cursor-pointer ${
+                  guests === item.val
+                    ? "bg-[#E8F5E9] text-[#0F5132]"
+                    : "text-gray-800 hover:bg-gray-50"
+                }`}
+              >
+                {item.label}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Search Button */}

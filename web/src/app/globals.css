@@ -78,14 +78,20 @@ span.flatpickr-weekday {
 }
 
 /* Ensure flatpickr altInput replaces the target input cleanly without duplicate labels */
-input.flatpickr-input {
+input.flatpickr-input[type="hidden"],
+input.flatpickr-input:not(.input) {
   display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  width: 0 !important;
+  position: absolute !important;
+  pointer-events: none !important;
 }
+
+input.flatpickr-input.input,
 input.flatpickr-input.form-control,
-input.flatpickr-input[type="text"] {
+input[type="text"].flatpickr-input {
   display: block !important;
-}
-.flatpickr-input.form-control {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
@@ -95,7 +101,8 @@ input.flatpickr-input[type="text"] {
   color: #111827 !important;
   width: 100% !important;
 }
-.flatpickr-input.form-control:focus {
+
+input.flatpickr-input:focus {
   outline: none !important;
   box-shadow: none !important;
 }
