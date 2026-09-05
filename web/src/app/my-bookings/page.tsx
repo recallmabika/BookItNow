@@ -40,12 +40,17 @@ export default function MyBookingsPage() {
   }, [router]);
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
-      <div>
-        <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">My Bookings</h1>
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
-          Review your upcoming stays, digital e-vouchers, and past reservations
-        </p>
+    <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6 overflow-x-hidden">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-200/60 dark:border-gray-800 pb-3">
+        <div>
+          <h1 className="text-xl font-medium text-gray-900 dark:text-white">My Bookings</h1>
+          <p className="text-[11px] text-gray-500 dark:text-gray-400 font-normal mt-0.5">
+            Review your upcoming stays, digital e-vouchers, and past reservations
+          </p>
+        </div>
+        <div className="text-[11px] font-normal text-[#2563EB] dark:text-blue-400 bg-[#EFF6FF] dark:bg-blue-950/40 px-2.5 py-1 rounded-xs border border-blue-200/60 dark:border-blue-900/50">
+          {loading ? "Loading..." : `${bookings.length} reservations`}
+        </div>
       </div>
 
       {loading ? (
