@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import { fetchPropertyBySlug, createRealBooking } from "@/lib/api";
 import { MapPin, Check, ShieldCheck, Users, ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import { SkeletonPropertyDetail } from "@/components/Skeleton";
 
 export default function PropertyDetailPage() {
   const params = useParams();
@@ -48,12 +49,7 @@ export default function PropertyDetailPage() {
   }, []);
 
   if (loading) {
-    return (
-      <div className="max-w-7xl mx-auto px-4 py-20 text-center">
-        <div className="w-7 h-7 border-2 border-[#0F5132] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-        <p className="text-xs text-gray-500">Checking live room availability...</p>
-      </div>
-    );
+    return <SkeletonPropertyDetail />;
   }
 
   if (!property) {

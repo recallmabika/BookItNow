@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { fetchProperties, PropertyListItem } from "@/lib/api";
 import SearchBar from "@/components/SearchBar";
+import { SkeletonPropertyCard } from "@/components/Skeleton";
 import { MapPin, ArrowRight } from "lucide-react";
 
 function SearchResultsContent() {
@@ -56,12 +57,9 @@ function SearchResultsContent() {
 
       {/* Results Grid */}
       {loading ? (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-6">
-          {[1, 2, 3].map((n) => (
-            <div
-              key={n}
-              className="h-64 rounded-xs bg-gray-100/70 dark:bg-gray-900 animate-pulse border border-gray-200/60 dark:border-gray-800"
-            />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[1, 2, 3, 4, 5, 6].map((n) => (
+            <SkeletonPropertyCard key={n} />
           ))}
         </div>
       ) : properties.length === 0 ? (

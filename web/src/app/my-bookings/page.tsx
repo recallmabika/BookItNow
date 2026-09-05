@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Calendar, QrCode, CheckCircle2, ArrowRight } from "lucide-react";
+import { SkeletonTable } from "@/components/Skeleton";
 
 export default function MyBookingsPage() {
   const router = useRouter();
@@ -47,7 +48,9 @@ export default function MyBookingsPage() {
       </div>
 
       {loading ? (
-        <div className="py-12 text-center text-xs text-gray-500">Loading your reservations...</div>
+        <div className="space-y-4">
+          <SkeletonTable rows={7} />
+        </div>
       ) : bookings.length === 0 ? (
         <div className="text-center py-16 bg-gray-50/50 rounded-xl border border-gray-200/80 space-y-3">
           <Calendar className="w-10 h-10 text-gray-400 mx-auto" />

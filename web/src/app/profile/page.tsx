@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Camera, User, Mail, Phone, ShieldCheck, CheckCircle2, ArrowLeft } from "lucide-react";
+import { SkeletonTable } from "@/components/Skeleton";
 
 interface UserProfile {
   id: string;
@@ -81,17 +82,24 @@ export default function ProfilePage() {
   };
 
   if (!user) {
-    return null;
+    return (
+      <div className="min-h-[calc(100vh-4.5rem)] bg-white dark:bg-[#0B0F19] py-10 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl mx-auto space-y-6">
+          <div className="h-4 w-28 bg-gray-200 dark:bg-gray-800 rounded animate-pulse" />
+          <SkeletonTable rows={6} />
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div className="min-h-[calc(100vh-4.5rem)] bg-white py-10 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-[calc(100vh-4.5rem)] bg-white dark:bg-[#0B0F19] py-10 px-4 sm:px-6 lg:px-8 transition-colors">
       <div className="max-w-3xl mx-auto">
         {/* Back Link */}
         <div className="mb-6">
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-500 hover:text-[#0F5132] transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-500 dark:text-gray-400 hover:text-[#2563EB] dark:hover:text-blue-400 transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Back to Explorer</span>
@@ -99,7 +107,7 @@ export default function ProfilePage() {
         </div>
 
         {/* Profile Card */}
-        <div className="bg-white rounded-xs border border-gray-200/90 shadow-xs overflow-hidden">
+        <div className="bg-white dark:bg-[#111827] rounded-xs border border-gray-200/90 dark:border-gray-800 shadow-xs overflow-hidden transition-colors">
           {/* Header Banner */}
           <div className="bg-[#2563EB] h-32 px-6 sm:px-8 relative flex items-end pb-4">
             <div className="text-white">
