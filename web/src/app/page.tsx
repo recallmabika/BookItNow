@@ -65,11 +65,11 @@ export default function HomePage() {
         <div className="absolute inset-0 z-0">
           <Image
             src="/pillars-bg.jpg"
-            alt="Hospitality interior"
+            alt="Victoria Falls mist and gorges"
             fill
             className="object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gray-950/85 backdrop-blur-[2px]" />
+          <div className="absolute inset-0 bg-gray-950/75 backdrop-blur-[1px]" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/80" />
         </div>
 
