@@ -5,7 +5,11 @@ import { useRouter } from "next/navigation";
 import { Search, MapPin, Calendar as CalendarIcon, Users, Loader2 } from "lucide-react";
 import flatpickr from "flatpickr";
 
-export default function SearchBar() {
+interface SearchBarProps {
+  transparent?: boolean;
+}
+
+export default function SearchBar({ transparent = false }: SearchBarProps) {
   const router = useRouter();
   const [city, setCity] = useState("");
   const [checkIn, setCheckIn] = useState("");
@@ -94,10 +98,18 @@ export default function SearchBar() {
   return (
     <form
       onSubmit={handleSearch}
-      className="bg-white dark:bg-[#111827] rounded-xs border border-gray-300 dark:border-gray-800 max-w-6xl w-full mx-auto flex flex-col md:flex-row items-stretch divide-y md:divide-y-0 md:divide-x divide-gray-200 dark:divide-gray-800 shadow-xs transition-colors"
+      className={`rounded-xs max-w-6xl w-full mx-auto flex flex-col md:flex-row items-stretch divide-y md:divide-y-0 md:divide-x shadow-lg transition-all ${
+        transparent
+          ? "bg-white/75 dark:bg-[#111827]/75 backdrop-blur-md border border-white/40 dark:border-white/10 divide-black/10 dark:divide-white/10 shadow-2xl"
+          : "bg-white dark:bg-[#111827] border border-gray-300 dark:border-gray-800 divide-gray-200 dark:divide-gray-800 shadow-xs"
+      }`}
     >
       {/* City / Destination */}
-      <div className="flex-1 flex flex-col justify-center px-5 py-3.5 hover:bg-gray-50/70 dark:hover:bg-gray-800/60 focus-within:bg-gray-50/90 dark:focus-within:bg-gray-800/80 transition-colors">
+      <div className={`flex-1 flex flex-col justify-center px-5 py-3.5 transition-colors ${
+        transparent 
+          ? "hover:bg-white/30 dark:hover:bg-white/5 focus-within:bg-white/40 dark:focus-within:bg-white/10"
+          : "hover:bg-gray-50/70 dark:hover:bg-gray-800/60 focus-within:bg-gray-50/90 dark:focus-within:bg-gray-800/80"
+      }`}>
         <div className="flex items-center gap-1.5 mb-1 text-gray-500 dark:text-gray-400">
           <MapPin className="w-3.5 h-3.5 text-[#2563EB] dark:text-blue-400 shrink-0 stroke-[2]" />
           <label className="text-[11px] font-semibold tracking-wider uppercase">
@@ -116,7 +128,11 @@ export default function SearchBar() {
       {/* Check-in Date */}
       <div 
         onClick={() => fpInInstance.current?.open()}
-        className="flex-1 flex flex-col justify-center px-5 py-3.5 hover:bg-gray-50/70 dark:hover:bg-gray-800/60 focus-within:bg-gray-50/90 dark:focus-within:bg-gray-800/80 transition-colors cursor-pointer"
+        className={`flex-1 flex flex-col justify-center px-5 py-3.5 transition-colors cursor-pointer ${
+          transparent
+            ? "hover:bg-white/30 dark:hover:bg-white/5 focus-within:bg-white/40 dark:focus-within:bg-white/10"
+            : "hover:bg-gray-50/70 dark:hover:bg-gray-800/60 focus-within:bg-gray-50/90 dark:focus-within:bg-gray-800/80"
+        }`}
       >
         <div className="flex items-center gap-1.5 mb-1 text-gray-500 dark:text-gray-400 pointer-events-none">
           <CalendarIcon className="w-3.5 h-3.5 text-[#2563EB] dark:text-blue-400 shrink-0 stroke-[2]" />
@@ -136,7 +152,11 @@ export default function SearchBar() {
       {/* Check-out Date */}
       <div 
         onClick={() => fpOutInstance.current?.open()}
-        className="flex-1 flex flex-col justify-center px-5 py-3.5 hover:bg-gray-50/70 dark:hover:bg-gray-800/60 focus-within:bg-gray-50/90 dark:focus-within:bg-gray-800/80 transition-colors cursor-pointer"
+        className={`flex-1 flex flex-col justify-center px-5 py-3.5 transition-colors cursor-pointer ${
+          transparent
+            ? "hover:bg-white/30 dark:hover:bg-white/5 focus-within:bg-white/40 dark:focus-within:bg-white/10"
+            : "hover:bg-gray-50/70 dark:hover:bg-gray-800/60 focus-within:bg-gray-50/90 dark:focus-within:bg-gray-800/80"
+        }`}
       >
         <div className="flex items-center gap-1.5 mb-1 text-gray-500 dark:text-gray-400 pointer-events-none">
           <CalendarIcon className="w-3.5 h-3.5 text-[#2563EB] dark:text-blue-400 shrink-0 stroke-[2]" />
@@ -156,7 +176,11 @@ export default function SearchBar() {
       {/* Guests */}
       <div
         ref={guestsRef}
-        className="flex-1 relative flex flex-col justify-center px-5 py-3.5 hover:bg-gray-50/70 dark:hover:bg-gray-800/60 focus-within:bg-gray-50/90 dark:focus-within:bg-gray-800/80 transition-colors cursor-pointer select-none"
+        className={`flex-1 relative flex flex-col justify-center px-5 py-3.5 transition-colors cursor-pointer select-none ${
+          transparent
+            ? "hover:bg-white/30 dark:hover:bg-white/5 focus-within:bg-white/40 dark:focus-within:bg-white/10"
+            : "hover:bg-gray-50/70 dark:hover:bg-gray-800/60 focus-within:bg-gray-50/90 dark:focus-within:bg-gray-800/80"
+        }`}
         onClick={() => setGuestsOpen((prev) => !prev)}
       >
         <div className="flex items-center gap-1.5 mb-1 text-gray-500 dark:text-gray-400 pointer-events-none">

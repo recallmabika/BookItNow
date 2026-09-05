@@ -54,7 +54,7 @@ export default function HomePage() {
 
           {/* Bottom Row: Search Widget reveals smoothly from bottom to center */}
           <div className="w-full pt-2 animate-hero-search">
-            <SearchBar />
+            <SearchBar transparent />
           </div>
         </div>
       </section>
