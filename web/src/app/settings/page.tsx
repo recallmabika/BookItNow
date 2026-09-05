@@ -3,8 +3,9 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Lock, Bell, Globe, ArrowLeft, CheckCircle2 } from "lucide-react";
+import { Lock, Bell, Globe, ArrowLeft, CheckCircle2, Sun, Moon, Laptop, Palette } from "lucide-react";
 import SearchableDropdown, { DropdownOption } from "@/components/SearchableDropdown";
+import { useTheme } from "@/context/ThemeContext";
 
 const CURRENCY_OPTIONS: DropdownOption[] = [
   { value: "USD", label: "USD ($) - United States Dollar", sublabel: "Global default currency" },
@@ -17,6 +18,7 @@ const CURRENCY_OPTIONS: DropdownOption[] = [
 
 export default function SettingsPage() {
   const router = useRouter();
+  const { theme, setTheme } = useTheme();
   const [savedMsg, setSavedMsg] = useState("");
   const [emailAlerts, setEmailAlerts] = useState(true);
   const [smsAlerts, setSmsAlerts] = useState(false);
@@ -142,7 +144,64 @@ export default function SettingsPage() {
               </div>
             </div>
 
-            <div className="h-px bg-gray-100 relative z-0" />
+            <div className="h-px bg-gray-100 dark:bg-gray-800" />
+
+            {/* Appearance / Theme */}
+            <div className="relative z-10">
+              <div className="flex items-center gap-2 mb-3">
+                <Palette className="w-4 h-4 text-[#2563EB]" />
+                <h3 className="text-xs font-semibold text-gray-900 dark:text-white uppercase tracking-wider">
+                  Appearance & Theme
+                </h3>
+              </div>
+              <div className="pl-6 max-w-md">
+                <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
+                  Choose how BookItNow appears to you. Select a specific theme or sync with your system.
+                </p>
+                <div className="grid grid-cols-3 gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setTheme("light")}
+                    className={`flex flex-col items-center gap-2 p-3.5 rounded-xs border transition-all cursor-pointer text-center ${
+                      theme === "light"
+                        ? "border-[#2563EB] bg-blue-50/40 text-[#2563EB] ring-1 ring-[#2563EB]"
+                        : "border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+                    }`}
+                  >
+                    <Sun className="w-5 h-5 stroke-[1.8]" />
+                    <span className="text-xs font-medium">Light</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setTheme("dark")}
+                    className={`flex flex-col items-center gap-2 p-3.5 rounded-xs border transition-all cursor-pointer text-center ${
+                      theme === "dark"
+                        ? "border-[#2563EB] bg-blue-50/40 dark:bg-blue-950/40 text-[#2563EB] dark:text-blue-400 ring-1 ring-[#2563EB]"
+                        : "border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+                    }`}
+                  >
+                    <Moon className="w-5 h-5 stroke-[1.8]" />
+                    <span className="text-xs font-medium">Dark</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setTheme("system")}
+                    className={`flex flex-col items-center gap-2 p-3.5 rounded-xs border transition-all cursor-pointer text-center ${
+                      theme === "system"
+                        ? "border-[#2563EB] bg-blue-50/40 dark:bg-blue-950/40 text-[#2563EB] dark:text-blue-400 ring-1 ring-[#2563EB]"
+                        : "border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+                    }`}
+                  >
+                    <Laptop className="w-5 h-5 stroke-[1.8]" />
+                    <span className="text-xs font-medium">System</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div className="h-px bg-gray-100 dark:bg-gray-800 relative z-0" />
 
             {/* Password */}
             <div className="relative z-0">

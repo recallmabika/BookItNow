@@ -8,8 +8,12 @@ import {
   User as UserIcon,
   Settings,
   LogOut,
-  ChevronDown
+  ChevronDown,
+  Sun,
+  Moon,
+  Laptop
 } from "lucide-react";
+import { useTheme } from "@/context/ThemeContext";
 
 interface UserProfile {
   id: string;
@@ -22,6 +26,7 @@ interface UserProfile {
 
 export default function Navbar() {
   const pathname = usePathname();
+  const { theme, setTheme } = useTheme();
   const [user, setUser] = useState<UserProfile | null>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -140,69 +145,117 @@ export default function Navbar() {
 
                 {/* Animated Dropdown Menu */}
                 {dropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-60 bg-white rounded-xs border border-gray-200/90 shadow-lg py-2 z-50 animate-fade-in">
-                    {/* User Header Info - Pure White with Full Name and Role (No Shield) */}
-                    <div className="px-4 py-3 border-b border-gray-100 flex items-center gap-3">
+                  <div className="absolute right-0 mt-2 w-64 bg-white dark:bg-[#111827] rounded-xs border border-gray-200/90 dark:border-gray-800 shadow-xl py-0 z-50 animate-fade-in overflow-hidden">
+                    {/* User Header Info - Avatar fills entire left, top, bottom with clean hover */}
+                    <div className="flex items-stretch border-b border-gray-100 dark:border-gray-800 bg-gray-50/40 dark:bg-gray-800/40 hover:bg-blue-50/30 dark:hover:bg-gray-800/70 transition-colors">
                       {user.avatar ? (
                         <img
                           src={user.avatar}
                           alt={user.first_name}
-                          className="w-9 h-9 rounded-xs object-cover border border-gray-200"
+                          className="w-16 min-h-[4.5rem] object-cover border-r border-gray-200 dark:border-gray-700 shrink-0"
                         />
                       ) : (
-                        <div className="w-9 h-9 rounded-xs bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center font-bold text-sm border border-blue-200 shrink-0">
+                        <div className="w-16 min-h-[4.5rem] bg-[#EFF6FF] dark:bg-blue-950/40 text-[#2563EB] dark:text-blue-400 flex items-center justify-center font-bold text-lg border-r border-blue-200 dark:border-blue-900/50 shrink-0">
                           {user.first_name[0]?.toUpperCase()}
                         </div>
                       )}
 
-                      <div className="flex-1 min-w-0">
-                        <div className="text-xs font-semibold text-gray-900 truncate">
+                      <div className="flex-1 min-w-0 p-3 flex flex-col justify-center">
+                        <div className="text-xs font-semibold text-gray-900 dark:text-white truncate">
                           {user.first_name} {user.last_name || ""}
                         </div>
-                        <div className="text-[10px] text-gray-500 truncate">{user.email}</div>
-                        <span className="inline-block text-[11px] text-gray-500 font-medium mt-0.5">
+                        <div className="text-[10px] text-gray-500 dark:text-gray-400 truncate">{user.email}</div>
+                        <span className="inline-block text-[10px] text-gray-400 dark:text-gray-500 font-medium mt-0.5">
                           {user.role === "guest" || user.role === "GUEST" ? "Guest Account" : `${user.role.charAt(0).toUpperCase() + user.role.slice(1).toLowerCase()} Account`}
                         </span>
                       </div>
                     </div>
 
                     {/* Menu Links */}
-                    <div className="px-2 pt-1 space-y-0.5">
+                    <div className="p-2 space-y-0.5">
                       <Link
                         href="/profile"
                         onClick={() => setDropdownOpen(false)}
-                        className={`flex items-center gap-2.5 px-3 py-2 text-xs rounded-xs transition-colors active:bg-[#EFF6FF] ${
+                        className={`flex items-center gap-2.5 px-3 py-2 text-xs rounded-xs transition-colors active:bg-[#EFF6FF] dark:active:bg-blue-950/50 ${
                           pathname === "/profile"
-                            ? "bg-[#EFF6FF] text-[#2563EB] font-semibold"
-                            : "text-gray-700 hover:text-[#2563EB] hover:bg-[#EFF6FF]/50"
+                            ? "bg-[#EFF6FF] dark:bg-blue-950/50 text-[#2563EB] dark:text-blue-400 font-semibold"
+                            : "text-gray-700 dark:text-gray-200 hover:text-[#2563EB] dark:hover:text-blue-400 hover:bg-[#EFF6FF]/50 dark:hover:bg-gray-800"
                         }`}
                       >
-                        <UserIcon className={`w-3.5 h-3.5 stroke-[1.8] ${pathname === "/profile" ? "text-[#2563EB]" : "text-gray-400"}`} />
+                        <UserIcon className={`w-3.5 h-3.5 stroke-[1.8] ${pathname === "/profile" ? "text-[#2563EB] dark:text-blue-400" : "text-gray-400"}`} />
                         <span>My Profile</span>
                       </Link>
 
                       <Link
                         href="/settings"
                         onClick={() => setDropdownOpen(false)}
-                        className={`flex items-center gap-2.5 px-3 py-2 text-xs rounded-xs transition-colors active:bg-[#EFF6FF] ${
+                        className={`flex items-center gap-2.5 px-3 py-2 text-xs rounded-xs transition-colors active:bg-[#EFF6FF] dark:active:bg-blue-950/50 ${
                           pathname === "/settings"
-                            ? "bg-[#EFF6FF] text-[#2563EB] font-semibold"
-                            : "text-gray-700 hover:text-[#2563EB] hover:bg-[#EFF6FF]/50"
+                            ? "bg-[#EFF6FF] dark:bg-blue-950/50 text-[#2563EB] dark:text-blue-400 font-semibold"
+                            : "text-gray-700 dark:text-gray-200 hover:text-[#2563EB] dark:hover:text-blue-400 hover:bg-[#EFF6FF]/50 dark:hover:bg-gray-800"
                         }`}
                       >
-                        <Settings className={`w-3.5 h-3.5 stroke-[1.8] ${pathname === "/settings" ? "text-[#2563EB]" : "text-gray-400"}`} />
+                        <Settings className={`w-3.5 h-3.5 stroke-[1.8] ${pathname === "/settings" ? "text-[#2563EB] dark:text-blue-400" : "text-gray-400"}`} />
                         <span>Account Settings</span>
                       </Link>
                     </div>
 
-                    <div className="h-px bg-gray-100 my-1.5" />
+                    {/* Theme Selector: Light, Dark, System */}
+                    <div className="px-3 py-2 border-t border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-900/50">
+                      <div className="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-1.5">
+                        Appearance
+                      </div>
+                      <div className="grid grid-cols-3 gap-1 bg-gray-200/70 dark:bg-gray-800 p-0.5 rounded-xs">
+                        <button
+                          type="button"
+                          onClick={() => setTheme("light")}
+                          className={`flex items-center justify-center gap-1 py-1 text-[11px] font-medium rounded-xs transition-colors cursor-pointer ${
+                            theme === "light"
+                              ? "bg-white dark:bg-gray-700 text-[#2563EB] dark:text-white shadow-xs font-semibold"
+                              : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
+                          }`}
+                          title="Light mode"
+                        >
+                          <Sun className="w-3 h-3 stroke-[2]" />
+                          <span>Light</span>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setTheme("dark")}
+                          className={`flex items-center justify-center gap-1 py-1 text-[11px] font-medium rounded-xs transition-colors cursor-pointer ${
+                            theme === "dark"
+                              ? "bg-white dark:bg-gray-700 text-[#2563EB] dark:text-white shadow-xs font-semibold"
+                              : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
+                          }`}
+                          title="Dark mode"
+                        >
+                          <Moon className="w-3 h-3 stroke-[2]" />
+                          <span>Dark</span>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setTheme("system")}
+                          className={`flex items-center justify-center gap-1 py-1 text-[11px] font-medium rounded-xs transition-colors cursor-pointer ${
+                            theme === "system"
+                              ? "bg-white dark:bg-gray-700 text-[#2563EB] dark:text-white shadow-xs font-semibold"
+                              : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
+                          }`}
+                          title="System preferences"
+                        >
+                          <Laptop className="w-3 h-3 stroke-[2]" />
+                          <span>System</span>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="h-px bg-gray-100 dark:border-gray-800" />
 
                     {/* Logout Option */}
-                    <div className="px-2">
+                    <div className="p-2">
                       <button
                         type="button"
                         onClick={handleLogout}
-                        className="w-full flex items-center gap-2.5 px-3 py-2 text-xs text-red-600 hover:bg-red-50 rounded-xs transition-colors cursor-pointer text-left"
+                        className="w-full flex items-center gap-2.5 px-3 py-2 text-xs text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 rounded-xs transition-colors cursor-pointer text-left font-medium"
                       >
                         <LogOut className="w-3.5 h-3.5 stroke-[1.8]" />
                         <span>Sign Out</span>
