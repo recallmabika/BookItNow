@@ -42,10 +42,12 @@ export default function AdminDashboardPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [actionLoading, setActionLoading] = useState<string | null>(null);
   const [actionSuccess, setActionSuccess] = useState("");
+  const [actionError, setActionError] = useState("");
 
   // Create Property Modal States
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [createSubmitting, setCreateSubmitting] = useState(false);
+  const [createError, setCreateError] = useState("");
   const [newPropTitle, setNewPropTitle] = useState("");
   const [newPropDesc, setNewPropDesc] = useState("");
   const [newPropType, setNewPropType] = useState("lodge");
@@ -76,6 +78,7 @@ export default function AdminDashboardPage() {
 
   async function loadData(token: string) {
     setLoading(true);
+    setActionError("");
     try {
       const [propsData, booksData] = await Promise.all([
         fetchManagedProperties(token),
@@ -83,8 +86,9 @@ export default function AdminDashboardPage() {
       ]);
       setProperties(propsData || []);
       setBookings(booksData || []);
-    } catch (err) {
+    } catch (err: any) {
       console.error("Failed to load admin data:", err);
+      setActionError(err.message || "Failed to load management data from server.");
     } finally {
       setLoading(false);
     }
@@ -95,6 +99,7 @@ export default function AdminDashboardPage() {
     if (!token) return;
 
     setActionLoading(propertyId);
+    setActionError("");
     try {
       await updatePropertyStatus(propertyId, newStatus, token);
       setProperties((prev) =>
@@ -103,7 +108,8 @@ export default function AdminDashboardPage() {
       setActionSuccess(`Property status successfully updated to ${newStatus}.`);
       setTimeout(() => setActionSuccess(""), 4000);
     } catch (err: any) {
-      alert(err.message || "Failed to update property status");
+      setActionError(err.message || "Failed to update property status");
+      setTimeout(() => setActionError(""), 6000);
     } finally {
       setActionLoading(null);
     }
@@ -117,13 +123,15 @@ export default function AdminDashboardPage() {
     if (!token) return;
 
     setActionLoading(propertyId);
+    setActionError("");
     try {
       await deleteProperty(propertyId, token);
       setProperties((prev) => prev.filter((p) => p.id !== propertyId));
       setActionSuccess(`Property "${title}" deleted successfully.`);
       setTimeout(() => setActionSuccess(""), 4000);
     } catch (err: any) {
-      alert(err.message || "Failed to delete property.");
+      setActionError(err.message || "Failed to delete property.");
+      setTimeout(() => setActionError(""), 6000);
     } finally {
       setActionLoading(null);
     }
@@ -131,8 +139,17 @@ export default function AdminDashboardPage() {
 
   async function handleCreatePropertySubmit(e: React.FormEvent) {
     e.preventDefault();
+    setCreateError("");
     const token = localStorage.getItem("bookitnow_token");
-    if (!token) return;
+    if (!token) {
+      setCreateError("Authentication session expired. Please sign in again.");
+      return;
+    }
+
+    if (!newPropTitle.trim()) {
+      setCreateError("Please enter a property title.");
+      return;
+    }
 
     setCreateSubmitting(true);
     try {
@@ -162,9 +179,10 @@ export default function AdminDashboardPage() {
       setNewPropDesc("");
       setNewPropCity("Harare");
       setNewPropAddress("");
-      loadData(token);
+      setCreateError("");
+      await loadData(token);
     } catch (err: any) {
-      alert(err.message || "Failed to create property.");
+      setCreateError(err.message || "Failed to create property. Please try again.");
     } finally {
       setCreateSubmitting(false);
     }
@@ -208,7 +226,10 @@ export default function AdminDashboardPage() {
 
           <div className="flex items-center gap-3">
             <button
-              onClick={() => setShowCreateModal(true)}
+              onClick={() => {
+                setCreateError("");
+                setShowCreateModal(true);
+              }}
               className="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white text-xs font-semibold rounded-xs shadow-sm flex items-center gap-1.5 transition-all cursor-pointer"
             >
               <Plus className="w-4 h-4" />
@@ -231,6 +252,21 @@ export default function AdminDashboardPage() {
           <div className="p-3.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 rounded-xs text-xs font-medium flex items-center gap-2">
             <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
             <span>{actionSuccess}</span>
+          </div>
+        )}
+
+        {actionError && (
+          <div className="p-3.5 bg-red-500/10 border border-red-500/30 text-red-700 dark:text-red-300 rounded-xs text-xs font-medium flex items-center justify-between gap-2 animate-in fade-in duration-200">
+            <div className="flex items-center gap-2">
+              <AlertTriangle className="w-4 h-4 text-red-500 shrink-0" />
+              <span>{actionError}</span>
+            </div>
+            <button
+              onClick={() => setActionError("")}
+              className="text-red-500 hover:text-red-700 dark:hover:text-red-300 p-1 cursor-pointer"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
           </div>
         )}
 
@@ -563,6 +599,22 @@ export default function AdminDashboardPage() {
               </div>
 
               <form onSubmit={handleCreatePropertySubmit} className="space-y-4">
+                {createError && (
+                  <div className="p-3 bg-red-500/10 border border-red-500/30 text-red-700 dark:text-red-300 rounded-xs text-xs font-medium flex items-center justify-between gap-2 animate-in fade-in duration-150">
+                    <div className="flex items-center gap-2">
+                      <AlertTriangle className="w-4 h-4 text-red-500 shrink-0" />
+                      <span>{createError}</span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setCreateError("")}
+                      className="text-red-500 hover:text-red-700 p-0.5 cursor-pointer"
+                    >
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                )}
+
                 <div className="space-y-1.5">
                   <label className="block text-[11px] font-semibold uppercase tracking-wider text-gray-500">
                     Property Title *
