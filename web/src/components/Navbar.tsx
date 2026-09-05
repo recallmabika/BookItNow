@@ -11,7 +11,8 @@ import {
   ChevronDown,
   Sun,
   Moon,
-  Laptop
+  Laptop,
+  CalendarCheck
 } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
 
@@ -70,27 +71,27 @@ export default function Navbar() {
 
   return (
     <header className="bg-[#2563EB] border-b border-[#1D4ED8] sticky top-0 z-50 shadow-xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-18 flex items-center justify-between gap-2">
         {/* Brand */}
-        <Link href="/" className="flex items-center gap-2.5 group py-2">
-          <div className="w-8 h-8 rounded-xs bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors duration-150 border border-white/20">
-            <Compass className="w-4 h-4 stroke-[1.8]" />
+        <Link href="/" className="flex items-center gap-2 group py-1.5 shrink-0">
+          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xs bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors duration-150 border border-white/20">
+            <Compass className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[1.8]" />
           </div>
           <div>
-            <span className="font-semibold text-lg tracking-tight text-white block leading-none">
+            <span className="font-semibold text-base sm:text-lg tracking-tight text-white block leading-none">
               BookIt<span className="text-blue-200">Now</span>
             </span>
-            <span className="text-[9px] tracking-wider uppercase text-blue-100/80 font-normal">
+            <span className="hidden sm:block text-[9px] tracking-wider uppercase text-blue-100/80 font-normal">
               Lodging & Stays
             </span>
           </div>
         </Link>
 
         {/* Navigation / Actions */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 sm:gap-2 shrink-0">
           <Link
             href="/search"
-            className={`text-xs font-medium transition-all duration-150 px-3.5 py-3 rounded-xs outline-none focus-visible:ring-2 focus-visible:ring-white/80 active:scale-[0.98] active:bg-white active:text-[#2563EB] ${
+            className={`text-xs font-medium transition-all duration-150 px-2.5 sm:px-3.5 py-2 sm:py-3 rounded-xs outline-none focus-visible:ring-2 focus-visible:ring-white/80 active:scale-[0.98] active:bg-white active:text-[#2563EB] ${
               pathname.startsWith("/search")
                 ? "bg-white text-[#2563EB] font-semibold shadow-xs"
                 : "text-white hover:bg-white hover:text-[#2563EB] focus-visible:bg-white focus-visible:text-[#2563EB]"
@@ -100,11 +101,11 @@ export default function Navbar() {
           </Link>
 
           {user ? (
-            <div className="flex items-center gap-2.5 pl-1">
-              {/* Clean My Bookings text button without awkward icon */}
+            <div className="flex items-center gap-1 sm:gap-2.5 pl-0.5 sm:pl-1">
+              {/* Clean My Bookings text button */}
               <Link
                 href="/my-bookings"
-                className={`text-xs font-medium transition-all duration-150 px-3.5 py-3 rounded-xs outline-none focus-visible:ring-2 focus-visible:ring-white/80 active:scale-[0.98] active:bg-white active:text-[#2563EB] ${
+                className={`hidden md:inline-flex text-xs font-medium transition-all duration-150 px-3.5 py-3 rounded-xs outline-none focus-visible:ring-2 focus-visible:ring-white/80 active:scale-[0.98] active:bg-white active:text-[#2563EB] ${
                   pathname.startsWith("/my-bookings")
                     ? "bg-white text-[#2563EB] font-semibold shadow-xs"
                     : "text-white hover:bg-white hover:text-[#2563EB] focus-visible:bg-white focus-visible:text-[#2563EB]"
@@ -113,14 +114,14 @@ export default function Navbar() {
                 My Bookings
               </Link>
 
-              <div className="h-5 w-px bg-white/20 mx-1" />
+              <div className="hidden md:block h-5 w-px bg-white/20 mx-0.5 sm:mx-1" />
 
               {/* Profile Trigger - Full height left avatar, centered name, clean hover */}
               <div className="relative" ref={dropdownRef}>
                 <button
                   type="button"
                   onClick={() => setDropdownOpen((prev) => !prev)}
-                  className="flex items-center h-10 pl-0 pr-3.5 bg-white text-[#2563EB] rounded-xs shadow-xs border border-white/80 hover:bg-blue-50/50 hover:border-white active:scale-[0.98] transition-all duration-150 cursor-pointer overflow-hidden group"
+                  className="flex items-center h-8 sm:h-10 pl-0 pr-2 sm:pr-3.5 bg-white text-[#2563EB] rounded-xs shadow-xs border border-white/80 hover:bg-blue-50/50 hover:border-white active:scale-[0.98] transition-all duration-150 cursor-pointer overflow-hidden group"
                 >
                   {user.avatar ? (
                     <img
@@ -133,11 +134,11 @@ export default function Navbar() {
                       {user.first_name[0]?.toUpperCase()}
                     </span>
                   )}
-                  <span className="text-xs font-semibold px-3 truncate">
+                  <span className="text-xs font-semibold px-1.5 sm:px-3 max-w-[5rem] sm:max-w-none truncate">
                     {user.first_name}
                   </span>
                   <ChevronDown
-                    className={`w-3.5 h-3.5 stroke-[2] transition-transform duration-200 text-[#2563EB] shrink-0 ${
+                    className={`w-3 h-3 sm:w-3.5 sm:h-3.5 stroke-[2] transition-transform duration-200 text-[#2563EB] shrink-0 ${
                       dropdownOpen ? "rotate-180" : ""
                     }`}
                   />
@@ -173,6 +174,19 @@ export default function Navbar() {
 
                     {/* Menu Links */}
                     <div className="p-2 space-y-0.5">
+                      <Link
+                        href="/my-bookings"
+                        onClick={() => setDropdownOpen(false)}
+                        className={`md:hidden flex items-center gap-2.5 px-3 py-2 text-xs rounded-xs transition-colors active:bg-[#EFF6FF] dark:active:bg-blue-950/50 ${
+                          pathname === "/my-bookings"
+                            ? "bg-[#EFF6FF] dark:bg-blue-950/50 text-[#2563EB] dark:text-blue-400 font-semibold"
+                            : "text-gray-700 dark:text-gray-200 hover:text-[#2563EB] dark:hover:text-blue-400 hover:bg-[#EFF6FF]/50 dark:hover:bg-gray-800"
+                        }`}
+                      >
+                        <CalendarCheck className={`w-3.5 h-3.5 stroke-[1.8] ${pathname === "/my-bookings" ? "text-[#2563EB] dark:text-blue-400" : "text-gray-400"}`} />
+                        <span>My Bookings</span>
+                      </Link>
+
                       <Link
                         href="/profile"
                         onClick={() => setDropdownOpen(false)}

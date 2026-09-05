@@ -4,9 +4,9 @@ import { ShieldCheck, Zap, Wallet, QrCode, ArrowUpRight } from "lucide-react";
 
 export default function HomePage() {
   return (
-    <div className="space-y-16 sm:space-y-20 bg-white">
+    <div className="space-y-16 sm:space-y-20 bg-white overflow-x-hidden">
       {/* Hero Section */}
-      <section className="relative pt-12 sm:pt-16 pb-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
+      <section className="relative pt-10 sm:pt-16 pb-8 sm:pb-10 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
         <div className="max-w-3xl mx-auto space-y-4">
           <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-xs bg-[#EFF6FF] text-[#2563EB] text-[11px] font-normal tracking-wide border border-blue-200/60">
             <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB] animate-pulse" />
