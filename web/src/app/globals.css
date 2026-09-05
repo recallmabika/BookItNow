@@ -77,32 +77,11 @@ span.flatpickr-weekday {
   font-weight: 500 !important;
 }
 
-/* Ensure flatpickr altInput replaces the target input cleanly without duplicate labels */
-input.flatpickr-input[type="hidden"],
-input.flatpickr-input:not(.input) {
+/* Flatpickr input and popup styling */
+.flatpickr-calendar {
+  z-index: 99999 !important;
+}
+
+input.flatpickr-input[type="hidden"] {
   display: none !important;
-  visibility: hidden !important;
-  height: 0 !important;
-  width: 0 !important;
-  position: absolute !important;
-  pointer-events: none !important;
-}
-
-input.flatpickr-input.input,
-input.flatpickr-input.form-control,
-input[type="text"].flatpickr-input {
-  display: block !important;
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-  font-size: 0.875rem !important;
-  line-height: 1.25rem !important;
-  color: #111827 !important;
-  width: 100% !important;
-}
-
-input.flatpickr-input:focus {
-  outline: none !important;
-  box-shadow: none !important;
 }

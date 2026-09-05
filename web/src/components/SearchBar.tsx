@@ -27,21 +27,22 @@ export default function SearchBar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  useEffect(() => {
-    let fpIn: any = null;
-    let fpOut: any = null;
+  const fpInInstance = useRef<any>(null);
+  const fpOutInstance = useRef<any>(null);
 
+  useEffect(() => {
     if (checkInRef.current) {
-      fpIn = flatpickr(checkInRef.current, {
+      fpInInstance.current = flatpickr(checkInRef.current, {
         minDate: "today",
         dateFormat: "M j, Y",
         allowInput: false,
+        disableMobile: "true",
         onChange: (selectedDates) => {
           if (selectedDates.length > 0) {
             const dStr = selectedDates[0].toISOString().split("T")[0];
             setCheckIn(dStr);
-            if (fpOut) {
-              fpOut.set("minDate", selectedDates[0]);
+            if (fpOutInstance.current) {
+              fpOutInstance.current.set("minDate", selectedDates[0]);
             }
           } else {
             setCheckIn("");
@@ -51,10 +52,11 @@ export default function SearchBar() {
     }
 
     if (checkOutRef.current) {
-      fpOut = flatpickr(checkOutRef.current, {
+      fpOutInstance.current = flatpickr(checkOutRef.current, {
         minDate: "today",
         dateFormat: "M j, Y",
         allowInput: false,
+        disableMobile: "true",
         onChange: (selectedDates) => {
           if (selectedDates.length > 0) {
             const dStr = selectedDates[0].toISOString().split("T")[0];
@@ -67,8 +69,8 @@ export default function SearchBar() {
     }
 
     return () => {
-      fpIn?.destroy();
-      fpOut?.destroy();
+      fpInInstance.current?.destroy();
+      fpOutInstance.current?.destroy();
     };
   }, []);
 
@@ -105,32 +107,40 @@ export default function SearchBar() {
       </div>
 
       {/* Check-in Date */}
-      <div className="flex-1 flex items-center gap-3.5 px-5 py-3.5 hover:bg-gray-50/70 focus-within:bg-gray-50/90 transition-colors">
+      <div 
+        onClick={() => fpInInstance.current?.open()}
+        className="flex-1 flex items-center gap-3.5 px-5 py-3.5 hover:bg-gray-50/70 focus-within:bg-gray-50/90 transition-colors cursor-pointer"
+      >
         <CalendarIcon className="w-5 h-5 text-[#0F5132] shrink-0 stroke-[1.5]" />
         <div className="w-full text-left">
-          <label className="block text-[11px] font-semibold tracking-wider text-gray-500 uppercase mb-0.5">
+          <label className="block text-[11px] font-semibold tracking-wider text-gray-500 uppercase mb-0.5 pointer-events-none">
             Check-In
           </label>
           <input
             ref={checkInRef}
             type="text"
             placeholder="Add dates"
+            readOnly
             className="w-full bg-transparent text-gray-900 text-sm font-medium outline-none focus:outline-none cursor-pointer placeholder:text-gray-400 placeholder:font-normal"
           />
         </div>
       </div>
 
       {/* Check-out Date */}
-      <div className="flex-1 flex items-center gap-3.5 px-5 py-3.5 hover:bg-gray-50/70 focus-within:bg-gray-50/90 transition-colors">
+      <div 
+        onClick={() => fpOutInstance.current?.open()}
+        className="flex-1 flex items-center gap-3.5 px-5 py-3.5 hover:bg-gray-50/70 focus-within:bg-gray-50/90 transition-colors cursor-pointer"
+      >
         <CalendarIcon className="w-5 h-5 text-[#0F5132] shrink-0 stroke-[1.5]" />
         <div className="w-full text-left">
-          <label className="block text-[11px] font-semibold tracking-wider text-gray-500 uppercase mb-0.5">
+          <label className="block text-[11px] font-semibold tracking-wider text-gray-500 uppercase mb-0.5 pointer-events-none">
             Check-Out
           </label>
           <input
             ref={checkOutRef}
             type="text"
             placeholder="Add dates"
+            readOnly
             className="w-full bg-transparent text-gray-900 text-sm font-medium outline-none focus:outline-none cursor-pointer placeholder:text-gray-400 placeholder:font-normal"
           />
         </div>
