@@ -63,13 +63,13 @@ function SearchResultsContent() {
           ))}
         </div>
       ) : properties.length === 0 ? (
-        <div className="text-center py-12 px-4 bg-white dark:bg-[#111827] rounded-xs border border-gray-200/80 dark:border-gray-800 shadow-xs flex flex-col items-center justify-center transition-colors">
-          <div className="relative w-64 h-64 sm:w-80 sm:h-80 mb-6">
+        <div className="text-center py-12 px-4 bg-transparent flex flex-col items-center justify-center">
+          <div className="relative w-64 h-64 sm:w-80 sm:h-80 mb-6 bg-transparent">
             <Image
               src="/empty-search.png"
               alt="No lodgings match your search"
               fill
-              className="object-contain"
+              className="object-contain bg-transparent"
               priority
             />
           </div>
