@@ -1,37 +1,66 @@
 "use client";
 
-import { useState, Suspense } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-
+import { AlertCircle, CheckCircle2 } from "lucide-react";
 import { SkeletonLoginForm } from "@/components/Skeleton";
 
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectUrl = searchParams.get("redirect") || "/";
+  const justRegistered = searchParams.get("registered");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const [generalError, setGeneralError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (justRegistered) {
+      setSuccessMessage("Account created successfully! Please sign in below.");
+    }
+  }, [justRegistered]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError("");
+    setGeneralError("");
+    setSuccessMessage("");
+    const errors: Record<string, string> = {};
+
+    if (!email.trim()) {
+      errors.email = "Please enter your email address.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      errors.email = "Please enter a valid email address.";
+    }
+
+    if (!password) {
+      errors.password = "Please enter your password.";
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      setGeneralError("Please check your email and password.");
+      return;
+    }
+
+    setFieldErrors({});
     setLoading(true);
 
     try {
       const res = await fetch("http://localhost:8000/api/v1/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email: email.trim(), password }),
       });
 
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        throw new Error(data.detail || "Authentication failed");
+        throw new Error(data.detail || "Invalid email or password. Please try again.");
       }
 
       const data = await res.json();
@@ -47,12 +76,13 @@ function LoginForm() {
         })
       );
 
+      setSuccessMessage("Signed in successfully! Redirecting...");
       router.push(redirectUrl);
       setTimeout(() => {
         window.location.reload();
       }, 100);
     } catch (err: any) {
-      setError(err.message || "Invalid email or password");
+      setGeneralError(err.message || "Invalid email or password.");
     } finally {
       setLoading(false);
     }
@@ -65,41 +95,75 @@ function LoginForm() {
         <p className="text-xs text-gray-300 font-normal">Sign in to manage your bookings and saved lodgings</p>
       </div>
 
-      {error && (
-        <div className="p-3 bg-red-500/20 border border-red-500/40 text-red-200 rounded-xs text-xs font-medium">
-          {error}
+      {/* Danger Error Banner */}
+      {generalError && (
+        <div className="p-3 bg-red-500/20 border border-red-500/40 text-red-200 rounded-xs text-xs font-medium flex items-center gap-2">
+          <AlertCircle className="w-4 h-4 shrink-0 text-red-400" />
+          <span>{generalError}</span>
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      {/* Success Banner */}
+      {successMessage && (
+        <div className="p-3 bg-emerald-500/20 border border-emerald-500/40 text-emerald-200 rounded-xs text-xs font-medium flex items-center gap-2">
+          <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-400" />
+          <span>{successMessage}</span>
+        </div>
+      )}
+
+      <form noValidate onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-1.5">
           <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-300">
-            Email Address
+            Email Address <span className="text-red-400">*</span>
           </label>
           <input
             type="email"
-            required
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              if (fieldErrors.email) setFieldErrors((prev) => ({ ...prev, email: "" }));
+            }}
             placeholder="you@example.com"
-            className="w-full bg-white/10 hover:bg-white/15 focus:bg-white/15 px-3.5 py-2.5 rounded-xs border border-white/20 text-xs sm:text-sm text-white font-normal placeholder:text-gray-400 outline-none focus:outline-none focus:ring-0 focus:border-white/50 transition-colors"
+            className={`w-full bg-white/10 hover:bg-white/15 focus:bg-white/15 px-3.5 py-2.5 rounded-xs border ${
+              fieldErrors.email
+                ? "border-red-400/80 bg-red-500/10 focus:border-red-400"
+                : "border-white/20 focus:border-white/50"
+            } text-xs sm:text-sm text-white font-normal placeholder:text-gray-400 outline-none focus:outline-none focus:ring-0 transition-colors`}
           />
+          {fieldErrors.email && (
+            <p className="text-[11px] text-red-400 font-medium flex items-center gap-1 mt-1">
+              <AlertCircle className="w-3 h-3 shrink-0" />
+              <span>{fieldErrors.email}</span>
+            </p>
+          )}
         </div>
 
         <div className="space-y-1.5">
           <div className="flex items-center justify-between">
             <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-300">
-              Password
+              Password <span className="text-red-400">*</span>
             </label>
           </div>
           <input
             type="password"
-            required
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              if (fieldErrors.password) setFieldErrors((prev) => ({ ...prev, password: "" }));
+            }}
             placeholder="••••••••"
-            className="w-full bg-white/10 hover:bg-white/15 focus:bg-white/15 px-3.5 py-2.5 rounded-xs border border-white/20 text-xs sm:text-sm text-white font-normal placeholder:text-gray-400 outline-none focus:outline-none focus:ring-0 focus:border-white/50 transition-colors"
+            className={`w-full bg-white/10 hover:bg-white/15 focus:bg-white/15 px-3.5 py-2.5 rounded-xs border ${
+              fieldErrors.password
+                ? "border-red-400/80 bg-red-500/10 focus:border-red-400"
+                : "border-white/20 focus:border-white/50"
+            } text-xs sm:text-sm text-white font-normal placeholder:text-gray-400 outline-none focus:outline-none focus:ring-0 transition-colors`}
           />
+          {fieldErrors.password && (
+            <p className="text-[11px] text-red-400 font-medium flex items-center gap-1 mt-1">
+              <AlertCircle className="w-3 h-3 shrink-0" />
+              <span>{fieldErrors.password}</span>
+            </p>
+          )}
         </div>
 
         <button

@@ -4,6 +4,7 @@ import { useState, Suspense } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { AlertCircle, CheckCircle2 } from "lucide-react";
 import { SkeletonRegisterForm } from "@/components/Skeleton";
 
 function RegisterForm() {
@@ -15,18 +16,46 @@ function RegisterForm() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [error, setError] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const [generalError, setGeneralError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError("");
+    setGeneralError("");
+    setSuccessMessage("");
+    const errors: Record<string, string> = {};
 
-    if (password !== confirmPassword) {
-      setError("Passwords do not match. Please verify your password.");
+    if (!firstName.trim()) {
+      errors.firstName = "Please enter your first name.";
+    }
+    if (!lastName.trim()) {
+      errors.lastName = "Please enter your last name.";
+    }
+    if (!email.trim()) {
+      errors.email = "Please enter your email address.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      errors.email = "Please enter a valid email address.";
+    }
+    if (!password) {
+      errors.password = "Please enter a password.";
+    } else if (password.length < 6) {
+      errors.password = "Password must be at least 6 characters.";
+    }
+    if (!confirmPassword) {
+      errors.confirmPassword = "Please confirm your password.";
+    } else if (password !== confirmPassword) {
+      errors.confirmPassword = "Passwords do not match.";
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      setGeneralError("Please complete all required fields correctly.");
       return;
     }
 
+    setFieldErrors({});
     setLoading(true);
 
     try {
@@ -34,11 +63,11 @@ function RegisterForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          first_name: firstName,
-          last_name: lastName,
-          email,
+          first_name: firstName.trim(),
+          last_name: lastName.trim(),
+          email: email.trim(),
           password,
-          phone: phoneNumber || undefined,
+          phone: phoneNumber.trim() || undefined,
           role: "GUEST",
         }),
       });
@@ -48,10 +77,12 @@ function RegisterForm() {
         throw new Error(data.detail || "Registration failed. Please check your details.");
       }
 
+      setSuccessMessage("Account created successfully! Signing you in...");
+
       const loginRes = await fetch("http://localhost:8000/api/v1/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email: email.trim(), password }),
       });
 
       if (loginRes.ok) {
@@ -75,7 +106,7 @@ function RegisterForm() {
         router.push("/login?registered=true");
       }
     } catch (err: any) {
-      setError(err.message || "Something went wrong during registration.");
+      setGeneralError(err.message || "Something went wrong during registration.");
     } finally {
       setLoading(false);
     }
@@ -88,57 +119,103 @@ function RegisterForm() {
         <p className="text-xs text-gray-300 font-normal">Instant bookings, transparent pricing, and digital check-in e-vouchers</p>
       </div>
 
-      {error && (
-        <div className="p-3 bg-red-500/20 border border-red-500/40 text-red-200 rounded-xs text-xs font-medium">
-          {error}
+      {/* Danger Error Banner */}
+      {generalError && (
+        <div className="p-3 bg-red-500/20 border border-red-500/40 text-red-200 rounded-xs text-xs font-medium flex items-center gap-2">
+          <AlertCircle className="w-4 h-4 shrink-0 text-red-400" />
+          <span>{generalError}</span>
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      {/* Success Banner */}
+      {successMessage && (
+        <div className="p-3 bg-emerald-500/20 border border-emerald-500/40 text-emerald-200 rounded-xs text-xs font-medium flex items-center gap-2">
+          <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-400" />
+          <span>{successMessage}</span>
+        </div>
+      )}
+
+      <form noValidate onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           {/* First Name */}
           <div className="space-y-1">
             <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-300">
-              First Name
+              First Name <span className="text-red-400">*</span>
             </label>
             <input
               type="text"
-              required
               value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
+              onChange={(e) => {
+                setFirstName(e.target.value);
+                if (fieldErrors.firstName) setFieldErrors((prev) => ({ ...prev, firstName: "" }));
+              }}
               placeholder="Tatenda"
-              className="w-full bg-white/10 hover:bg-white/15 focus:bg-white/15 px-3.5 py-2.5 rounded-xs border border-white/20 text-xs sm:text-sm text-white font-normal placeholder:text-gray-400 outline-none focus:outline-none focus:ring-0 focus:border-white/50 transition-colors"
+              className={`w-full bg-white/10 hover:bg-white/15 focus:bg-white/15 px-3.5 py-2.5 rounded-xs border ${
+                fieldErrors.firstName
+                  ? "border-red-400/80 bg-red-500/10 focus:border-red-400"
+                  : "border-white/20 focus:border-white/50"
+              } text-xs sm:text-sm text-white font-normal placeholder:text-gray-400 outline-none focus:outline-none focus:ring-0 transition-colors`}
             />
+            {fieldErrors.firstName && (
+              <p className="text-[11px] text-red-400 font-medium flex items-center gap-1 mt-1">
+                <AlertCircle className="w-3 h-3 shrink-0" />
+                <span>{fieldErrors.firstName}</span>
+              </p>
+            )}
           </div>
 
           {/* Last Name */}
           <div className="space-y-1">
             <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-300">
-              Last Name
+              Last Name <span className="text-red-400">*</span>
             </label>
             <input
               type="text"
-              required
               value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
+              onChange={(e) => {
+                setLastName(e.target.value);
+                if (fieldErrors.lastName) setFieldErrors((prev) => ({ ...prev, lastName: "" }));
+              }}
               placeholder="Moyo"
-              className="w-full bg-white/10 hover:bg-white/15 focus:bg-white/15 px-3.5 py-2.5 rounded-xs border border-white/20 text-xs sm:text-sm text-white font-normal placeholder:text-gray-400 outline-none focus:outline-none focus:ring-0 focus:border-white/50 transition-colors"
+              className={`w-full bg-white/10 hover:bg-white/15 focus:bg-white/15 px-3.5 py-2.5 rounded-xs border ${
+                fieldErrors.lastName
+                  ? "border-red-400/80 bg-red-500/10 focus:border-red-400"
+                  : "border-white/20 focus:border-white/50"
+              } text-xs sm:text-sm text-white font-normal placeholder:text-gray-400 outline-none focus:outline-none focus:ring-0 transition-colors`}
             />
+            {fieldErrors.lastName && (
+              <p className="text-[11px] text-red-400 font-medium flex items-center gap-1 mt-1">
+                <AlertCircle className="w-3 h-3 shrink-0" />
+                <span>{fieldErrors.lastName}</span>
+              </p>
+            )}
           </div>
 
           {/* Email Address */}
           <div className="space-y-1">
             <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-300">
-              Email Address
+              Email Address <span className="text-red-400">*</span>
             </label>
             <input
               type="email"
-              required
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                if (fieldErrors.email) setFieldErrors((prev) => ({ ...prev, email: "" }));
+              }}
               placeholder="you@example.com"
-              className="w-full bg-white/10 hover:bg-white/15 focus:bg-white/15 px-3.5 py-2.5 rounded-xs border border-white/20 text-xs sm:text-sm text-white font-normal placeholder:text-gray-400 outline-none focus:outline-none focus:ring-0 focus:border-white/50 transition-colors"
+              className={`w-full bg-white/10 hover:bg-white/15 focus:bg-white/15 px-3.5 py-2.5 rounded-xs border ${
+                fieldErrors.email
+                  ? "border-red-400/80 bg-red-500/10 focus:border-red-400"
+                  : "border-white/20 focus:border-white/50"
+              } text-xs sm:text-sm text-white font-normal placeholder:text-gray-400 outline-none focus:outline-none focus:ring-0 transition-colors`}
             />
+            {fieldErrors.email && (
+              <p className="text-[11px] text-red-400 font-medium flex items-center gap-1 mt-1">
+                <AlertCircle className="w-3 h-3 shrink-0" />
+                <span>{fieldErrors.email}</span>
+              </p>
+            )}
           </div>
 
           {/* Phone Number */}
@@ -151,40 +228,62 @@ function RegisterForm() {
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
               placeholder="+263 77 123 4567"
-              className="w-full bg-white/10 hover:bg-white/15 focus:bg-white/15 px-3.5 py-2.5 rounded-xs border border-white/20 text-xs sm:text-sm text-white font-normal placeholder:text-gray-400 outline-none focus:outline-none focus:ring-0 focus:border-white/50 transition-colors"
+              className="w-full bg-white/10 hover:bg-white/15 focus:bg-white/15 px-3.5 py-2.5 rounded-xs border border-white/20 focus:border-white/50 text-xs sm:text-sm text-white font-normal placeholder:text-gray-400 outline-none focus:outline-none focus:ring-0 transition-colors"
             />
           </div>
 
           {/* Password */}
           <div className="space-y-1">
             <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-300">
-              Password (Min. 6 chars)
+              Password (Min. 6 chars) <span className="text-red-400">*</span>
             </label>
             <input
               type="password"
-              required
-              minLength={6}
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                if (fieldErrors.password) setFieldErrors((prev) => ({ ...prev, password: "" }));
+              }}
               placeholder="••••••••"
-              className="w-full bg-white/10 hover:bg-white/15 focus:bg-white/15 px-3.5 py-2.5 rounded-xs border border-white/20 text-xs sm:text-sm text-white font-normal placeholder:text-gray-400 outline-none focus:outline-none focus:ring-0 focus:border-white/50 transition-colors"
+              className={`w-full bg-white/10 hover:bg-white/15 focus:bg-white/15 px-3.5 py-2.5 rounded-xs border ${
+                fieldErrors.password
+                  ? "border-red-400/80 bg-red-500/10 focus:border-red-400"
+                  : "border-white/20 focus:border-white/50"
+              } text-xs sm:text-sm text-white font-normal placeholder:text-gray-400 outline-none focus:outline-none focus:ring-0 transition-colors`}
             />
+            {fieldErrors.password && (
+              <p className="text-[11px] text-red-400 font-medium flex items-center gap-1 mt-1">
+                <AlertCircle className="w-3 h-3 shrink-0" />
+                <span>{fieldErrors.password}</span>
+              </p>
+            )}
           </div>
 
           {/* Confirm Password */}
           <div className="space-y-1">
             <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-300">
-              Confirm Password
+              Confirm Password <span className="text-red-400">*</span>
             </label>
             <input
               type="password"
-              required
-              minLength={6}
               value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              onChange={(e) => {
+                setConfirmPassword(e.target.value);
+                if (fieldErrors.confirmPassword) setFieldErrors((prev) => ({ ...prev, confirmPassword: "" }));
+              }}
               placeholder="••••••••"
-              className="w-full bg-white/10 hover:bg-white/15 focus:bg-white/15 px-3.5 py-2.5 rounded-xs border border-white/20 text-xs sm:text-sm text-white font-normal placeholder:text-gray-400 outline-none focus:outline-none focus:ring-0 focus:border-white/50 transition-colors"
+              className={`w-full bg-white/10 hover:bg-white/15 focus:bg-white/15 px-3.5 py-2.5 rounded-xs border ${
+                fieldErrors.confirmPassword
+                  ? "border-red-400/80 bg-red-500/10 focus:border-red-400"
+                  : "border-white/20 focus:border-white/50"
+              } text-xs sm:text-sm text-white font-normal placeholder:text-gray-400 outline-none focus:outline-none focus:ring-0 transition-colors`}
             />
+            {fieldErrors.confirmPassword && (
+              <p className="text-[11px] text-red-400 font-medium flex items-center gap-1 mt-1">
+                <AlertCircle className="w-3 h-3 shrink-0" />
+                <span>{fieldErrors.confirmPassword}</span>
+              </p>
+            )}
           </div>
         </div>
 
