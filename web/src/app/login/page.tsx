@@ -4,7 +4,6 @@ import { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { Compass } from "lucide-react";
 
 function LoginForm() {
   const router = useRouter();
@@ -58,12 +57,9 @@ function LoginForm() {
   };
 
   return (
-    <div className="w-full max-w-sm bg-black/60 dark:bg-black/70 backdrop-blur-xl p-8 rounded-xs border border-white/20 shadow-2xl space-y-5">
+    <div className="w-full max-w-sm bg-transparent p-4 sm:p-6 space-y-5">
       <div className="text-center space-y-1.5">
-        <div className="w-10 h-10 rounded-xs bg-white/10 text-blue-300 flex items-center justify-center mx-auto border border-white/20 shadow-xs">
-          <Compass className="w-5 h-5 stroke-[2]" />
-        </div>
-        <h1 className="text-xl font-medium tracking-tight text-white">Welcome Back</h1>
+        <h1 className="text-2xl font-medium tracking-tight text-white">Welcome Back</h1>
         <p className="text-xs text-gray-300 font-normal">Sign in to manage your bookings and saved lodgings</p>
       </div>
 
@@ -150,9 +146,9 @@ function LoginForm() {
         </button>
       </form>
 
-      <p className="text-center text-xs text-gray-500 dark:text-gray-400 pt-2">
+      <p className="text-center text-xs text-gray-300 pt-2">
         Don't have an account?{" "}
-        <Link href="/register" className="font-semibold text-[#2563EB] dark:text-blue-400 hover:underline">
+        <Link href="/register" className="font-semibold text-blue-400 hover:underline">
           Register as a Guest
         </Link>
       </p>

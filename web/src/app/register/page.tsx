@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { Compass } from "lucide-react";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -86,12 +85,9 @@ export default function RegisterPage() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/75" />
       </div>
 
-      {/* Registration Card - Wider 2-Column Grid with Translucent Frosted Glass */}
-      <div className="relative z-10 w-full max-w-xl bg-black/60 dark:bg-black/70 backdrop-blur-xl p-7 sm:p-9 rounded-xs border border-white/20 shadow-2xl space-y-6">
+      {/* Registration Card - Transparent Full Bleed */}
+      <div className="relative z-10 w-full max-w-xl bg-transparent p-4 sm:p-6 space-y-6">
         <div className="text-center space-y-1">
-          <div className="w-10 h-10 rounded-xs bg-white/10 text-blue-300 flex items-center justify-center mx-auto border border-white/20 shadow-xs mb-2">
-            <Compass className="w-5 h-5 stroke-[2]" />
-          </div>
           <h1 className="text-2xl font-medium tracking-tight text-white">Create Guest Account</h1>
           <p className="text-xs text-gray-300 font-normal">Instant bookings, transparent pricing, and digital check-in e-vouchers</p>
         </div>
