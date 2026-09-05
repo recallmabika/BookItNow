@@ -37,22 +37,17 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* Right Content: Triangle-notched Image reveals smoothly from left to right */}
+            {/* Right Content: Full couple image reveals smoothly from left to right */}
             <div className="lg:col-span-5 flex justify-center lg:justify-end animate-hero-image">
-              <div 
-                className="relative w-full max-w-md aspect-[16/10] sm:aspect-[16/9] lg:aspect-[4/3] rounded-xs overflow-hidden shadow-2xl border border-white/20 bg-gray-900"
-                style={{
-                  clipPath: "polygon(0% 0%, 100% 0%, 78% 50%, 100% 100%, 0% 100%)"
-                }}
-              >
+              <div className="relative w-full max-w-lg aspect-[16/10] sm:aspect-[16/9] lg:aspect-[16/10] rounded-xs overflow-hidden shadow-2xl border border-white/20 bg-gray-900 group">
                 <Image
                   src="/hero-couple.png"
                   alt="Happy couple booking their stay on phone"
                   fill
                   priority
-                  className="object-cover object-center transform hover:scale-105 transition-transform duration-700 ease-out"
+                  className="object-cover object-center transform group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10 pointer-events-none" />
               </div>
             </div>
           </div>
