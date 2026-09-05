@@ -64,7 +64,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="bg-[#0F5132] border-b border-[#0A3622] sticky top-0 z-50 shadow-xs">
+    <header className="bg-[#2563EB] border-b border-[#1D4ED8] sticky top-0 z-50 shadow-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
         {/* Brand */}
         <Link href="/" className="flex items-center gap-2.5 group py-2">
@@ -73,9 +73,9 @@ export default function Navbar() {
           </div>
           <div>
             <span className="font-semibold text-lg tracking-tight text-white block leading-none">
-              BookIt<span className="text-green-300">Now</span>
+              BookIt<span className="text-blue-200">Now</span>
             </span>
-            <span className="text-[9px] tracking-wider uppercase text-green-100/70 font-normal">
+            <span className="text-[9px] tracking-wider uppercase text-blue-100/80 font-normal">
               Lodging & Stays
             </span>
           </div>
@@ -85,10 +85,10 @@ export default function Navbar() {
         <div className="flex items-center gap-2">
           <Link
             href="/search"
-            className={`text-xs font-medium transition-all duration-150 px-3.5 py-3 rounded-xs outline-none focus-visible:ring-2 focus-visible:ring-white/80 active:scale-[0.98] active:bg-white active:text-[#0F5132] ${
+            className={`text-xs font-medium transition-all duration-150 px-3.5 py-3 rounded-xs outline-none focus-visible:ring-2 focus-visible:ring-white/80 active:scale-[0.98] active:bg-white active:text-[#2563EB] ${
               pathname.startsWith("/search")
-                ? "bg-white text-[#0F5132] font-semibold shadow-xs"
-                : "text-white hover:bg-white hover:text-[#0F5132] focus-visible:bg-white focus-visible:text-[#0F5132]"
+                ? "bg-white text-[#2563EB] font-semibold shadow-xs"
+                : "text-white hover:bg-white hover:text-[#2563EB] focus-visible:bg-white focus-visible:text-[#2563EB]"
             }`}
           >
             Explore Stays
@@ -99,10 +99,10 @@ export default function Navbar() {
               {/* Clean My Bookings text button without awkward icon */}
               <Link
                 href="/my-bookings"
-                className={`text-xs font-medium transition-all duration-150 px-3.5 py-3 rounded-xs outline-none focus-visible:ring-2 focus-visible:ring-white/80 active:scale-[0.98] active:bg-white active:text-[#0F5132] ${
+                className={`text-xs font-medium transition-all duration-150 px-3.5 py-3 rounded-xs outline-none focus-visible:ring-2 focus-visible:ring-white/80 active:scale-[0.98] active:bg-white active:text-[#2563EB] ${
                   pathname.startsWith("/my-bookings")
-                    ? "bg-white text-[#0F5132] font-semibold shadow-xs"
-                    : "text-white hover:bg-white hover:text-[#0F5132] focus-visible:bg-white focus-visible:text-[#0F5132]"
+                    ? "bg-white text-[#2563EB] font-semibold shadow-xs"
+                    : "text-white hover:bg-white hover:text-[#2563EB] focus-visible:bg-white focus-visible:text-[#2563EB]"
                 }`}
               >
                 My Bookings
@@ -115,7 +115,7 @@ export default function Navbar() {
                 <button
                   type="button"
                   onClick={() => setDropdownOpen((prev) => !prev)}
-                  className="flex items-center gap-2 px-3 py-2 bg-white text-[#0F5132] rounded-xs shadow-xs border border-white/80 hover:bg-gray-50 active:bg-gray-100 transition-colors duration-150 cursor-pointer"
+                  className="flex items-center gap-2 px-3 py-2 bg-white text-[#2563EB] rounded-xs shadow-xs border border-white/80 hover:bg-gray-50 active:bg-gray-100 transition-colors duration-150 cursor-pointer"
                 >
                   {user.avatar ? (
                     <img
@@ -124,7 +124,7 @@ export default function Navbar() {
                       className="w-6 h-6 rounded-xs object-cover border border-gray-200"
                     />
                   ) : (
-                    <span className="w-6 h-6 rounded-xs bg-[#E8F5E9] text-[#0F5132] flex items-center justify-center font-bold text-[11px] border border-green-200">
+                    <span className="w-6 h-6 rounded-xs bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center font-bold text-[11px] border border-blue-200">
                       {user.first_name[0]?.toUpperCase()}
                     </span>
                   )}
@@ -132,7 +132,7 @@ export default function Navbar() {
                     {user.first_name}
                   </span>
                   <ChevronDown
-                    className={`w-3.5 h-3.5 stroke-[2] transition-transform duration-200 text-[#0F5132] ${
+                    className={`w-3.5 h-3.5 stroke-[2] transition-transform duration-200 text-[#2563EB] ${
                       dropdownOpen ? "rotate-180" : ""
                     }`}
                   />
@@ -150,7 +150,7 @@ export default function Navbar() {
                           className="w-9 h-9 rounded-xs object-cover border border-gray-200"
                         />
                       ) : (
-                        <div className="w-9 h-9 rounded-xs bg-[#E8F5E9] text-[#0F5132] flex items-center justify-center font-bold text-sm border border-green-200 shrink-0">
+                        <div className="w-9 h-9 rounded-xs bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center font-bold text-sm border border-blue-200 shrink-0">
                           {user.first_name[0]?.toUpperCase()}
                         </div>
                       )}
@@ -171,26 +171,26 @@ export default function Navbar() {
                       <Link
                         href="/profile"
                         onClick={() => setDropdownOpen(false)}
-                        className={`flex items-center gap-2.5 px-3 py-2 text-xs rounded-xs transition-colors active:bg-[#E8F5E9] ${
+                        className={`flex items-center gap-2.5 px-3 py-2 text-xs rounded-xs transition-colors active:bg-[#EFF6FF] ${
                           pathname === "/profile"
-                            ? "bg-[#E8F5E9] text-[#0F5132] font-semibold"
-                            : "text-gray-700 hover:text-[#0F5132] hover:bg-[#E8F5E9]/50"
+                            ? "bg-[#EFF6FF] text-[#2563EB] font-semibold"
+                            : "text-gray-700 hover:text-[#2563EB] hover:bg-[#EFF6FF]/50"
                         }`}
                       >
-                        <UserIcon className={`w-3.5 h-3.5 stroke-[1.8] ${pathname === "/profile" ? "text-[#0F5132]" : "text-gray-400"}`} />
+                        <UserIcon className={`w-3.5 h-3.5 stroke-[1.8] ${pathname === "/profile" ? "text-[#2563EB]" : "text-gray-400"}`} />
                         <span>My Profile</span>
                       </Link>
 
                       <Link
                         href="/settings"
                         onClick={() => setDropdownOpen(false)}
-                        className={`flex items-center gap-2.5 px-3 py-2 text-xs rounded-xs transition-colors active:bg-[#E8F5E9] ${
+                        className={`flex items-center gap-2.5 px-3 py-2 text-xs rounded-xs transition-colors active:bg-[#EFF6FF] ${
                           pathname === "/settings"
-                            ? "bg-[#E8F5E9] text-[#0F5132] font-semibold"
-                            : "text-gray-700 hover:text-[#0F5132] hover:bg-[#E8F5E9]/50"
+                            ? "bg-[#EFF6FF] text-[#2563EB] font-semibold"
+                            : "text-gray-700 hover:text-[#2563EB] hover:bg-[#EFF6FF]/50"
                         }`}
                       >
-                        <Settings className={`w-3.5 h-3.5 stroke-[1.8] ${pathname === "/settings" ? "text-[#0F5132]" : "text-gray-400"}`} />
+                        <Settings className={`w-3.5 h-3.5 stroke-[1.8] ${pathname === "/settings" ? "text-[#2563EB]" : "text-gray-400"}`} />
                         <span>Account Settings</span>
                       </Link>
                     </div>
@@ -216,13 +216,13 @@ export default function Navbar() {
             <div className="flex items-center gap-2">
               <Link
                 href="/login"
-                className="text-xs font-medium text-white hover:bg-white hover:text-[#0F5132] focus-visible:bg-white focus-visible:text-[#0F5132] focus-visible:ring-2 focus-visible:ring-white/80 transition-all duration-150 px-3.5 py-3 rounded-xs outline-none"
+                className="text-xs font-medium text-white hover:bg-white hover:text-[#2563EB] focus-visible:bg-white focus-visible:text-[#2563EB] focus-visible:ring-2 focus-visible:ring-white/80 transition-all duration-150 px-3.5 py-3 rounded-xs outline-none"
               >
                 Sign In
               </Link>
               <Link
                 href="/register"
-                className="text-xs font-medium bg-white text-[#0F5132] hover:bg-green-50 active:bg-green-100 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0F5132] px-4 py-3 rounded-xs transition-all duration-150 shadow-xs outline-none"
+                className="text-xs font-medium bg-white text-[#2563EB] hover:bg-blue-50 active:bg-blue-100 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#2563EB] px-4 py-3 rounded-xs transition-all duration-150 shadow-xs outline-none"
               >
                 Register
               </Link>

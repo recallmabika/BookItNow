@@ -99,7 +99,7 @@ export default function SearchBar() {
       {/* City / Destination */}
       <div className="flex-1 flex flex-col justify-center px-5 py-3.5 hover:bg-gray-50/70 focus-within:bg-gray-50/90 transition-colors">
         <div className="flex items-center gap-1.5 mb-1 text-gray-500">
-          <MapPin className="w-3.5 h-3.5 text-[#0F5132] shrink-0 stroke-[2]" />
+          <MapPin className="w-3.5 h-3.5 text-[#2563EB] shrink-0 stroke-[2]" />
           <label className="text-[11px] font-semibold tracking-wider uppercase">
             Destination
           </label>
@@ -119,7 +119,7 @@ export default function SearchBar() {
         className="flex-1 flex flex-col justify-center px-5 py-3.5 hover:bg-gray-50/70 focus-within:bg-gray-50/90 transition-colors cursor-pointer"
       >
         <div className="flex items-center gap-1.5 mb-1 text-gray-500 pointer-events-none">
-          <CalendarIcon className="w-3.5 h-3.5 text-[#0F5132] shrink-0 stroke-[2]" />
+          <CalendarIcon className="w-3.5 h-3.5 text-[#2563EB] shrink-0 stroke-[2]" />
           <label className="text-[11px] font-semibold tracking-wider uppercase">
             Check-In
           </label>
@@ -139,7 +139,7 @@ export default function SearchBar() {
         className="flex-1 flex flex-col justify-center px-5 py-3.5 hover:bg-gray-50/70 focus-within:bg-gray-50/90 transition-colors cursor-pointer"
       >
         <div className="flex items-center gap-1.5 mb-1 text-gray-500 pointer-events-none">
-          <CalendarIcon className="w-3.5 h-3.5 text-[#0F5132] shrink-0 stroke-[2]" />
+          <CalendarIcon className="w-3.5 h-3.5 text-[#2563EB] shrink-0 stroke-[2]" />
           <label className="text-[11px] font-semibold tracking-wider uppercase">
             Check-Out
           </label>
@@ -160,7 +160,7 @@ export default function SearchBar() {
         onClick={() => setGuestsOpen((prev) => !prev)}
       >
         <div className="flex items-center gap-1.5 mb-1 text-gray-500 pointer-events-none">
-          <Users className="w-3.5 h-3.5 text-[#0F5132] shrink-0 stroke-[2]" />
+          <Users className="w-3.5 h-3.5 text-[#2563EB] shrink-0 stroke-[2]" />
           <label className="text-[11px] font-semibold tracking-wider uppercase">
             Guests
           </label>
@@ -188,7 +188,7 @@ export default function SearchBar() {
                 }}
                 className={`px-4 py-2.5 text-xs sm:text-sm font-medium transition-colors cursor-pointer ${
                   guests === item.val
-                    ? "bg-[#E8F5E9] text-[#0F5132]"
+                    ? "bg-[#EFF6FF] text-[#2563EB]"
                     : "text-gray-800 hover:bg-gray-50"
                 }`}
               >
@@ -204,8 +204,8 @@ export default function SearchBar() {
         <button
           type="submit"
           disabled={isSearching}
-          className={`w-full md:w-auto px-7 py-3.5 bg-[#0F5132] hover:bg-[#0B3D26] active:scale-95 text-white font-semibold text-sm rounded-xs flex items-center justify-center gap-2.5 transition-all duration-200 cursor-pointer whitespace-nowrap shadow-xs group ${
-            isSearching ? "opacity-90 scale-[0.98] ring-2 ring-[#0F5132]/30 ring-offset-1" : ""
+          className={`w-full md:w-auto px-7 py-3.5 bg-[#2563EB] hover:bg-[#1D4ED8] active:scale-95 text-white font-semibold text-sm rounded-xs flex items-center justify-center gap-2.5 transition-all duration-200 cursor-pointer whitespace-nowrap shadow-xs group ${
+            isSearching ? "opacity-90 scale-[0.98] ring-2 ring-[#2563EB]/30 ring-offset-1" : ""
           }`}
         >
           {isSearching ? (

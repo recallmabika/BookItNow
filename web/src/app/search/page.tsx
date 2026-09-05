@@ -49,7 +49,7 @@ function SearchResultsContent() {
             {guests} {guests === 1 ? "guest" : "guests"}
           </p>
         </div>
-        <div className="text-[11px] font-normal text-[#0F5132] bg-[#F0FDF4] px-2 py-0.5 rounded-xs border border-green-200/60">
+        <div className="text-[11px] font-normal text-[#2563EB] bg-[#EFF6FF] px-2 py-0.5 rounded-xs border border-blue-200/60">
           {loading ? "Searching..." : `${properties.length} active listings found`}
         </div>
       </div>
@@ -93,7 +93,7 @@ function SearchResultsContent() {
             return (
               <div
                 key={prop.id}
-                className="bg-white rounded-xs border border-gray-200/80 overflow-hidden hover:border-[#0F5132]/50 transition-colors duration-150 flex flex-col group"
+                className="bg-white rounded-xs border border-gray-200/80 overflow-hidden hover:border-[#2563EB]/50 transition-colors duration-150 flex flex-col group"
               >
                 {/* Photo Preview */}
                 <div className="relative aspect-[16/10] bg-gray-900 overflow-hidden">
@@ -113,11 +113,11 @@ function SearchResultsContent() {
                 <div className="p-3.5 flex-1 flex flex-col justify-between space-y-3">
                   <div>
                     <div className="flex items-center gap-1 text-[11px] text-gray-500 mb-1">
-                      <MapPin className="w-3 h-3 text-[#0F5132] shrink-0 stroke-[1.6]" />
+                      <MapPin className="w-3 h-3 text-[#2563EB] shrink-0 stroke-[1.6]" />
                       <span>{prop.city}, {prop.country}</span>
                     </div>
 
-                    <h2 className="font-medium text-sm text-gray-900 line-clamp-1 group-hover:text-[#0F5132] transition-colors">
+                    <h2 className="font-medium text-sm text-gray-900 line-clamp-1 group-hover:text-[#2563EB] transition-colors">
                       {prop.title}
                     </h2>
 
@@ -158,7 +158,7 @@ function SearchResultsContent() {
 
                     <Link
                       href={`/properties/${prop.slug}`}
-                      className="inline-flex items-center gap-1 bg-[#0F5132] hover:bg-[#0B3D26] text-white px-2.5 py-1 rounded-xs text-[11px] font-normal transition-colors"
+                      className="inline-flex items-center gap-1 bg-[#2563EB] hover:bg-[#1D4ED8] text-white px-2.5 py-1 rounded-xs text-[11px] font-normal transition-colors"
                     >
                       <span>View Rooms</span>
                       <ArrowRight className="w-3 h-3 stroke-[1.8]" />

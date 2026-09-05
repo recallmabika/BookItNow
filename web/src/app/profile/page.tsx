@@ -101,10 +101,10 @@ export default function ProfilePage() {
         {/* Profile Card */}
         <div className="bg-white rounded-xs border border-gray-200/90 shadow-xs overflow-hidden">
           {/* Header Banner */}
-          <div className="bg-[#0F5132] h-32 px-6 sm:px-8 relative flex items-end pb-4">
+          <div className="bg-[#2563EB] h-32 px-6 sm:px-8 relative flex items-end pb-4">
             <div className="text-white">
               <h1 className="text-xl font-semibold tracking-tight">Personal Profile</h1>
-              <p className="text-xs text-green-100/80 mt-0.5">
+              <p className="text-xs text-blue-100/80 mt-0.5">
                 Manage your account credentials and personal information
               </p>
             </div>
@@ -112,8 +112,8 @@ export default function ProfilePage() {
 
           <div className="px-6 sm:px-8 pb-8 pt-6">
             {savedMsg && (
-              <div className="mb-6 p-3 bg-[#E8F5E9] border border-green-200 rounded-xs flex items-center gap-2 text-xs text-[#0F5132]">
-                <CheckCircle2 className="w-4 h-4 text-[#0F5132] shrink-0" />
+              <div className="mb-6 p-3 bg-[#EFF6FF] border border-blue-200 rounded-xs flex items-center gap-2 text-xs text-[#2563EB]">
+                <CheckCircle2 className="w-4 h-4 text-[#2563EB] shrink-0" />
                 <span>{savedMsg}</span>
               </div>
             )}
@@ -128,7 +128,7 @@ export default function ProfilePage() {
                     className="w-24 h-24 rounded-xs object-cover border-2 border-gray-200 shadow-xs"
                   />
                 ) : (
-                  <div className="w-24 h-24 rounded-xs bg-[#E8F5E9] text-[#0F5132] flex items-center justify-center font-bold text-3xl border border-green-200">
+                  <div className="w-24 h-24 rounded-xs bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center font-bold text-3xl border border-blue-200">
                     {user.first_name[0]?.toUpperCase()}
                   </div>
                 )}
@@ -167,7 +167,7 @@ export default function ProfilePage() {
                   <button
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
-                    className="inline-flex items-center gap-1.5 px-3 py-2 bg-[#0F5132] text-white text-xs font-medium rounded-xs hover:bg-[#0c4027] transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-3 py-2 bg-[#2563EB] text-white text-xs font-medium rounded-xs hover:bg-[#1D4ED8] transition-colors cursor-pointer"
                   >
                     <Camera className="w-3.5 h-3.5" />
                     <span>Upload New Photo</span>
@@ -212,7 +212,7 @@ export default function ProfilePage() {
                       required
                       value={firstName}
                       onChange={(e) => setFirstName(e.target.value)}
-                      className="w-full pl-9 pr-3 py-2 text-xs border border-gray-300 rounded-xs outline-none focus:outline-none focus:ring-0 focus:border-[#0F5132] transition-colors"
+                      className="w-full pl-9 pr-3 py-2 text-xs border border-gray-300 rounded-xs outline-none focus:outline-none focus:ring-0 focus:border-[#2563EB] transition-colors"
                     />
                   </div>
                 </div>
@@ -227,7 +227,7 @@ export default function ProfilePage() {
                       type="text"
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}
-                      className="w-full pl-9 pr-3 py-2 text-xs border border-gray-300 rounded-xs outline-none focus:outline-none focus:ring-0 focus:border-[#0F5132] transition-colors"
+                      className="w-full pl-9 pr-3 py-2 text-xs border border-gray-300 rounded-xs outline-none focus:outline-none focus:ring-0 focus:border-[#2563EB] transition-colors"
                     />
                   </div>
                 </div>
@@ -263,7 +263,7 @@ export default function ProfilePage() {
                       placeholder="+263 77 123 4567"
                       value={phoneNumber}
                       onChange={(e) => setPhoneNumber(e.target.value)}
-                      className="w-full pl-9 pr-3 py-2 text-xs border border-gray-300 rounded-xs outline-none focus:outline-none focus:border-[#0F5132] transition-colors focus:ring-0"
+                      className="w-full pl-9 pr-3 py-2 text-xs border border-gray-300 rounded-xs outline-none focus:outline-none focus:border-[#2563EB] transition-colors focus:ring-0"
                     />
                   </div>
                 </div>
@@ -272,7 +272,7 @@ export default function ProfilePage() {
               <div className="pt-4 flex justify-end">
                 <button
                   type="submit"
-                  className="px-6 py-2.5 bg-[#0F5132] text-white text-xs font-semibold rounded-xs hover:bg-[#0c4027] active:bg-[#09301e] transition-colors cursor-pointer shadow-xs"
+                  className="px-6 py-2.5 bg-[#2563EB] text-white text-xs font-semibold rounded-xs hover:bg-[#1D4ED8] active:bg-[#1E40AF] transition-colors cursor-pointer shadow-xs"
                 >
                   Save Changes
                 </button>

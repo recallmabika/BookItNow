@@ -78,7 +78,7 @@ export default function SearchableDropdown({
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className="w-full flex items-center justify-between px-3 py-2 text-xs border border-gray-300 rounded-xs bg-white text-gray-800 outline-none focus:outline-none focus:ring-0 focus:border-[#0F5132] transition-colors cursor-pointer text-left"
+        className="w-full flex items-center justify-between px-3 py-2 text-xs border border-gray-300 rounded-xs bg-white text-gray-800 outline-none focus:outline-none focus:ring-0 focus:border-[#2563EB] transition-colors cursor-pointer text-left"
       >
         <span className={selectedOption ? "text-gray-900 font-medium truncate" : "text-gray-400 truncate"}>
           {selectedOption ? selectedOption.label : placeholder}
@@ -103,7 +103,7 @@ export default function SearchableDropdown({
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={searchPlaceholder}
-                className="w-full pl-8 pr-3 py-1.5 text-xs border border-gray-200 rounded-xs bg-white outline-none focus:outline-none focus:border-[#0F5132] transition-colors text-gray-800"
+                className="w-full pl-8 pr-3 py-1.5 text-xs border border-gray-200 rounded-xs bg-white outline-none focus:outline-none focus:border-[#2563EB] transition-colors text-gray-800"
               />
             </div>
           </div>
@@ -120,7 +120,7 @@ export default function SearchableDropdown({
                     onClick={() => handleSelect(opt.value)}
                     className={`w-full flex items-center justify-between px-3 py-2 text-xs text-left cursor-pointer transition-colors ${
                       isSelected
-                        ? "bg-[#E8F5E9] text-[#0F5132] font-semibold"
+                        ? "bg-[#EFF6FF] text-[#2563EB] font-semibold"
                         : "text-gray-700 hover:bg-gray-50 hover:text-gray-900"
                     }`}
                   >
@@ -133,7 +133,7 @@ export default function SearchableDropdown({
                       )}
                     </div>
                     {isSelected && (
-                      <Check className="w-3.5 h-3.5 text-[#0F5132] stroke-[2.5] shrink-0 ml-2" />
+                      <Check className="w-3.5 h-3.5 text-[#2563EB] stroke-[2.5] shrink-0 ml-2" />
                     )}
                   </button>
                 );
