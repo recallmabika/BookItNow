@@ -4,13 +4,10 @@ import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import {
   Compass,
-  Briefcase,
   User as UserIcon,
   Settings,
   LogOut,
-  ChevronDown,
-  Camera,
-  ShieldCheck
+  ChevronDown
 } from "lucide-react";
 
 interface UserProfile {
@@ -26,7 +23,6 @@ export default function Navbar() {
   const [user, setUser] = useState<UserProfile | null>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     const checkUser = () => {
@@ -65,20 +61,6 @@ export default function Navbar() {
     window.location.reload();
   };
 
-  const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file && user) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const base64String = reader.result as string;
-        const updatedUser = { ...user, avatar: base64String };
-        setUser(updatedUser);
-        localStorage.setItem("bookitnow_user", JSON.stringify(updatedUser));
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
   return (
     <header className="bg-[#0F5132] border-b border-[#0A3622] sticky top-0 z-50 shadow-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
@@ -107,43 +89,40 @@ export default function Navbar() {
           </Link>
 
           {user ? (
-            <div className="flex items-center gap-2 pl-1">
-              {/* Refined My Bookings Link with clean Briefcase travel icon */}
+            <div className="flex items-center gap-2.5 pl-1">
+              {/* Clean My Bookings text button without awkward icon */}
               <Link
                 href="/my-bookings"
-                className="group flex items-center gap-2 text-xs font-medium text-white hover:bg-white hover:text-[#0F5132] transition-all duration-150 px-3.5 py-3 rounded-xs"
+                className="text-xs font-medium text-white hover:bg-white hover:text-[#0F5132] transition-all duration-150 px-3.5 py-3 rounded-xs"
               >
-                <Briefcase className="w-3.5 h-3.5 text-green-300 group-hover:text-[#0F5132] stroke-[1.8] transition-colors" />
-                <span>My Bookings</span>
+                My Bookings
               </Link>
 
               <div className="h-5 w-px bg-white/20 mx-1" />
 
-              {/* Profile Dropdown */}
+              {/* Profile Trigger - Always crisp white background */}
               <div className="relative" ref={dropdownRef}>
                 <button
                   type="button"
                   onClick={() => setDropdownOpen((prev) => !prev)}
-                  className={`flex items-center gap-2 px-3 py-2 rounded-xs transition-all duration-150 cursor-pointer ${
-                    dropdownOpen ? "bg-white text-[#0F5132]" : "text-white hover:bg-white hover:text-[#0F5132]"
-                  }`}
+                  className="flex items-center gap-2 px-3 py-2 bg-white text-[#0F5132] rounded-xs shadow-xs border border-white/80 hover:bg-gray-50 active:bg-gray-100 transition-colors duration-150 cursor-pointer"
                 >
                   {user.avatar ? (
                     <img
                       src={user.avatar}
                       alt={user.first_name}
-                      className="w-7 h-7 rounded-xs object-cover border border-white/40 shadow-xs"
+                      className="w-6 h-6 rounded-xs object-cover border border-gray-200"
                     />
                   ) : (
-                    <span className="w-7 h-7 rounded-xs bg-white text-[#0F5132] flex items-center justify-center font-semibold text-[11px] shadow-xs border border-green-800/20">
+                    <span className="w-6 h-6 rounded-xs bg-[#E8F5E9] text-[#0F5132] flex items-center justify-center font-bold text-[11px] border border-green-200">
                       {user.first_name[0]?.toUpperCase()}
                     </span>
                   )}
-                  <span className="hidden sm:inline text-xs font-medium">
+                  <span className="text-xs font-semibold">
                     {user.first_name}
                   </span>
                   <ChevronDown
-                    className={`w-3.5 h-3.5 stroke-[1.8] transition-transform duration-200 ${
+                    className={`w-3.5 h-3.5 stroke-[2] transition-transform duration-200 text-[#0F5132] ${
                       dropdownOpen ? "rotate-180" : ""
                     }`}
                   />
@@ -151,69 +130,40 @@ export default function Navbar() {
 
                 {/* Animated Dropdown Menu */}
                 {dropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-64 bg-white rounded-xs border border-gray-200/90 shadow-lg py-2 z-50 animate-fade-in">
-                    {/* User Header Info */}
+                  <div className="absolute right-0 mt-2 w-60 bg-white rounded-xs border border-gray-200/90 shadow-lg py-2 z-50 animate-fade-in">
+                    {/* User Header Info - Pure White with Full Name and Role (No Shield) */}
                     <div className="px-4 py-3 border-b border-gray-100 flex items-center gap-3">
-                      <div className="relative group/avatar cursor-pointer" onClick={() => fileInputRef.current?.click()}>
-                        {user.avatar ? (
-                          <img
-                            src={user.avatar}
-                            alt={user.first_name}
-                            className="w-10 h-10 rounded-xs object-cover border border-gray-200"
-                          />
-                        ) : (
-                          <div className="w-10 h-10 rounded-xs bg-[#E8F5E9] text-[#0F5132] flex items-center justify-center font-bold text-sm border border-green-200">
-                            {user.first_name[0]?.toUpperCase()}
-                          </div>
-                        )}
-                        <div className="absolute inset-0 bg-black/50 text-white rounded-xs opacity-0 group-hover/avatar:opacity-100 flex items-center justify-center transition-opacity duration-150">
-                          <Camera className="w-4 h-4 stroke-[1.8]" />
+                      {user.avatar ? (
+                        <img
+                          src={user.avatar}
+                          alt={user.first_name}
+                          className="w-9 h-9 rounded-xs object-cover border border-gray-200"
+                        />
+                      ) : (
+                        <div className="w-9 h-9 rounded-xs bg-[#E8F5E9] text-[#0F5132] flex items-center justify-center font-bold text-sm border border-green-200 shrink-0">
+                          {user.first_name[0]?.toUpperCase()}
                         </div>
-                      </div>
+                      )}
 
                       <div className="flex-1 min-w-0">
                         <div className="text-xs font-semibold text-gray-900 truncate">
                           {user.first_name} {user.last_name || ""}
                         </div>
                         <div className="text-[10px] text-gray-500 truncate">{user.email}</div>
-                        <span className="inline-flex items-center gap-1 text-[9px] uppercase tracking-wider text-[#0F5132] bg-[#E8F5E9] px-1.5 py-0.2 rounded-xs mt-1 font-medium">
-                          <ShieldCheck className="w-2.5 h-2.5 stroke-[2]" />
+                        <span className="inline-block text-[9px] uppercase tracking-wider text-[#0F5132] bg-[#E8F5E9] px-1.5 py-0.5 rounded-xs mt-1 font-medium">
                           {user.role}
                         </span>
                       </div>
                     </div>
 
-                    {/* Hidden Avatar Upload Input */}
-                    <input
-                      ref={fileInputRef}
-                      type="file"
-                      accept="image/*"
-                      onChange={handleAvatarChange}
-                      className="hidden"
-                    />
-
-                    {/* Change Photo Button */}
-                    <div className="px-2 pt-1 pb-1">
-                      <button
-                        type="button"
-                        onClick={() => fileInputRef.current?.click()}
-                        className="w-full flex items-center gap-2.5 px-3 py-2 text-xs text-gray-600 hover:text-[#0F5132] hover:bg-gray-50 rounded-xs transition-colors"
-                      >
-                        <Camera className="w-3.5 h-3.5 text-[#0F5132] stroke-[1.8]" />
-                        <span>Upload / Change Photo</span>
-                      </button>
-                    </div>
-
-                    <div className="h-px bg-gray-100 my-1" />
-
                     {/* Menu Links */}
-                    <div className="px-2 space-y-0.5">
+                    <div className="px-2 pt-1 space-y-0.5">
                       <Link
                         href="/profile"
                         onClick={() => setDropdownOpen(false)}
                         className="flex items-center gap-2.5 px-3 py-2 text-xs text-gray-700 hover:text-[#0F5132] hover:bg-[#E8F5E9]/50 rounded-xs transition-colors"
                       >
-                        <UserIcon className="w-3.5 h-3.5 text-gray-500 stroke-[1.8]" />
+                        <UserIcon className="w-3.5 h-3.5 text-gray-400 stroke-[1.8]" />
                         <span>My Profile</span>
                       </Link>
 
@@ -222,19 +172,19 @@ export default function Navbar() {
                         onClick={() => setDropdownOpen(false)}
                         className="flex items-center gap-2.5 px-3 py-2 text-xs text-gray-700 hover:text-[#0F5132] hover:bg-[#E8F5E9]/50 rounded-xs transition-colors"
                       >
-                        <Settings className="w-3.5 h-3.5 text-gray-500 stroke-[1.8]" />
+                        <Settings className="w-3.5 h-3.5 text-gray-400 stroke-[1.8]" />
                         <span>Account Settings</span>
                       </Link>
                     </div>
 
-                    <div className="h-px bg-gray-100 my-1" />
+                    <div className="h-px bg-gray-100 my-1.5" />
 
                     {/* Logout Option */}
-                    <div className="px-2 pt-0.5">
+                    <div className="px-2">
                       <button
                         type="button"
                         onClick={handleLogout}
-                        className="w-full flex items-center gap-2.5 px-3 py-2 text-xs text-red-600 hover:bg-red-50 rounded-xs transition-colors cursor-pointer"
+                        className="w-full flex items-center gap-2.5 px-3 py-2 text-xs text-red-600 hover:bg-red-50 rounded-xs transition-colors cursor-pointer text-left"
                       >
                         <LogOut className="w-3.5 h-3.5 stroke-[1.8]" />
                         <span>Sign Out</span>
