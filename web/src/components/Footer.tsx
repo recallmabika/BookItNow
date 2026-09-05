@@ -43,8 +43,8 @@ export default function Footer() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        {/* Newsletter Subscription Row - Fully Transparent with No Border */}
-        <div className="rounded-xs p-0 sm:p-2 bg-transparent border-0 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+        {/* Newsletter Subscription Row - Translucent Frosted Glass without Border */}
+        <div className="rounded-xs p-6 sm:p-8 bg-black/25 dark:bg-black/35 backdrop-blur-md border-0 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
           <div className="space-y-1.5 max-w-lg">
             <span className="text-blue-200 text-xs font-semibold uppercase tracking-wider block">
               Travel Insider & Exclusive Perks
