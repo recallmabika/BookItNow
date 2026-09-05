@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import {
   Compass,
@@ -20,6 +21,7 @@ interface UserProfile {
 }
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [user, setUser] = useState<UserProfile | null>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -83,7 +85,11 @@ export default function Navbar() {
         <div className="flex items-center gap-2">
           <Link
             href="/search"
-            className="text-xs font-medium text-white hover:bg-white hover:text-[#0F5132] focus-visible:bg-white focus-visible:text-[#0F5132] focus-visible:ring-2 focus-visible:ring-white/80 transition-all duration-150 px-3.5 py-3 rounded-xs outline-none"
+            className={`text-xs font-medium transition-all duration-150 px-3.5 py-3 rounded-xs outline-none focus-visible:ring-2 focus-visible:ring-white/80 active:scale-[0.98] active:bg-white active:text-[#0F5132] ${
+              pathname.startsWith("/search")
+                ? "bg-white text-[#0F5132] font-semibold shadow-xs"
+                : "text-white hover:bg-white hover:text-[#0F5132] focus-visible:bg-white focus-visible:text-[#0F5132]"
+            }`}
           >
             Explore Stays
           </Link>
@@ -93,7 +99,11 @@ export default function Navbar() {
               {/* Clean My Bookings text button without awkward icon */}
               <Link
                 href="/my-bookings"
-                className="text-xs font-medium text-white hover:bg-white hover:text-[#0F5132] focus-visible:bg-white focus-visible:text-[#0F5132] focus-visible:ring-2 focus-visible:ring-white/80 transition-all duration-150 px-3.5 py-3 rounded-xs outline-none"
+                className={`text-xs font-medium transition-all duration-150 px-3.5 py-3 rounded-xs outline-none focus-visible:ring-2 focus-visible:ring-white/80 active:scale-[0.98] active:bg-white active:text-[#0F5132] ${
+                  pathname.startsWith("/my-bookings")
+                    ? "bg-white text-[#0F5132] font-semibold shadow-xs"
+                    : "text-white hover:bg-white hover:text-[#0F5132] focus-visible:bg-white focus-visible:text-[#0F5132]"
+                }`}
               >
                 My Bookings
               </Link>
@@ -161,18 +171,26 @@ export default function Navbar() {
                       <Link
                         href="/profile"
                         onClick={() => setDropdownOpen(false)}
-                        className="flex items-center gap-2.5 px-3 py-2 text-xs text-gray-700 hover:text-[#0F5132] hover:bg-[#E8F5E9]/50 rounded-xs transition-colors"
+                        className={`flex items-center gap-2.5 px-3 py-2 text-xs rounded-xs transition-colors active:bg-[#E8F5E9] ${
+                          pathname === "/profile"
+                            ? "bg-[#E8F5E9] text-[#0F5132] font-semibold"
+                            : "text-gray-700 hover:text-[#0F5132] hover:bg-[#E8F5E9]/50"
+                        }`}
                       >
-                        <UserIcon className="w-3.5 h-3.5 text-gray-400 stroke-[1.8]" />
+                        <UserIcon className={`w-3.5 h-3.5 stroke-[1.8] ${pathname === "/profile" ? "text-[#0F5132]" : "text-gray-400"}`} />
                         <span>My Profile</span>
                       </Link>
 
                       <Link
                         href="/settings"
                         onClick={() => setDropdownOpen(false)}
-                        className="flex items-center gap-2.5 px-3 py-2 text-xs text-gray-700 hover:text-[#0F5132] hover:bg-[#E8F5E9]/50 rounded-xs transition-colors"
+                        className={`flex items-center gap-2.5 px-3 py-2 text-xs rounded-xs transition-colors active:bg-[#E8F5E9] ${
+                          pathname === "/settings"
+                            ? "bg-[#E8F5E9] text-[#0F5132] font-semibold"
+                            : "text-gray-700 hover:text-[#0F5132] hover:bg-[#E8F5E9]/50"
+                        }`}
                       >
-                        <Settings className="w-3.5 h-3.5 text-gray-400 stroke-[1.8]" />
+                        <Settings className={`w-3.5 h-3.5 stroke-[1.8] ${pathname === "/settings" ? "text-[#0F5132]" : "text-gray-400"}`} />
                         <span>Account Settings</span>
                       </Link>
                     </div>
