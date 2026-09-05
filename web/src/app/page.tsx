@@ -122,9 +122,15 @@ export default function HomePage() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <Link
             href="/search?city=Harare"
-            className="group relative rounded-xs overflow-hidden aspect-[16/10] bg-gray-900 flex flex-col justify-end p-4 border border-gray-200 dark:border-gray-800"
+            className="group relative rounded-xs overflow-hidden aspect-[16/10] bg-gray-900 flex flex-col justify-end p-4 border border-gray-200 dark:border-gray-800 shadow-sm"
           >
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent z-10" />
+            <Image
+              src="/destination-harare.jpg"
+              alt="Stays in Harare"
+              fill
+              className="object-cover object-center transform group-hover:scale-105 transition-transform duration-500 ease-out"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/10 z-10" />
             <div className="relative z-20 text-white">
               <span className="text-[10px] tracking-wider uppercase font-medium text-blue-300">Capital Hub</span>
               <h3 className="text-base font-medium">Harare</h3>
@@ -134,9 +140,15 @@ export default function HomePage() {
 
           <Link
             href="/search?city=Victoria+Falls"
-            className="group relative rounded-xs overflow-hidden aspect-[16/10] bg-gray-900 flex flex-col justify-end p-4 border border-gray-200 dark:border-gray-800"
+            className="group relative rounded-xs overflow-hidden aspect-[16/10] bg-gray-900 flex flex-col justify-end p-4 border border-gray-200 dark:border-gray-800 shadow-sm"
           >
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent z-10" />
+            <Image
+              src="/destination-vicfalls.jpg"
+              alt="Stays in Victoria Falls"
+              fill
+              className="object-cover object-center transform group-hover:scale-105 transition-transform duration-500 ease-out"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/10 z-10" />
             <div className="relative z-20 text-white">
               <span className="text-[10px] tracking-wider uppercase font-medium text-blue-300">Natural Wonder</span>
               <h3 className="text-base font-medium">Victoria Falls</h3>
@@ -146,9 +158,15 @@ export default function HomePage() {
 
           <Link
             href="/search?city=Bulawayo"
-            className="group relative rounded-xs overflow-hidden aspect-[16/10] bg-gray-900 flex flex-col justify-end p-4 border border-gray-200 dark:border-gray-800"
+            className="group relative rounded-xs overflow-hidden aspect-[16/10] bg-gray-900 flex flex-col justify-end p-4 border border-gray-200 dark:border-gray-800 shadow-sm"
           >
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent z-10" />
+            <Image
+              src="/destination-bulawayo.jpg"
+              alt="Stays in Bulawayo"
+              fill
+              className="object-cover object-center transform group-hover:scale-105 transition-transform duration-500 ease-out"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/10 z-10" />
             <div className="relative z-20 text-white">
               <span className="text-[10px] tracking-wider uppercase font-medium text-blue-300">Heritage City</span>
               <h3 className="text-base font-medium">Bulawayo</h3>
