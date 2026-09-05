@@ -25,14 +25,14 @@ export default function RootLayout({
     <html lang="en" className={jakarta.variable}>
       <body className="min-h-screen flex flex-col bg-white text-gray-900 font-sans antialiased selection:bg-[#E8F5E9] selection:text-[#0F5132]">
         <Navbar />
-        <main className="flex-1">{children}</main>
-        <footer className="border-t border-gray-200/70 bg-gray-50/50 py-8 mt-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500 font-normal">
-            <p>© 2026 BookItNow Lodging Platform. All rights reserved.</p>
-            <div className="flex gap-6">
-              <span className="hover:text-[#0F5132] cursor-pointer transition-colors">Terms & Policies</span>
-              <span className="hover:text-[#0F5132] cursor-pointer transition-colors">Privacy Notice</span>
-              <span className="hover:text-[#0F5132] cursor-pointer transition-colors">Host Support</span>
+        <main className="flex-1 bg-white">{children}</main>
+        <footer className="bg-[#0A2540] text-white py-10 mt-16 border-t border-[#0D3256]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-normal">
+            <p className="text-slate-300">© 2026 BookItNow Lodging Platform. All rights reserved.</p>
+            <div className="flex gap-6 text-slate-300">
+              <span className="hover:text-white cursor-pointer transition-colors">Terms & Policies</span>
+              <span className="hover:text-white cursor-pointer transition-colors">Privacy Notice</span>
+              <span className="hover:text-white cursor-pointer transition-colors">Host Support</span>
             </div>
           </div>
         </footer>
