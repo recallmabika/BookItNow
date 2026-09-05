@@ -66,9 +66,10 @@ function SearchResultsContent() {
         <div className="text-center py-12 px-4 bg-transparent flex flex-col items-center justify-center">
           <div className="relative w-64 h-64 sm:w-80 sm:h-80 mb-6 bg-transparent">
             <Image
-              src="/empty-search.png"
+              src="/empty-stays.png"
               alt="No lodgings match your search"
               fill
+              unoptimized
               className="object-contain bg-transparent"
               priority
             />
