@@ -85,7 +85,7 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="min-h-[calc(100vh-4.5rem)] bg-[#F8FAF9] py-10 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-[calc(100vh-4.5rem)] bg-white py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
         {/* Back Link */}
         <div className="mb-6">
