@@ -100,7 +100,7 @@ export default function SearchBar({ transparent = false }: SearchBarProps) {
       onSubmit={handleSearch}
       className={`rounded-xs max-w-6xl w-full mx-auto flex flex-col md:flex-row items-stretch divide-y md:divide-y-0 md:divide-x shadow-2xl transition-all ${
         transparent
-          ? "bg-black/60 backdrop-blur-md border border-white/20 divide-white/15 shadow-black/50"
+          ? "bg-black/50 backdrop-blur-md border border-white/20 divide-white/15 shadow-black/40"
           : "bg-white dark:bg-[#111827] border border-gray-300 dark:border-gray-800 divide-gray-200 dark:divide-gray-800 shadow-xs"
       }`}
     >
