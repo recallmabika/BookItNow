@@ -94,12 +94,12 @@ export default function SearchBar() {
   return (
     <form
       onSubmit={handleSearch}
-      className="bg-white rounded-xs border border-gray-300 max-w-6xl w-full mx-auto flex flex-col md:flex-row items-stretch divide-y md:divide-y-0 md:divide-x divide-gray-200 shadow-xs"
+      className="bg-white dark:bg-[#111827] rounded-xs border border-gray-300 dark:border-gray-800 max-w-6xl w-full mx-auto flex flex-col md:flex-row items-stretch divide-y md:divide-y-0 md:divide-x divide-gray-200 dark:divide-gray-800 shadow-xs transition-colors"
     >
       {/* City / Destination */}
-      <div className="flex-1 flex flex-col justify-center px-5 py-3.5 hover:bg-gray-50/70 focus-within:bg-gray-50/90 transition-colors">
-        <div className="flex items-center gap-1.5 mb-1 text-gray-500">
-          <MapPin className="w-3.5 h-3.5 text-[#2563EB] shrink-0 stroke-[2]" />
+      <div className="flex-1 flex flex-col justify-center px-5 py-3.5 hover:bg-gray-50/70 dark:hover:bg-gray-800/60 focus-within:bg-gray-50/90 dark:focus-within:bg-gray-800/80 transition-colors">
+        <div className="flex items-center gap-1.5 mb-1 text-gray-500 dark:text-gray-400">
+          <MapPin className="w-3.5 h-3.5 text-[#2563EB] dark:text-blue-400 shrink-0 stroke-[2]" />
           <label className="text-[11px] font-semibold tracking-wider uppercase">
             Destination
           </label>
@@ -109,17 +109,17 @@ export default function SearchBar() {
           placeholder="Where to? (e.g. Harare)"
           value={city}
           onChange={(e) => setCity(e.target.value)}
-          className="w-full bg-transparent text-gray-900 text-sm font-medium outline-none focus:outline-none placeholder:text-gray-400 placeholder:font-normal"
+          className="w-full bg-transparent text-gray-900 dark:text-white text-sm font-medium outline-none focus:outline-none placeholder:text-gray-400 dark:placeholder:text-gray-500 placeholder:font-normal"
         />
       </div>
 
       {/* Check-in Date */}
       <div 
         onClick={() => fpInInstance.current?.open()}
-        className="flex-1 flex flex-col justify-center px-5 py-3.5 hover:bg-gray-50/70 focus-within:bg-gray-50/90 transition-colors cursor-pointer"
+        className="flex-1 flex flex-col justify-center px-5 py-3.5 hover:bg-gray-50/70 dark:hover:bg-gray-800/60 focus-within:bg-gray-50/90 dark:focus-within:bg-gray-800/80 transition-colors cursor-pointer"
       >
-        <div className="flex items-center gap-1.5 mb-1 text-gray-500 pointer-events-none">
-          <CalendarIcon className="w-3.5 h-3.5 text-[#2563EB] shrink-0 stroke-[2]" />
+        <div className="flex items-center gap-1.5 mb-1 text-gray-500 dark:text-gray-400 pointer-events-none">
+          <CalendarIcon className="w-3.5 h-3.5 text-[#2563EB] dark:text-blue-400 shrink-0 stroke-[2]" />
           <label className="text-[11px] font-semibold tracking-wider uppercase">
             Check-In
           </label>
@@ -129,17 +129,17 @@ export default function SearchBar() {
           type="text"
           placeholder="Add dates"
           readOnly
-          className="w-full bg-transparent text-gray-900 text-sm font-medium outline-none focus:outline-none cursor-pointer placeholder:text-gray-400 placeholder:font-normal"
+          className="w-full bg-transparent text-gray-900 dark:text-white text-sm font-medium outline-none focus:outline-none cursor-pointer placeholder:text-gray-400 dark:placeholder:text-gray-500 placeholder:font-normal"
         />
       </div>
 
       {/* Check-out Date */}
       <div 
         onClick={() => fpOutInstance.current?.open()}
-        className="flex-1 flex flex-col justify-center px-5 py-3.5 hover:bg-gray-50/70 focus-within:bg-gray-50/90 transition-colors cursor-pointer"
+        className="flex-1 flex flex-col justify-center px-5 py-3.5 hover:bg-gray-50/70 dark:hover:bg-gray-800/60 focus-within:bg-gray-50/90 dark:focus-within:bg-gray-800/80 transition-colors cursor-pointer"
       >
-        <div className="flex items-center gap-1.5 mb-1 text-gray-500 pointer-events-none">
-          <CalendarIcon className="w-3.5 h-3.5 text-[#2563EB] shrink-0 stroke-[2]" />
+        <div className="flex items-center gap-1.5 mb-1 text-gray-500 dark:text-gray-400 pointer-events-none">
+          <CalendarIcon className="w-3.5 h-3.5 text-[#2563EB] dark:text-blue-400 shrink-0 stroke-[2]" />
           <label className="text-[11px] font-semibold tracking-wider uppercase">
             Check-Out
           </label>
@@ -149,29 +149,29 @@ export default function SearchBar() {
           type="text"
           placeholder="Add dates"
           readOnly
-          className="w-full bg-transparent text-gray-900 text-sm font-medium outline-none focus:outline-none cursor-pointer placeholder:text-gray-400 placeholder:font-normal"
+          className="w-full bg-transparent text-gray-900 dark:text-white text-sm font-medium outline-none focus:outline-none cursor-pointer placeholder:text-gray-400 dark:placeholder:text-gray-500 placeholder:font-normal"
         />
       </div>
 
       {/* Guests */}
       <div
         ref={guestsRef}
-        className="flex-1 relative flex flex-col justify-center px-5 py-3.5 hover:bg-gray-50/70 focus-within:bg-gray-50/90 transition-colors cursor-pointer select-none"
+        className="flex-1 relative flex flex-col justify-center px-5 py-3.5 hover:bg-gray-50/70 dark:hover:bg-gray-800/60 focus-within:bg-gray-50/90 dark:focus-within:bg-gray-800/80 transition-colors cursor-pointer select-none"
         onClick={() => setGuestsOpen((prev) => !prev)}
       >
-        <div className="flex items-center gap-1.5 mb-1 text-gray-500 pointer-events-none">
-          <Users className="w-3.5 h-3.5 text-[#2563EB] shrink-0 stroke-[2]" />
+        <div className="flex items-center gap-1.5 mb-1 text-gray-500 dark:text-gray-400 pointer-events-none">
+          <Users className="w-3.5 h-3.5 text-[#2563EB] dark:text-blue-400 shrink-0 stroke-[2]" />
           <label className="text-[11px] font-semibold tracking-wider uppercase">
             Guests
           </label>
         </div>
-        <div className="text-gray-900 text-sm font-medium truncate">
+        <div className="text-gray-900 dark:text-white text-sm font-medium truncate">
           {guests === "1" ? "1 Guest" : guests === "5" ? "5+ Guests" : `${guests} Guests`}
         </div>
 
         {/* Custom Dropdown Menu matching user reference image */}
         {guestsOpen && (
-          <div className="absolute left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-xs shadow-xl z-[9999] py-1 divide-y divide-gray-50 animate-fade-in">
+          <div className="absolute left-0 right-0 top-full mt-1 bg-white dark:bg-[#111827] border border-gray-200 dark:border-gray-800 rounded-xs shadow-xl z-[9999] py-1 divide-y divide-gray-50 dark:divide-gray-800 animate-fade-in">
             {[
               { val: "1", label: "1 Guest" },
               { val: "2", label: "2 Guests" },
@@ -188,8 +188,8 @@ export default function SearchBar() {
                 }}
                 className={`px-4 py-2.5 text-xs sm:text-sm font-medium transition-colors cursor-pointer ${
                   guests === item.val
-                    ? "bg-[#EFF6FF] text-[#2563EB]"
-                    : "text-gray-800 hover:bg-gray-50"
+                    ? "bg-[#EFF6FF] dark:bg-blue-950/50 text-[#2563EB] dark:text-blue-400"
+                    : "text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800"
                 }`}
               >
                 {item.label}

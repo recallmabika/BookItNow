@@ -39,17 +39,17 @@ function SearchResultsContent() {
       <SearchBar />
 
       {/* Results Title & Count */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-200/60 pb-3">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-200/60 dark:border-gray-800 pb-3">
         <div>
-          <h1 className="text-xl font-medium text-gray-900">
+          <h1 className="text-xl font-medium text-gray-900 dark:text-white">
             {city ? `Stays in ${city}` : "All Available Stays"}
           </h1>
-          <p className="text-[11px] text-gray-500 font-normal">
+          <p className="text-[11px] text-gray-500 dark:text-gray-400 font-normal">
             {checkIn && checkOut ? `${checkIn} to ${checkOut} • ` : ""}
             {guests} {guests === 1 ? "guest" : "guests"}
           </p>
         </div>
-        <div className="text-[11px] font-normal text-[#2563EB] bg-[#EFF6FF] px-2 py-0.5 rounded-xs border border-blue-200/60">
+        <div className="text-[11px] font-normal text-[#2563EB] dark:text-blue-400 bg-[#EFF6FF] dark:bg-blue-950/40 px-2.5 py-1 rounded-xs border border-blue-200/60 dark:border-blue-900/50">
           {loading ? "Searching..." : `${properties.length} active listings found`}
         </div>
       </div>
@@ -60,12 +60,12 @@ function SearchResultsContent() {
           {[1, 2, 3].map((n) => (
             <div
               key={n}
-              className="h-64 rounded-xs bg-gray-100/70 animate-pulse border border-gray-200/60"
+              className="h-64 rounded-xs bg-gray-100/70 dark:bg-gray-900 animate-pulse border border-gray-200/60 dark:border-gray-800"
             />
           ))}
         </div>
       ) : properties.length === 0 ? (
-        <div className="text-center py-12 px-4 bg-white rounded-xs border border-gray-200/80 shadow-xs flex flex-col items-center justify-center">
+        <div className="text-center py-12 px-4 bg-white dark:bg-[#111827] rounded-xs border border-gray-200/80 dark:border-gray-800 shadow-xs flex flex-col items-center justify-center transition-colors">
           <div className="relative w-64 h-64 sm:w-80 sm:h-80 mb-6">
             <Image
               src="/empty-search.png"
@@ -75,10 +75,10 @@ function SearchResultsContent() {
               priority
             />
           </div>
-          <h3 className="font-semibold text-lg sm:text-xl text-gray-900 mb-2">
+          <h3 className="font-semibold text-lg sm:text-xl text-gray-900 dark:text-white mb-2">
             No lodgings match your search
           </h3>
-          <p className="text-xs sm:text-sm text-gray-500 max-w-md mx-auto font-normal leading-relaxed">
+          <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 max-w-md mx-auto font-normal leading-relaxed">
             We couldn't find any stays matching your exact dates or location. Try adjusting your search criteria or clearing filters.
           </p>
         </div>
@@ -93,7 +93,7 @@ function SearchResultsContent() {
             return (
               <div
                 key={prop.id}
-                className="bg-white rounded-xs border border-gray-200/80 overflow-hidden hover:border-[#2563EB]/50 transition-colors duration-150 flex flex-col group"
+                className="bg-white dark:bg-[#111827] rounded-xs border border-gray-200/80 dark:border-gray-800 overflow-hidden hover:border-[#2563EB]/50 dark:hover:border-blue-500/50 transition-colors duration-150 flex flex-col group"
               >
                 {/* Photo Preview */}
                 <div className="relative aspect-[16/10] bg-gray-900 overflow-hidden">
@@ -104,7 +104,7 @@ function SearchResultsContent() {
                       backgroundColor: "#111827",
                     }}
                   />
-                  <span className="absolute top-2 left-2 bg-white/95 text-gray-900 text-[9px] font-medium uppercase px-1.5 py-0.5 rounded-xs tracking-wider border border-gray-200/60">
+                  <span className="absolute top-2 left-2 bg-white/95 dark:bg-gray-900/95 text-gray-900 dark:text-white text-[9px] font-medium uppercase px-1.5 py-0.5 rounded-xs tracking-wider border border-gray-200/60 dark:border-gray-700">
                     {prop.property_type}
                   </span>
                 </div>
@@ -112,16 +112,16 @@ function SearchResultsContent() {
                 {/* Content */}
                 <div className="p-3.5 flex-1 flex flex-col justify-between space-y-3">
                   <div>
-                    <div className="flex items-center gap-1 text-[11px] text-gray-500 mb-1">
-                      <MapPin className="w-3 h-3 text-[#2563EB] shrink-0 stroke-[1.6]" />
+                    <div className="flex items-center gap-1 text-[11px] text-gray-500 dark:text-gray-400 mb-1">
+                      <MapPin className="w-3 h-3 text-[#2563EB] dark:text-blue-400 shrink-0 stroke-[1.6]" />
                       <span>{prop.city}, {prop.country}</span>
                     </div>
 
-                    <h2 className="font-medium text-sm text-gray-900 line-clamp-1 group-hover:text-[#2563EB] transition-colors">
+                    <h2 className="font-medium text-sm text-gray-900 dark:text-white line-clamp-1 group-hover:text-[#2563EB] dark:group-hover:text-blue-400 transition-colors">
                       {prop.title}
                     </h2>
 
-                    <p className="text-[11px] text-gray-500 line-clamp-2 mt-1 font-normal leading-relaxed">
+                    <p className="text-[11px] text-gray-500 dark:text-gray-400 line-clamp-2 mt-1 font-normal leading-relaxed">
                       {prop.description}
                     </p>
                   </div>
@@ -132,7 +132,7 @@ function SearchResultsContent() {
                       {prop.amenities.slice(0, 3).map((amenity, idx) => (
                         <span
                           key={idx}
-                          className="text-[9px] font-normal bg-gray-50 px-1.5 py-0.5 rounded-xs text-gray-600 border border-gray-200/60"
+                          className="text-[9px] font-normal bg-gray-50 dark:bg-gray-800 px-1.5 py-0.5 rounded-xs text-gray-600 dark:text-gray-300 border border-gray-200/60 dark:border-gray-700"
                         >
                           {amenity}
                         </span>
@@ -141,12 +141,12 @@ function SearchResultsContent() {
                   )}
 
                   {/* Price & Action */}
-                  <div className="pt-2.5 border-t border-gray-100 flex items-center justify-between">
+                  <div className="pt-2.5 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between">
                     <div>
                       {lowestPrice !== null ? (
                         <>
                           <span className="text-[11px] text-gray-400">From </span>
-                          <span className="font-mono font-medium text-sm text-gray-900">
+                          <span className="font-mono font-medium text-sm text-gray-900 dark:text-white">
                             ${lowestPrice.toFixed(2)}
                           </span>
                           <span className="text-[10px] text-gray-400"> / night</span>

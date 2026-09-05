@@ -92,3 +92,62 @@ span.flatpickr-weekday {
 input.flatpickr-input[type="hidden"] {
   display: none !important;
 }
+
+/* Flatpickr dark mode support */
+.dark .flatpickr-calendar {
+  background: #111827 !important;
+  border-color: #1F2937 !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5) !important;
+  color: #F8FAFC !important;
+}
+
+.dark .flatpickr-day {
+  color: #E2E8F0 !important;
+}
+
+.dark .flatpickr-day.flatpickr-disabled,
+.dark .flatpickr-day.flatpickr-disabled:hover,
+.dark .flatpickr-day.prevMonthDay,
+.dark .flatpickr-day.nextMonthDay {
+  color: #475569 !important;
+}
+
+.dark .flatpickr-day:hover:not(.selected) {
+  background: #1F2937 !important;
+  border-color: #374151 !important;
+}
+
+.dark .flatpickr-day.inRange {
+  background: rgba(37, 99, 235, 0.25) !important;
+  border-color: rgba(37, 99, 235, 0.25) !important;
+  color: #93C5FD !important;
+}
+
+.dark .flatpickr-months .flatpickr-month {
+  color: #F8FAFC !important;
+  fill: #F8FAFC !important;
+}
+
+.dark .flatpickr-current-month .numInputWrapper span.arrowUp:after {
+  border-bottom-color: #F8FAFC !important;
+}
+
+.dark .flatpickr-current-month .numInputWrapper span.arrowDown:after {
+  border-top-color: #F8FAFC !important;
+}
+
+.dark span.flatpickr-weekday {
+  color: #94A3B8 !important;
+}
+
+.dark .flatpickr-months .flatpickr-prev-month,
+.dark .flatpickr-months .flatpickr-next-month {
+  color: #94A3B8 !important;
+  fill: #94A3B8 !important;
+}
+
+.dark .flatpickr-months .flatpickr-prev-month:hover svg,
+.dark .flatpickr-months .flatpickr-next-month:hover svg {
+  fill: #FFFFFF !important;
+}
+
