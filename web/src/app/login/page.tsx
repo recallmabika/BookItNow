@@ -6,12 +6,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { AlertCircle, CheckCircle2 } from "lucide-react";
 import { SkeletonLoginForm } from "@/components/Skeleton";
+import { useAuth } from "@/context/AuthContext";
 
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectUrl = searchParams.get("redirect") || "/";
   const justRegistered = searchParams.get("registered");
+  const { user, login: setAuthLogin } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,6 +21,13 @@ function LoginForm() {
   const [generalError, setGeneralError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [loading, setLoading] = useState(false);
+
+  // If already logged in, redirect immediately away from /login
+  useEffect(() => {
+    if (user) {
+      router.replace(redirectUrl !== "/login" ? redirectUrl : user.role === "admin" ? "/admin" : "/");
+    }
+  }, [user, router, redirectUrl]);
 
   useEffect(() => {
     if (justRegistered) {
@@ -64,23 +73,18 @@ function LoginForm() {
       }
 
       const data = await res.json();
-      localStorage.setItem("bookitnow_token", data.access_token);
-      localStorage.setItem(
-        "bookitnow_user",
-        JSON.stringify({
+      setSuccessMessage("Signed in successfully! Redirecting...");
+      setAuthLogin(
+        data.access_token,
+        {
           id: data.user_id,
           email: data.email,
           first_name: data.first_name,
           last_name: data.last_name,
           role: data.role,
-        })
+        },
+        redirectUrl !== "/login" ? redirectUrl : data.role === "admin" ? "/admin" : "/"
       );
-
-      setSuccessMessage("Signed in successfully! Redirecting...");
-      router.push(redirectUrl);
-      setTimeout(() => {
-        window.location.reload();
-      }, 100);
     } catch (err: any) {
       setGeneralError(err.message || "Invalid email or password.");
     } finally {

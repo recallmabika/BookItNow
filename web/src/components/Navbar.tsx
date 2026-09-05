@@ -18,40 +18,14 @@ import {
   Layers
 } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
-
-interface UserProfile {
-  id: string;
-  email: string;
-  first_name: string;
-  last_name: string;
-  role: string;
-  avatar?: string;
-}
+import { useAuth } from "@/context/AuthContext";
 
 export default function Navbar() {
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
-  const [user, setUser] = useState<UserProfile | null>(null);
+  const { user, logout } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const checkUser = () => {
-      const saved = localStorage.getItem("bookitnow_user");
-      if (saved) {
-        try {
-          setUser(JSON.parse(saved));
-        } catch (e) {
-          // ignore
-        }
-      } else {
-        setUser(null);
-      }
-    };
-    checkUser();
-    window.addEventListener("storage", checkUser);
-    return () => window.removeEventListener("storage", checkUser);
-  }, []);
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -65,11 +39,8 @@ export default function Navbar() {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("bookitnow_token");
-    localStorage.removeItem("bookitnow_user");
-    setUser(null);
     setDropdownOpen(false);
-    window.location.reload();
+    logout("/");
   };
 
   return (
@@ -178,7 +149,7 @@ export default function Navbar() {
                         </div>
                         <div className="text-[10px] text-gray-500 dark:text-gray-400 truncate">{user.email}</div>
                         <span className="inline-block text-[10px] text-gray-400 dark:text-gray-500 font-medium mt-0.5">
-                          {user.role === "guest" || user.role === "GUEST" ? "Guest Account" : `${user.role.charAt(0).toUpperCase() + user.role.slice(1).toLowerCase()} Account`}
+                          {user.role.toLowerCase() === "guest" ? "Guest Account" : `${user.role.charAt(0).toUpperCase() + user.role.slice(1).toLowerCase()} Account`}
                         </span>
                       </div>
                     </div>

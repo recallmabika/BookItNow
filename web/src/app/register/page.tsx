@@ -1,14 +1,16 @@
 "use client";
 
-import { useState, Suspense } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { AlertCircle, CheckCircle2 } from "lucide-react";
 import { SkeletonRegisterForm } from "@/components/Skeleton";
+import { useAuth } from "@/context/AuthContext";
 
 function RegisterForm() {
   const router = useRouter();
+  const { user, login: setAuthLogin } = useAuth();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -20,6 +22,12 @@ function RegisterForm() {
   const [generalError, setGeneralError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      router.replace(user.role === "admin" ? "/admin" : "/");
+    }
+  }, [user, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -87,21 +95,17 @@ function RegisterForm() {
 
       if (loginRes.ok) {
         const loginData = await loginRes.json();
-        localStorage.setItem("bookitnow_token", loginData.access_token);
-        localStorage.setItem(
-          "bookitnow_user",
-          JSON.stringify({
+        setAuthLogin(
+          loginData.access_token,
+          {
             id: loginData.user_id,
             email: loginData.email,
             first_name: loginData.first_name,
             last_name: loginData.last_name,
             role: loginData.role,
-          })
+          },
+          loginData.role === "admin" ? "/admin" : "/"
         );
-        router.push("/");
-        setTimeout(() => {
-          window.location.reload();
-        }, 100);
       } else {
         router.push("/login?registered=true");
       }
