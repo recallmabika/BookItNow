@@ -97,76 +97,76 @@ export default function SearchBar() {
       className="bg-white rounded-xs border border-gray-300 max-w-6xl w-full mx-auto flex flex-col md:flex-row items-stretch divide-y md:divide-y-0 md:divide-x divide-gray-200 shadow-xs"
     >
       {/* City / Destination */}
-      <div className="flex-[1.4] flex items-center gap-3.5 px-5 py-3.5 hover:bg-gray-50/70 focus-within:bg-gray-50/90 transition-colors">
-        <MapPin className="w-5 h-5 text-[#0F5132] shrink-0 stroke-[1.5]" />
-        <div className="w-full text-left">
-          <label className="block text-[11px] font-semibold tracking-wider text-gray-500 uppercase mb-0.5">
+      <div className="flex-1 flex flex-col justify-center px-5 py-3.5 hover:bg-gray-50/70 focus-within:bg-gray-50/90 transition-colors">
+        <div className="flex items-center gap-1.5 mb-1 text-gray-500">
+          <MapPin className="w-3.5 h-3.5 text-[#0F5132] shrink-0 stroke-[2]" />
+          <label className="text-[11px] font-semibold tracking-wider uppercase">
             Destination
           </label>
-          <input
-            type="text"
-            placeholder="Where to? (e.g. Harare)"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            className="w-full bg-transparent text-gray-900 text-sm font-medium outline-none focus:outline-none placeholder:text-gray-400 placeholder:font-normal"
-          />
         </div>
+        <input
+          type="text"
+          placeholder="Where to? (e.g. Harare)"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          className="w-full bg-transparent text-gray-900 text-sm font-medium outline-none focus:outline-none placeholder:text-gray-400 placeholder:font-normal"
+        />
       </div>
 
       {/* Check-in Date */}
       <div 
         onClick={() => fpInInstance.current?.open()}
-        className="flex-1 flex items-center gap-3.5 px-5 py-3.5 hover:bg-gray-50/70 focus-within:bg-gray-50/90 transition-colors cursor-pointer"
+        className="flex-1 flex flex-col justify-center px-5 py-3.5 hover:bg-gray-50/70 focus-within:bg-gray-50/90 transition-colors cursor-pointer"
       >
-        <CalendarIcon className="w-5 h-5 text-[#0F5132] shrink-0 stroke-[1.5]" />
-        <div className="w-full text-left">
-          <label className="block text-[11px] font-semibold tracking-wider text-gray-500 uppercase mb-0.5 pointer-events-none">
+        <div className="flex items-center gap-1.5 mb-1 text-gray-500 pointer-events-none">
+          <CalendarIcon className="w-3.5 h-3.5 text-[#0F5132] shrink-0 stroke-[2]" />
+          <label className="text-[11px] font-semibold tracking-wider uppercase">
             Check-In
           </label>
-          <input
-            ref={checkInRef}
-            type="text"
-            placeholder="Add dates"
-            readOnly
-            className="w-full bg-transparent text-gray-900 text-sm font-medium outline-none focus:outline-none cursor-pointer placeholder:text-gray-400 placeholder:font-normal"
-          />
         </div>
+        <input
+          ref={checkInRef}
+          type="text"
+          placeholder="Add dates"
+          readOnly
+          className="w-full bg-transparent text-gray-900 text-sm font-medium outline-none focus:outline-none cursor-pointer placeholder:text-gray-400 placeholder:font-normal"
+        />
       </div>
 
       {/* Check-out Date */}
       <div 
         onClick={() => fpOutInstance.current?.open()}
-        className="flex-1 flex items-center gap-3.5 px-5 py-3.5 hover:bg-gray-50/70 focus-within:bg-gray-50/90 transition-colors cursor-pointer"
+        className="flex-1 flex flex-col justify-center px-5 py-3.5 hover:bg-gray-50/70 focus-within:bg-gray-50/90 transition-colors cursor-pointer"
       >
-        <CalendarIcon className="w-5 h-5 text-[#0F5132] shrink-0 stroke-[1.5]" />
-        <div className="w-full text-left">
-          <label className="block text-[11px] font-semibold tracking-wider text-gray-500 uppercase mb-0.5 pointer-events-none">
+        <div className="flex items-center gap-1.5 mb-1 text-gray-500 pointer-events-none">
+          <CalendarIcon className="w-3.5 h-3.5 text-[#0F5132] shrink-0 stroke-[2]" />
+          <label className="text-[11px] font-semibold tracking-wider uppercase">
             Check-Out
           </label>
-          <input
-            ref={checkOutRef}
-            type="text"
-            placeholder="Add dates"
-            readOnly
-            className="w-full bg-transparent text-gray-900 text-sm font-medium outline-none focus:outline-none cursor-pointer placeholder:text-gray-400 placeholder:font-normal"
-          />
         </div>
+        <input
+          ref={checkOutRef}
+          type="text"
+          placeholder="Add dates"
+          readOnly
+          className="w-full bg-transparent text-gray-900 text-sm font-medium outline-none focus:outline-none cursor-pointer placeholder:text-gray-400 placeholder:font-normal"
+        />
       </div>
 
       {/* Guests */}
       <div
         ref={guestsRef}
-        className="w-full md:w-52 relative flex items-center gap-3.5 px-5 py-3.5 hover:bg-gray-50/70 focus-within:bg-gray-50/90 transition-colors cursor-pointer"
+        className="flex-1 relative flex flex-col justify-center px-5 py-3.5 hover:bg-gray-50/70 focus-within:bg-gray-50/90 transition-colors cursor-pointer select-none"
         onClick={() => setGuestsOpen((prev) => !prev)}
       >
-        <Users className="w-5 h-5 text-[#0F5132] shrink-0 stroke-[1.5]" />
-        <div className="w-full text-left select-none">
-          <label className="block text-[11px] font-semibold tracking-wider text-gray-500 uppercase mb-0.5 pointer-events-none">
+        <div className="flex items-center gap-1.5 mb-1 text-gray-500 pointer-events-none">
+          <Users className="w-3.5 h-3.5 text-[#0F5132] shrink-0 stroke-[2]" />
+          <label className="text-[11px] font-semibold tracking-wider uppercase">
             Guests
           </label>
-          <div className="text-gray-900 text-sm font-medium">
-            {guests === "1" ? "1 Guest" : guests === "5" ? "5+ Guests" : `${guests} Guests`}
-          </div>
+        </div>
+        <div className="text-gray-900 text-sm font-medium truncate">
+          {guests === "1" ? "1 Guest" : guests === "5" ? "5+ Guests" : `${guests} Guests`}
         </div>
 
         {/* Custom Dropdown Menu matching user reference image */}
