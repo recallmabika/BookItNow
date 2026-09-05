@@ -21,6 +21,10 @@ export default function SettingsPage() {
   const [emailAlerts, setEmailAlerts] = useState(true);
   const [smsAlerts, setSmsAlerts] = useState(false);
   const [currency, setCurrency] = useState("USD");
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   useEffect(() => {
     const raw = localStorage.getItem("bookitnow_user");
@@ -31,7 +35,23 @@ export default function SettingsPage() {
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
+    setPasswordError("");
+
+    if (newPassword || confirmPassword) {
+      if (newPassword.length < 6) {
+        setPasswordError("New password must be at least 6 characters long.");
+        return;
+      }
+      if (newPassword !== confirmPassword) {
+        setPasswordError("Passwords do not match. Please re-check.");
+        return;
+      }
+    }
+
     setSavedMsg("Settings saved successfully!");
+    setCurrentPassword("");
+    setNewPassword("");
+    setConfirmPassword("");
     setTimeout(() => setSavedMsg(""), 3500);
   };
 
@@ -132,13 +152,18 @@ export default function SettingsPage() {
                   Password & Security
                 </h3>
               </div>
-              <div className="pl-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="pl-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
                   <label className="block text-xs font-medium text-gray-700 mb-1.5">
                     Current Password
                   </label>
                   <input
                     type="password"
+                    value={currentPassword}
+                    onChange={(e) => {
+                      setCurrentPassword(e.target.value);
+                      setPasswordError("");
+                    }}
                     placeholder="••••••••"
                     className="w-full px-3 py-2 text-xs border border-gray-300 rounded-xs outline-none focus:outline-none focus:ring-0 focus:border-[#0F5132] transition-colors"
                   />
@@ -149,11 +174,34 @@ export default function SettingsPage() {
                   </label>
                   <input
                     type="password"
+                    value={newPassword}
+                    onChange={(e) => {
+                      setNewPassword(e.target.value);
+                      setPasswordError("");
+                    }}
+                    placeholder="••••••••"
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-xs outline-none focus:outline-none focus:ring-0 focus:border-[#0F5132] transition-colors"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-medium text-gray-700 mb-1.5">
+                    Confirm Password
+                  </label>
+                  <input
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => {
+                      setConfirmPassword(e.target.value);
+                      setPasswordError("");
+                    }}
                     placeholder="••••••••"
                     className="w-full px-3 py-2 text-xs border border-gray-300 rounded-xs outline-none focus:outline-none focus:ring-0 focus:border-[#0F5132] transition-colors"
                   />
                 </div>
               </div>
+              {passwordError && (
+                <p className="text-[11px] text-red-600 mt-2 pl-6">{passwordError}</p>
+              )}
             </div>
 
             <div className="pt-4 flex justify-end">

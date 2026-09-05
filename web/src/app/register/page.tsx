@@ -12,6 +12,7 @@ export default function RegisterPage() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -19,6 +20,12 @@ export default function RegisterPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match. Please verify your password.");
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -148,6 +155,21 @@ export default function RegisterPage() {
               minLength={6}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="••••••••"
+              className="w-full bg-gray-50 px-3 py-2 rounded-lg border border-gray-200 text-xs sm:text-sm text-gray-900 font-medium focus:outline-none focus:border-[#0F5132] focus:bg-white transition-all"
+            />
+          </div>
+
+          <div className="space-y-1">
+            <label className="block text-[10px] font-semibold uppercase tracking-wider text-gray-500">
+              Confirm Password
+            </label>
+            <input
+              type="password"
+              required
+              minLength={6}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="••••••••"
               className="w-full bg-gray-50 px-3 py-2 rounded-lg border border-gray-200 text-xs sm:text-sm text-gray-900 font-medium focus:outline-none focus:border-[#0F5132] focus:bg-white transition-all"
             />
