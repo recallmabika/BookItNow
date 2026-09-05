@@ -1,67 +1,74 @@
 @import "tailwindcss";
 
 :root {
-  /* README Design System Color Palette */
-  --color-ink: #1C1E1B;
-  --color-parchment: #EFEAE1;
-  --color-parchment-light: #F8F5F0;
-  --color-deep-teal: #0D5C4C;
-  --color-deep-teal-hover: #09473A;
-  --color-ochre: #B5772E;
-  --color-ochre-light: #E89A3C;
-  --color-slate: #6B6B63;
-  --color-slate-light: #D5D3CB;
-  --color-alert-red: #B23B2E;
+  /* Crisp White & Forest Emerald Green Palette */
+  --color-primary: #0F5132;        /* Rich British racing / forest green */
+  --color-primary-hover: #0A3622;  /* Deep dark forest green */
+  --color-primary-light: #E8F5E9;  /* Crisp light green tint */
+  --color-accent: #198754;         /* Vibrant emerald accent */
+  --color-accent-subtle: #D1E7DD;  /* Light mint border / badge */
+  
+  --color-ink: #111827;            /* Deep dark slate for text */
+  --color-slate-muted: #6B7280;    /* Muted secondary text */
+  --color-slate-border: #E5E7EB;   /* Crisp subtle border */
+  --color-surface: #FFFFFF;        /* Pure white */
+  --color-surface-subtle: #F9FAFB; /* Crisp off-white */
 
-  --background: var(--color-parchment);
-  --foreground: var(--color-ink);
+  --background: #FFFFFF;
+  --foreground: #111827;
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom design tokens */
-.bg-parchment {
-  background-color: #EFEAE1;
+/* Custom design utilities */
+.bg-primary-green {
+  background-color: #0F5132;
 }
 
-.bg-parchment-light {
-  background-color: #F8F5F0;
+.hover\:bg-primary-green-dark:hover {
+  background-color: #0A3622;
 }
 
-.text-ink {
-  color: #1C1E1B;
+.text-primary-green {
+  color: #0F5132;
 }
 
-.text-deep-teal {
-  color: #0D5C4C;
+.text-accent-green {
+  color: #198754;
 }
 
-.bg-deep-teal {
-  background-color: #0D5C4C;
+.bg-accent-light {
+  background-color: #E8F5E9;
 }
 
-.bg-deep-teal:hover {
-  background-color: #09473A;
+.border-subtle {
+  border-color: #E5E7EB;
 }
 
-.text-ochre {
-  color: #B5772E;
+/* Smooth micro-interaction animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.bg-ochre {
-  background-color: #B5772E;
+.animate-fade-in {
+  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.border-slate-subtle {
-  border-color: #D5D3CB;
-}
-
-.text-slate-muted {
-  color: #6B6B63;
+/* Subtle clean input styling */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: invert(25%) sepia(30%) saturate(1500%) hue-rotate(105deg) brightness(85%) contrast(90%);
 }

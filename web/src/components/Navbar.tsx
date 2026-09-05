@@ -2,20 +2,27 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { Compass, User, Calendar, LogOut, Building } from "lucide-react";
+import { Compass, Calendar, LogOut } from "lucide-react";
 
 export default function Navbar() {
   const [user, setUser] = useState<{ email: string; first_name: string; role: string } | null>(null);
 
   useEffect(() => {
-    const saved = localStorage.getItem("bookitnow_user");
-    if (saved) {
-      try {
-        setUser(JSON.parse(saved));
-      } catch (e) {
-        // ignore
+    const checkUser = () => {
+      const saved = localStorage.getItem("bookitnow_user");
+      if (saved) {
+        try {
+          setUser(JSON.parse(saved));
+        } catch (e) {
+          // ignore
+        }
+      } else {
+        setUser(null);
       }
-    }
+    };
+    checkUser();
+    window.addEventListener("storage", checkUser);
+    return () => window.removeEventListener("storage", checkUser);
   }, []);
 
   const handleLogout = () => {
@@ -26,67 +33,67 @@ export default function Navbar() {
   };
 
   return (
-    <header className="border-b border-slate-subtle bg-[#F8F5F0]/90 backdrop-blur-md sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    <header className="border-b border-gray-200/80 bg-white/95 backdrop-blur-md sticky top-0 z-50 transition-all">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
         {/* Brand */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-lg bg-deep-teal flex items-center justify-center text-[#EFEAE1] shadow-sm transition-transform group-hover:scale-105">
-            <Compass className="w-6 h-6 stroke-[2.2]" />
+        <Link href="/" className="flex items-center gap-2.5 group">
+          <div className="w-9 h-9 rounded-lg bg-[#0F5132] flex items-center justify-center text-white shadow-xs transition-transform duration-200 group-hover:scale-105">
+            <Compass className="w-5 h-5 stroke-[2.2]" />
           </div>
           <div>
-            <span className="font-bold text-2xl tracking-tight text-ink font-serif block leading-none">
-              BookIt<span className="text-ochre">Now</span>
+            <span className="font-bold text-xl tracking-tight text-gray-900 block leading-tight">
+              BookIt<span className="text-[#198754]">Now</span>
             </span>
-            <span className="text-[10px] tracking-wider uppercase text-slate-muted font-medium">
+            <span className="text-[10px] tracking-wider uppercase text-gray-500 font-medium">
               Lodging & Stays
             </span>
           </div>
         </Link>
 
         {/* Navigation / Actions */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <Link
             href="/search"
-            className="text-sm font-medium text-ink hover:text-deep-teal transition-colors px-3 py-2"
+            className="text-sm font-medium text-gray-700 hover:text-[#0F5132] transition-colors px-3 py-2 rounded-lg hover:bg-gray-50"
           >
             Explore Stays
           </Link>
 
           {user ? (
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 pl-2">
               <Link
                 href="/my-bookings"
-                className="flex items-center gap-1.5 text-sm font-medium text-ink hover:text-deep-teal px-3 py-2 rounded-md hover:bg-parchment transition-colors"
+                className="flex items-center gap-1.5 text-sm font-medium text-gray-700 hover:text-[#0F5132] px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors"
               >
-                <Calendar className="w-4 h-4 text-slate-muted" />
+                <Calendar className="w-4 h-4 text-[#0F5132]" />
                 <span>My Bookings</span>
               </Link>
-              <div className="h-4 w-px bg-slate-subtle" />
-              <div className="flex items-center gap-2 text-sm text-ink font-medium pl-1">
-                <span className="w-8 h-8 rounded-full bg-deep-teal/10 text-deep-teal flex items-center justify-center font-bold text-xs">
+              <div className="h-4 w-px bg-gray-200" />
+              <div className="flex items-center gap-2 text-sm text-gray-900 font-medium pl-1">
+                <span className="w-8 h-8 rounded-lg bg-[#E8F5E9] text-[#0F5132] flex items-center justify-center font-bold text-xs border border-green-200">
                   {user.first_name[0]?.toUpperCase()}
                 </span>
-                <span className="hidden sm:inline">{user.first_name}</span>
+                <span className="hidden sm:inline text-xs font-semibold">{user.first_name}</span>
                 <button
                   onClick={handleLogout}
                   title="Log out"
-                  className="text-slate-muted hover:text-alert-red transition-colors p-1"
+                  className="text-gray-400 hover:text-red-600 transition-colors p-1"
                 >
                   <LogOut className="w-4 h-4" />
                 </button>
               </div>
             </div>
           ) : (
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2.5">
               <Link
                 href="/login"
-                className="text-sm font-medium text-ink hover:text-deep-teal transition-colors px-3 py-2"
+                className="text-sm font-medium text-gray-700 hover:text-[#0F5132] transition-colors px-3 py-2 rounded-lg hover:bg-gray-50"
               >
                 Sign In
               </Link>
               <Link
                 href="/register"
-                className="text-sm font-medium bg-deep-teal text-[#EFEAE1] hover:bg-deep-teal-hover px-4 py-2.5 rounded-lg shadow-sm transition-all hover:shadow"
+                className="text-sm font-medium bg-[#0F5132] text-white hover:bg-[#0A3622] px-4 py-2 rounded-lg shadow-xs transition-all duration-150 hover:shadow-sm"
               >
                 Register
               </Link>
