@@ -86,18 +86,18 @@ export default function RegisterPage() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/75" />
       </div>
 
-      {/* Registration Card - Wider 2-Column Grid to reduce vertical height */}
-      <div className="relative z-10 w-full max-w-xl bg-white/95 dark:bg-[#111827]/95 backdrop-blur-md p-7 sm:p-9 rounded-xs border border-white/20 dark:border-gray-800 shadow-2xl space-y-6">
+      {/* Registration Card - Wider 2-Column Grid with Translucent Frosted Glass */}
+      <div className="relative z-10 w-full max-w-xl bg-black/60 dark:bg-black/70 backdrop-blur-xl p-7 sm:p-9 rounded-xs border border-white/20 shadow-2xl space-y-6">
         <div className="text-center space-y-1">
-          <div className="w-10 h-10 rounded-xs bg-[#EFF6FF] dark:bg-blue-950/60 text-[#2563EB] dark:text-blue-400 flex items-center justify-center mx-auto border border-blue-200 dark:border-blue-900/50 shadow-xs mb-2">
+          <div className="w-10 h-10 rounded-xs bg-white/10 text-blue-300 flex items-center justify-center mx-auto border border-white/20 shadow-xs mb-2">
             <Compass className="w-5 h-5 stroke-[2]" />
           </div>
-          <h1 className="text-2xl font-medium tracking-tight text-gray-900 dark:text-white">Create Guest Account</h1>
-          <p className="text-xs text-gray-500 dark:text-gray-400 font-normal">Instant bookings, transparent pricing, and digital check-in e-vouchers</p>
+          <h1 className="text-2xl font-medium tracking-tight text-white">Create Guest Account</h1>
+          <p className="text-xs text-gray-300 font-normal">Instant bookings, transparent pricing, and digital check-in e-vouchers</p>
         </div>
 
         {error && (
-          <div className="p-3 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/50 text-red-700 dark:text-red-300 rounded-xs text-xs font-medium">
+          <div className="p-3 bg-red-500/20 border border-red-500/40 text-red-200 rounded-xs text-xs font-medium">
             {error}
           </div>
         )}
@@ -106,7 +106,7 @@ export default function RegisterPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             {/* First Name */}
             <div className="space-y-1">
-              <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-600 dark:text-gray-400">
+              <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-300">
                 First Name
               </label>
               <input
@@ -115,13 +115,13 @@ export default function RegisterPage() {
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 placeholder="Tatenda"
-                className="w-full bg-gray-50 dark:bg-gray-800/70 px-3.5 py-2.5 rounded-xs border border-gray-200 dark:border-gray-700 text-xs sm:text-sm text-gray-900 dark:text-white font-normal placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] transition-all"
+                className="w-full bg-white/10 hover:bg-white/15 focus:bg-white/15 px-3.5 py-2.5 rounded-xs border border-white/20 text-xs sm:text-sm text-white font-normal placeholder:text-gray-400 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-all"
               />
             </div>
 
             {/* Last Name */}
             <div className="space-y-1">
-              <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-600 dark:text-gray-400">
+              <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-300">
                 Last Name
               </label>
               <input
@@ -130,13 +130,13 @@ export default function RegisterPage() {
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
                 placeholder="Moyo"
-                className="w-full bg-gray-50 dark:bg-gray-800/70 px-3.5 py-2.5 rounded-xs border border-gray-200 dark:border-gray-700 text-xs sm:text-sm text-gray-900 dark:text-white font-normal placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] transition-all"
+                className="w-full bg-white/10 hover:bg-white/15 focus:bg-white/15 px-3.5 py-2.5 rounded-xs border border-white/20 text-xs sm:text-sm text-white font-normal placeholder:text-gray-400 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-all"
               />
             </div>
 
             {/* Email Address */}
             <div className="space-y-1">
-              <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-600 dark:text-gray-400">
+              <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-300">
                 Email Address
               </label>
               <input
@@ -145,13 +145,13 @@ export default function RegisterPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                className="w-full bg-gray-50 dark:bg-gray-800/70 px-3.5 py-2.5 rounded-xs border border-gray-200 dark:border-gray-700 text-xs sm:text-sm text-gray-900 dark:text-white font-normal placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] transition-all"
+                className="w-full bg-white/10 hover:bg-white/15 focus:bg-white/15 px-3.5 py-2.5 rounded-xs border border-white/20 text-xs sm:text-sm text-white font-normal placeholder:text-gray-400 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-all"
               />
             </div>
 
             {/* Phone Number */}
             <div className="space-y-1">
-              <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-600 dark:text-gray-400">
+              <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-300">
                 Phone (Optional)
               </label>
               <input
@@ -159,13 +159,13 @@ export default function RegisterPage() {
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 placeholder="+263 77 123 4567"
-                className="w-full bg-gray-50 dark:bg-gray-800/70 px-3.5 py-2.5 rounded-xs border border-gray-200 dark:border-gray-700 text-xs sm:text-sm text-gray-900 dark:text-white font-normal placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] transition-all"
+                className="w-full bg-white/10 hover:bg-white/15 focus:bg-white/15 px-3.5 py-2.5 rounded-xs border border-white/20 text-xs sm:text-sm text-white font-normal placeholder:text-gray-400 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-all"
               />
             </div>
 
             {/* Password */}
             <div className="space-y-1">
-              <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-600 dark:text-gray-400">
+              <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-300">
                 Password (Min. 6 chars)
               </label>
               <input
@@ -175,13 +175,13 @@ export default function RegisterPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full bg-gray-50 dark:bg-gray-800/70 px-3.5 py-2.5 rounded-xs border border-gray-200 dark:border-gray-700 text-xs sm:text-sm text-gray-900 dark:text-white font-normal placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] transition-all"
+                className="w-full bg-white/10 hover:bg-white/15 focus:bg-white/15 px-3.5 py-2.5 rounded-xs border border-white/20 text-xs sm:text-sm text-white font-normal placeholder:text-gray-400 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-all"
               />
             </div>
 
             {/* Confirm Password */}
             <div className="space-y-1">
-              <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-600 dark:text-gray-400">
+              <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-300">
                 Confirm Password
               </label>
               <input
@@ -191,7 +191,7 @@ export default function RegisterPage() {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full bg-gray-50 dark:bg-gray-800/70 px-3.5 py-2.5 rounded-xs border border-gray-200 dark:border-gray-700 text-xs sm:text-sm text-gray-900 dark:text-white font-normal placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] transition-all"
+                className="w-full bg-white/10 hover:bg-white/15 focus:bg-white/15 px-3.5 py-2.5 rounded-xs border border-white/20 text-xs sm:text-sm text-white font-normal placeholder:text-gray-400 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-all"
               />
             </div>
           </div>
@@ -205,11 +205,11 @@ export default function RegisterPage() {
           </button>
 
           <div className="relative flex items-center justify-center my-3">
-            <div className="border-t border-gray-200 dark:border-gray-700 w-full" />
-            <span className="bg-white dark:bg-[#111827] px-3 text-[11px] uppercase tracking-wider text-gray-400 font-medium shrink-0">
+            <div className="border-t border-white/15 w-full" />
+            <span className="bg-transparent px-3 text-[11px] uppercase tracking-wider text-gray-400 font-medium shrink-0">
               or register with
             </span>
-            <div className="border-t border-gray-200 dark:border-gray-700 w-full" />
+            <div className="border-t border-white/15 w-full" />
           </div>
 
           {/* Google Sign Up Button */}
@@ -218,7 +218,7 @@ export default function RegisterPage() {
             onClick={() => {
               alert("Google Sign Up: Connect your Google Cloud Client ID to enable 1-tap registration.");
             }}
-            className="w-full py-2.5 px-4 rounded-xs border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/80 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 font-medium text-xs flex items-center justify-center gap-2.5 shadow-2xs transition-colors cursor-pointer"
+            className="w-full py-2.5 px-4 rounded-xs border border-white/20 bg-white/10 hover:bg-white/15 text-white font-medium text-xs flex items-center justify-center gap-2.5 shadow-xs transition-colors cursor-pointer"
           >
             <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
               <path
@@ -242,9 +242,9 @@ export default function RegisterPage() {
           </button>
         </form>
 
-        <p className="text-center text-xs text-gray-500 dark:text-gray-400 pt-1">
+        <p className="text-center text-xs text-gray-300 pt-1">
           Already have an account?{" "}
-          <Link href="/login" className="font-semibold text-[#2563EB] dark:text-blue-400 hover:underline">
+          <Link href="/login" className="font-semibold text-blue-400 hover:underline">
             Sign In
           </Link>
         </p>

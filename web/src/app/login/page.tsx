@@ -58,24 +58,24 @@ function LoginForm() {
   };
 
   return (
-    <div className="w-full max-w-sm bg-white dark:bg-[#111827] p-8 rounded-xs border border-gray-200 dark:border-gray-800 shadow-xl space-y-5">
+    <div className="w-full max-w-sm bg-black/60 dark:bg-black/70 backdrop-blur-xl p-8 rounded-xs border border-white/20 shadow-2xl space-y-5">
       <div className="text-center space-y-1.5">
-        <div className="w-10 h-10 rounded-xs bg-[#EFF6FF] dark:bg-blue-950/60 text-[#2563EB] dark:text-blue-400 flex items-center justify-center mx-auto border border-blue-200 dark:border-blue-900/50 shadow-xs">
+        <div className="w-10 h-10 rounded-xs bg-white/10 text-blue-300 flex items-center justify-center mx-auto border border-white/20 shadow-xs">
           <Compass className="w-5 h-5 stroke-[2]" />
         </div>
-        <h1 className="text-xl font-medium tracking-tight text-gray-900 dark:text-white">Welcome Back</h1>
-        <p className="text-xs text-gray-500 dark:text-gray-400 font-normal">Sign in to manage your bookings and saved lodgings</p>
+        <h1 className="text-xl font-medium tracking-tight text-white">Welcome Back</h1>
+        <p className="text-xs text-gray-300 font-normal">Sign in to manage your bookings and saved lodgings</p>
       </div>
 
       {error && (
-        <div className="p-3 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/50 text-red-700 dark:text-red-300 rounded-xs text-xs font-medium">
+        <div className="p-3 bg-red-500/20 border border-red-500/40 text-red-200 rounded-xs text-xs font-medium">
           {error}
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-1.5">
-          <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-600 dark:text-gray-400">
+          <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-300">
             Email Address
           </label>
           <input
@@ -84,13 +84,13 @@ function LoginForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@example.com"
-            className="w-full bg-gray-50 dark:bg-gray-800/60 px-3.5 py-2.5 rounded-xs border border-gray-200 dark:border-gray-700 text-xs sm:text-sm text-gray-900 dark:text-white font-normal placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] transition-all"
+            className="w-full bg-white/10 hover:bg-white/15 focus:bg-white/15 px-3.5 py-2.5 rounded-xs border border-white/20 text-xs sm:text-sm text-white font-normal placeholder:text-gray-400 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-all"
           />
         </div>
 
         <div className="space-y-1.5">
           <div className="flex items-center justify-between">
-            <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-600 dark:text-gray-400">
+            <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-300">
               Password
             </label>
           </div>
@@ -100,7 +100,7 @@ function LoginForm() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="••••••••"
-            className="w-full bg-gray-50 dark:bg-gray-800/60 px-3.5 py-2.5 rounded-xs border border-gray-200 dark:border-gray-700 text-xs sm:text-sm text-gray-900 dark:text-white font-normal placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] transition-all"
+            className="w-full bg-white/10 hover:bg-white/15 focus:bg-white/15 px-3.5 py-2.5 rounded-xs border border-white/20 text-xs sm:text-sm text-white font-normal placeholder:text-gray-400 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-all"
           />
         </div>
 
@@ -113,11 +113,11 @@ function LoginForm() {
         </button>
 
         <div className="relative flex items-center justify-center my-4">
-          <div className="border-t border-gray-200 dark:border-gray-700 w-full" />
-          <span className="bg-white dark:bg-[#111827] px-3 text-[11px] uppercase tracking-wider text-gray-400 font-medium shrink-0">
+          <div className="border-t border-white/15 w-full" />
+          <span className="bg-transparent px-3 text-[11px] uppercase tracking-wider text-gray-400 font-medium shrink-0">
             or continue with
           </span>
-          <div className="border-t border-gray-200 dark:border-gray-700 w-full" />
+          <div className="border-t border-white/15 w-full" />
         </div>
 
         {/* Google Sign In Button */}
@@ -126,7 +126,7 @@ function LoginForm() {
           onClick={() => {
             alert("Google Sign In: Connect your Google Cloud Client ID to enable 1-tap authentication.");
           }}
-          className="w-full py-2.5 px-4 rounded-xs border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/80 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 font-medium text-xs flex items-center justify-center gap-2.5 shadow-2xs transition-colors cursor-pointer"
+          className="w-full py-2.5 px-4 rounded-xs border border-white/20 bg-white/10 hover:bg-white/15 text-white font-medium text-xs flex items-center justify-center gap-2.5 shadow-xs transition-colors cursor-pointer"
         >
           <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
             <path
