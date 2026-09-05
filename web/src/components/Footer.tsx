@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Mail, Check, ArrowRight } from "lucide-react";
 
 export default function Footer() {
@@ -27,10 +28,23 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#0A2540] dark:bg-[#061527] text-white pt-14 pb-10 border-t border-[#0D3256] transition-colors duration-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+    <footer className="relative bg-[#0D76BD] text-white pt-14 pb-10 border-t border-white/10 overflow-hidden">
+      {/* Africa Dotted Map Background */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <Image
+          src="/africa-dotted-map.png"
+          alt="Africa continent dotted map"
+          fill
+          priority
+          className="object-cover object-center"
+        />
+        {/* Gradient scrim ensuring map is vividly visible while text has high contrast */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0A2540]/80 via-[#0A2540]/55 to-[#0A2540]/85" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Newsletter Subscription Row */}
-        <div className="rounded-xs p-6 sm:p-8 bg-white/5 border border-white/10 backdrop-blur-sm flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+        <div className="rounded-xs p-6 sm:p-8 bg-black/30 border border-white/15 backdrop-blur-md flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
           <div className="space-y-1.5 max-w-lg">
             <span className="text-blue-400 text-xs font-semibold uppercase tracking-wider block">
               Travel Insider & Exclusive Perks
