@@ -110,9 +110,9 @@ export default function SearchBar({ transparent = false }: SearchBarProps) {
           ? "hover:bg-white/10 focus-within:bg-white/15"
           : "hover:bg-gray-50/70 dark:hover:bg-gray-800/60 focus-within:bg-gray-50/90 dark:focus-within:bg-gray-800/80"
       }`}>
-        <div className={`flex items-center gap-1.5 mb-1 ${transparent ? "text-blue-300" : "text-gray-500 dark:text-gray-400"}`}>
-          <MapPin className={`w-3.5 h-3.5 shrink-0 stroke-[2] ${transparent ? "text-blue-400" : "text-[#2563EB] dark:text-blue-400"}`} />
-          <label className="text-[11px] font-semibold tracking-wider uppercase">
+        <div className="flex items-center gap-1.5 mb-1">
+          <MapPin className={`w-3.5 h-3.5 shrink-0 stroke-[1.8] ${transparent ? "text-white/70" : "text-[#2563EB] dark:text-blue-400"}`} />
+          <label className={`text-[10px] font-medium tracking-wider uppercase ${transparent ? "text-white/60" : "text-gray-500 dark:text-gray-400"}`}>
             Destination
           </label>
         </div>
@@ -123,7 +123,7 @@ export default function SearchBar({ transparent = false }: SearchBarProps) {
           onChange={(e) => setCity(e.target.value)}
           className={`w-full bg-transparent text-sm font-medium outline-none focus:outline-none placeholder:font-normal ${
             transparent
-              ? "text-white placeholder:text-gray-400"
+              ? "text-white placeholder:text-white/40"
               : "text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500"
           }`}
         />
@@ -138,9 +138,9 @@ export default function SearchBar({ transparent = false }: SearchBarProps) {
             : "hover:bg-gray-50/70 dark:hover:bg-gray-800/60 focus-within:bg-gray-50/90 dark:focus-within:bg-gray-800/80"
         }`}
       >
-        <div className={`flex items-center gap-1.5 mb-1 pointer-events-none ${transparent ? "text-blue-300" : "text-gray-500 dark:text-gray-400"}`}>
-          <CalendarIcon className={`w-3.5 h-3.5 shrink-0 stroke-[2] ${transparent ? "text-blue-400" : "text-[#2563EB] dark:text-blue-400"}`} />
-          <label className="text-[11px] font-semibold tracking-wider uppercase">
+        <div className="flex items-center gap-1.5 mb-1 pointer-events-none">
+          <CalendarIcon className={`w-3.5 h-3.5 shrink-0 stroke-[1.8] ${transparent ? "text-white/70" : "text-[#2563EB] dark:text-blue-400"}`} />
+          <label className={`text-[10px] font-medium tracking-wider uppercase ${transparent ? "text-white/60" : "text-gray-500 dark:text-gray-400"}`}>
             Check-In
           </label>
         </div>
@@ -151,7 +151,7 @@ export default function SearchBar({ transparent = false }: SearchBarProps) {
           readOnly
           className={`w-full bg-transparent text-sm font-medium outline-none focus:outline-none cursor-pointer placeholder:font-normal ${
             transparent
-              ? "text-white placeholder:text-gray-400"
+              ? "text-white placeholder:text-white/40"
               : "text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500"
           }`}
         />
@@ -166,9 +166,9 @@ export default function SearchBar({ transparent = false }: SearchBarProps) {
             : "hover:bg-gray-50/70 dark:hover:bg-gray-800/60 focus-within:bg-gray-50/90 dark:focus-within:bg-gray-800/80"
         }`}
       >
-        <div className={`flex items-center gap-1.5 mb-1 pointer-events-none ${transparent ? "text-blue-300" : "text-gray-500 dark:text-gray-400"}`}>
-          <CalendarIcon className={`w-3.5 h-3.5 shrink-0 stroke-[2] ${transparent ? "text-blue-400" : "text-[#2563EB] dark:text-blue-400"}`} />
-          <label className="text-[11px] font-semibold tracking-wider uppercase">
+        <div className="flex items-center gap-1.5 mb-1 pointer-events-none">
+          <CalendarIcon className={`w-3.5 h-3.5 shrink-0 stroke-[1.8] ${transparent ? "text-white/70" : "text-[#2563EB] dark:text-blue-400"}`} />
+          <label className={`text-[10px] font-medium tracking-wider uppercase ${transparent ? "text-white/60" : "text-gray-500 dark:text-gray-400"}`}>
             Check-Out
           </label>
         </div>
@@ -179,7 +179,7 @@ export default function SearchBar({ transparent = false }: SearchBarProps) {
           readOnly
           className={`w-full bg-transparent text-sm font-medium outline-none focus:outline-none cursor-pointer placeholder:font-normal ${
             transparent
-              ? "text-white placeholder:text-gray-400"
+              ? "text-white placeholder:text-white/40"
               : "text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500"
           }`}
         />
@@ -195,9 +195,9 @@ export default function SearchBar({ transparent = false }: SearchBarProps) {
         }`}
         onClick={() => setGuestsOpen((prev) => !prev)}
       >
-        <div className={`flex items-center gap-1.5 mb-1 pointer-events-none ${transparent ? "text-blue-300" : "text-gray-500 dark:text-gray-400"}`}>
-          <Users className={`w-3.5 h-3.5 shrink-0 stroke-[2] ${transparent ? "text-blue-400" : "text-[#2563EB] dark:text-blue-400"}`} />
-          <label className="text-[11px] font-semibold tracking-wider uppercase">
+        <div className="flex items-center gap-1.5 mb-1 pointer-events-none">
+          <Users className={`w-3.5 h-3.5 shrink-0 stroke-[1.8] ${transparent ? "text-white/70" : "text-[#2563EB] dark:text-blue-400"}`} />
+          <label className={`text-[10px] font-medium tracking-wider uppercase ${transparent ? "text-white/60" : "text-gray-500 dark:text-gray-400"}`}>
             Guests
           </label>
         </div>
