@@ -193,7 +193,7 @@ function InventoryContent() {
       {/* INVENTORY MANAGER SIDEBAR                                    */}
       {/* ============================================================ */}
       <aside
-        className={`fixed inset-y-0 left-0 z-40 w-72 bg-[#0B101E] border-r border-gray-800 flex flex-col justify-between transition-transform duration-200 lg:translate-x-0 ${
+        className={`fixed top-0 bottom-0 left-0 z-30 w-72 bg-[#0B101E] border-r border-gray-800 flex flex-col justify-between transition-transform duration-200 lg:translate-x-0 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
