@@ -5,6 +5,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 
+import { SkeletonLoginForm } from "@/components/Skeleton";
+
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -57,8 +59,8 @@ function LoginForm() {
   };
 
   return (
-    <div className="w-full max-w-sm bg-transparent p-4 sm:p-6 space-y-5">
-      <div className="text-center space-y-1.5">
+    <div className="w-full max-w-sm bg-transparent p-4 sm:p-6 space-y-5 text-left">
+      <div className="text-left space-y-1.5">
         <h1 className="text-2xl font-medium tracking-tight text-white">Welcome Back</h1>
         <p className="text-xs text-gray-300 font-normal">Sign in to manage your bookings and saved lodgings</p>
       </div>
@@ -80,7 +82,7 @@ function LoginForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@example.com"
-            className="w-full bg-white/10 hover:bg-white/15 focus:bg-white/15 px-3.5 py-2.5 rounded-xs border border-white/20 text-xs sm:text-sm text-white font-normal placeholder:text-gray-400 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-all"
+            className="w-full bg-white/10 hover:bg-white/15 focus:bg-white/15 px-3.5 py-2.5 rounded-xs border border-white/20 text-xs sm:text-sm text-white font-normal placeholder:text-gray-400 outline-none focus:outline-none focus:ring-0 focus:border-white/50 transition-colors"
           />
         </div>
 
@@ -96,7 +98,7 @@ function LoginForm() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="••••••••"
-            className="w-full bg-white/10 hover:bg-white/15 focus:bg-white/15 px-3.5 py-2.5 rounded-xs border border-white/20 text-xs sm:text-sm text-white font-normal placeholder:text-gray-400 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-all"
+            className="w-full bg-white/10 hover:bg-white/15 focus:bg-white/15 px-3.5 py-2.5 rounded-xs border border-white/20 text-xs sm:text-sm text-white font-normal placeholder:text-gray-400 outline-none focus:outline-none focus:ring-0 focus:border-white/50 transition-colors"
           />
         </div>
 
@@ -146,7 +148,7 @@ function LoginForm() {
         </button>
       </form>
 
-      <p className="text-center text-xs text-gray-300 pt-2">
+      <p className="text-left text-xs text-gray-300 pt-2">
         Don't have an account?{" "}
         <Link href="/register" className="font-semibold text-blue-400 hover:underline">
           Register as a Guest
@@ -172,7 +174,7 @@ export default function LoginPage() {
       </div>
 
       <div className="relative z-10 w-full flex items-center justify-center">
-        <Suspense fallback={<div className="text-xs text-white">Loading sign in...</div>}>
+        <Suspense fallback={<SkeletonLoginForm />}>
           <LoginForm />
         </Suspense>
       </div>

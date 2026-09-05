@@ -76,3 +76,95 @@ export function SkeletonPropertyDetail() {
     </div>
   );
 }
+
+// Login Form Skeleton for Auth Pages
+export function SkeletonLoginForm() {
+  return (
+    <div className="w-full max-w-sm bg-transparent p-4 sm:p-6 space-y-5 animate-pulse">
+      <div className="text-left space-y-2">
+        <div className="h-7 w-44 bg-white/20 rounded-xs" />
+        <div className="h-3.5 w-64 bg-white/10 rounded-xs" />
+      </div>
+
+      <div className="space-y-4 pt-2">
+        <div className="space-y-2">
+          <div className="h-3 w-24 bg-white/15 rounded-xs" />
+          <div className="h-10 w-full bg-white/10 rounded-xs border border-white/10" />
+        </div>
+
+        <div className="space-y-2">
+          <div className="h-3 w-20 bg-white/15 rounded-xs" />
+          <div className="h-10 w-full bg-white/10 rounded-xs border border-white/10" />
+        </div>
+
+        <div className="h-10 w-full bg-blue-600/40 rounded-xs" />
+
+        <div className="relative flex items-center justify-center my-4">
+          <div className="border-t border-white/15 w-full" />
+          <div className="h-3 w-28 bg-white/10 rounded-xs mx-3 shrink-0" />
+          <div className="border-t border-white/15 w-full" />
+        </div>
+
+        <div className="h-10 w-full bg-white/10 rounded-xs border border-white/10" />
+      </div>
+
+      <div className="h-3.5 w-48 bg-white/15 rounded-xs mx-auto mt-4" />
+    </div>
+  );
+}
+
+// Register Form Skeleton for Auth Pages
+export function SkeletonRegisterForm() {
+  return (
+    <div className="relative z-10 w-full max-w-xl bg-transparent p-4 sm:p-6 space-y-6 animate-pulse">
+      <div className="text-left space-y-2">
+        <div className="h-7 w-56 bg-white/20 rounded-xs" />
+        <div className="h-3.5 w-72 bg-white/10 rounded-xs" />
+      </div>
+
+      <div className="space-y-4 pt-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <div className="space-y-2">
+            <div className="h-3 w-20 bg-white/15 rounded-xs" />
+            <div className="h-10 w-full bg-white/10 rounded-xs border border-white/10" />
+          </div>
+          <div className="space-y-2">
+            <div className="h-3 w-20 bg-white/15 rounded-xs" />
+            <div className="h-10 w-full bg-white/10 rounded-xs border border-white/10" />
+          </div>
+          <div className="space-y-2">
+            <div className="h-3 w-24 bg-white/15 rounded-xs" />
+            <div className="h-10 w-full bg-white/10 rounded-xs border border-white/10" />
+          </div>
+          <div className="space-y-2">
+            <div className="h-3 w-24 bg-white/15 rounded-xs" />
+            <div className="h-10 w-full bg-white/10 rounded-xs border border-white/10" />
+          </div>
+          <div className="space-y-2 sm:col-span-2">
+            <div className="h-3 w-20 bg-white/15 rounded-xs" />
+            <div className="h-10 w-full bg-white/10 rounded-xs border border-white/10" />
+          </div>
+          <div className="space-y-2 sm:col-span-2">
+            <div className="h-3 w-24 bg-white/15 rounded-xs" />
+            <div className="grid grid-cols-2 gap-3">
+              <div className="h-10 bg-white/10 rounded-xs border border-white/10" />
+              <div className="h-10 bg-white/10 rounded-xs border border-white/10" />
+            </div>
+          </div>
+        </div>
+
+        <div className="h-10 w-full bg-blue-600/40 rounded-xs" />
+
+        <div className="relative flex items-center justify-center my-4">
+          <div className="border-t border-white/15 w-full" />
+          <div className="h-3 w-28 bg-white/10 rounded-xs mx-3 shrink-0" />
+          <div className="border-t border-white/15 w-full" />
+        </div>
+
+        <div className="h-10 w-full bg-white/10 rounded-xs border border-white/10" />
+      </div>
+
+      <div className="h-3.5 w-48 bg-white/15 rounded-xs mx-auto mt-4" />
+    </div>
+  );
+}
