@@ -57,24 +57,24 @@ function LoginForm() {
   };
 
   return (
-    <div className="w-full max-w-sm bg-white p-7 rounded-xl border border-gray-200/90 shadow-xs space-y-5">
+    <div className="w-full max-w-sm bg-white dark:bg-[#111827] p-8 rounded-xs border border-gray-200 dark:border-gray-800 shadow-xl space-y-5">
       <div className="text-center space-y-1.5">
-        <div className="w-10 h-10 rounded-lg bg-[#0F5132] text-white flex items-center justify-center mx-auto shadow-xs">
-          <Compass className="w-5 h-5" />
+        <div className="w-10 h-10 rounded-xs bg-[#EFF6FF] dark:bg-blue-950/60 text-[#2563EB] dark:text-blue-400 flex items-center justify-center mx-auto border border-blue-200 dark:border-blue-900/50 shadow-xs">
+          <Compass className="w-5 h-5 stroke-[2]" />
         </div>
-        <h1 className="text-xl font-serif font-bold text-gray-900">Welcome Back</h1>
-        <p className="text-xs text-gray-500">Sign in to manage your bookings and saved lodgings</p>
+        <h1 className="text-xl font-medium tracking-tight text-gray-900 dark:text-white">Welcome Back</h1>
+        <p className="text-xs text-gray-500 dark:text-gray-400 font-normal">Sign in to manage your bookings and saved lodgings</p>
       </div>
 
       {error && (
-        <div className="p-2.5 bg-red-50 border border-red-200 text-red-700 rounded-lg text-xs font-medium">
+        <div className="p-3 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/50 text-red-700 dark:text-red-300 rounded-xs text-xs font-medium">
           {error}
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-3.5">
-        <div className="space-y-1">
-          <label className="block text-[11px] font-semibold uppercase tracking-wider text-gray-500">
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="space-y-1.5">
+          <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-600 dark:text-gray-400">
             Email Address
           </label>
           <input
@@ -83,36 +83,38 @@ function LoginForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@example.com"
-            className="w-full bg-gray-50 px-3 py-2 rounded-lg border border-gray-200 text-xs sm:text-sm text-gray-900 font-medium focus:outline-none focus:border-[#0F5132] focus:bg-white transition-all"
+            className="w-full bg-gray-50 dark:bg-gray-800/60 px-3.5 py-2.5 rounded-xs border border-gray-200 dark:border-gray-700 text-xs sm:text-sm text-gray-900 dark:text-white font-normal placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] transition-all"
           />
         </div>
 
-        <div className="space-y-1">
-          <label className="block text-[11px] font-semibold uppercase tracking-wider text-gray-500">
-            Password
-          </label>
+        <div className="space-y-1.5">
+          <div className="flex items-center justify-between">
+            <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-600 dark:text-gray-400">
+              Password
+            </label>
+          </div>
           <input
             type="password"
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="••••••••"
-            className="w-full bg-gray-50 px-3 py-2 rounded-lg border border-gray-200 text-xs sm:text-sm text-gray-900 font-medium focus:outline-none focus:border-[#0F5132] focus:bg-white transition-all"
+            className="w-full bg-gray-50 dark:bg-gray-800/60 px-3.5 py-2.5 rounded-xs border border-gray-200 dark:border-gray-700 text-xs sm:text-sm text-gray-900 dark:text-white font-normal placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] transition-all"
           />
         </div>
 
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-[#0F5132] hover:bg-[#0A3622] disabled:opacity-50 text-white py-2.5 rounded-lg font-semibold text-xs shadow-xs transition-all duration-150"
+          className="w-full bg-[#2563EB] hover:bg-[#1D4ED8] active:scale-[0.99] disabled:opacity-50 text-white py-2.5 rounded-xs font-semibold text-xs tracking-wide shadow-sm transition-all duration-150 cursor-pointer"
         >
           {loading ? "Signing In..." : "Sign In"}
         </button>
       </form>
 
-      <p className="text-center text-xs text-gray-500">
+      <p className="text-center text-xs text-gray-500 dark:text-gray-400">
         Don't have an account?{" "}
-        <Link href="/register" className="font-semibold text-[#0F5132] hover:underline">
+        <Link href="/register" className="font-semibold text-[#2563EB] dark:text-blue-400 hover:underline">
           Register as a Guest
         </Link>
       </p>
@@ -122,7 +124,7 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <div className="min-h-[70vh] flex items-center justify-center px-4 py-8">
+    <div className="min-h-[75vh] flex items-center justify-center px-4 py-12 bg-gray-50/50 dark:bg-[#0B0F19] transition-colors">
       <Suspense fallback={<div className="text-xs text-gray-500">Loading sign in...</div>}>
         <LoginForm />
       </Suspense>
