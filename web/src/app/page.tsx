@@ -1,11 +1,11 @@
 import Image from "next/image";
 import SearchBar from "@/components/SearchBar";
 import Link from "next/link";
-import { ShieldCheck, Zap, Wallet, QrCode, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 export default function HomePage() {
   return (
-    <div className="space-y-16 sm:space-y-20 bg-white dark:bg-[#0B0F19] overflow-x-hidden transition-colors">
+    <div className="bg-white dark:bg-[#0B0F19] overflow-x-hidden transition-colors">
       {/* Hero Section - Full Screen Viewport Fit */}
       <section className="relative z-30 min-h-[calc(100vh-4.5rem)] flex flex-col justify-center px-4 sm:px-6 lg:px-8 py-10 sm:py-14 overflow-visible">
         {/* Background Resort Pool Image with Rich Overlay */}
@@ -59,8 +59,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Value Pillars with rich hospitality background */}
-      <section className="relative z-10 py-16 sm:py-20 border-y border-gray-200/60 dark:border-gray-800/80 overflow-hidden">
+      {/* Value Pillars seamlessly docked against Hero with rich hospitality background */}
+      <section className="relative z-10 py-16 sm:py-24 border-y border-white/10 dark:border-gray-800/80 overflow-hidden">
         {/* Background Image & Ambient Overlays */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -69,67 +69,87 @@ export default function HomePage() {
             fill
             className="object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gray-950/80 backdrop-blur-[2px]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/60" />
+          <div className="absolute inset-0 bg-gray-950/85 backdrop-blur-[2px]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/80" />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
-            <span className="text-[11px] font-medium tracking-widest uppercase text-blue-400">Why Book With Us</span>
+          <div className="text-center max-w-2xl mx-auto mb-12 space-y-2.5">
+            <span className="text-[11px] font-semibold tracking-widest uppercase text-blue-400">Why Book With Us</span>
             <h2 className="text-2xl sm:text-3xl font-medium text-white tracking-tight">Seamless Travel, Zero Uncertainty</h2>
-            <p className="text-xs sm:text-sm text-gray-300 font-normal">Every booking backed by direct host coordination, transparent terms, and local support.</p>
+            <p className="text-xs sm:text-sm text-gray-300 font-normal leading-relaxed">Every reservation backed by direct host coordination, verified terms, and local payment gateways.</p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
             {/* Instant Confirmation */}
-            <div className="group p-5 rounded-xs bg-white/10 dark:bg-black/30 backdrop-blur-md border border-white/15 hover:border-blue-400/50 hover:bg-white/[0.14] transition-all duration-300 space-y-3 shadow-lg">
-              <div className="w-10 h-10 rounded-xs bg-blue-500/20 border border-blue-400/30 text-blue-300 flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-500 group-hover:text-white transition-all duration-300">
-                <Zap className="w-5 h-5 stroke-[1.8]" />
-              </div>
-              <div>
-                <h3 className="font-medium text-sm text-white">Instant Confirmation</h3>
-                <p className="text-xs text-gray-300 leading-relaxed font-normal mt-1">
-                  No waiting on host callbacks. Your dates are locked immediately in the inventory calendar.
+            <div className="group relative p-6 rounded-xs bg-white/[0.07] dark:bg-black/40 backdrop-blur-md border border-white/15 hover:border-blue-400/50 hover:bg-white/[0.12] transition-all duration-300 shadow-xl flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono font-semibold tracking-wider text-blue-400">01</span>
+                  <span className="text-[10px] tracking-widest uppercase font-medium text-gray-400">Real-time</span>
+                </div>
+                <h3 className="font-medium text-base text-white group-hover:text-blue-200 transition-colors">Instant Confirmation</h3>
+                <p className="text-xs text-gray-300 leading-relaxed font-normal">
+                  No waiting on host callbacks. Your dates are locked immediately in the property inventory calendar.
                 </p>
+              </div>
+              <div className="mt-5 pt-3 border-t border-white/10 flex items-center gap-2">
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="text-[10px] font-medium text-gray-300">Live Inventory Lock</span>
               </div>
             </div>
 
             {/* Transparent Pricing */}
-            <div className="group p-5 rounded-xs bg-white/10 dark:bg-black/30 backdrop-blur-md border border-white/15 hover:border-blue-400/50 hover:bg-white/[0.14] transition-all duration-300 space-y-3 shadow-lg">
-              <div className="w-10 h-10 rounded-xs bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 flex items-center justify-center group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300">
-                <Wallet className="w-5 h-5 stroke-[1.8]" />
-              </div>
-              <div>
-                <h3 className="font-medium text-sm text-white">Transparent Pricing</h3>
-                <p className="text-xs text-gray-300 leading-relaxed font-normal mt-1">
-                  Clear room rate, taxes, and fees breakdown. What you see is exactly what you pay.
+            <div className="group relative p-6 rounded-xs bg-white/[0.07] dark:bg-black/40 backdrop-blur-md border border-white/15 hover:border-blue-400/50 hover:bg-white/[0.12] transition-all duration-300 shadow-xl flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono font-semibold tracking-wider text-emerald-400">02</span>
+                  <span className="text-[10px] tracking-widest uppercase font-medium text-gray-400">No Surprises</span>
+                </div>
+                <h3 className="font-medium text-base text-white group-hover:text-emerald-200 transition-colors">Transparent Pricing</h3>
+                <p className="text-xs text-gray-300 leading-relaxed font-normal">
+                  Clear room rate, municipal taxes, and service fees breakdown. What you see upfront is exactly what you pay.
                 </p>
+              </div>
+              <div className="mt-5 pt-3 border-t border-white/10 flex items-center gap-2">
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                <span className="text-[10px] font-medium text-gray-300">Itemized Breakdown</span>
               </div>
             </div>
 
             {/* Verified Stays Only */}
-            <div className="group p-5 rounded-xs bg-white/10 dark:bg-black/30 backdrop-blur-md border border-white/15 hover:border-blue-400/50 hover:bg-white/[0.14] transition-all duration-300 space-y-3 shadow-lg">
-              <div className="w-10 h-10 rounded-xs bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 flex items-center justify-center group-hover:scale-110 group-hover:bg-indigo-500 group-hover:text-white transition-all duration-300">
-                <ShieldCheck className="w-5 h-5 stroke-[1.8]" />
-              </div>
-              <div>
-                <h3 className="font-medium text-sm text-white">Verified Stays Only</h3>
-                <p className="text-xs text-gray-300 leading-relaxed font-normal mt-1">
-                  Zero fake reviews. Only guests with checked-out completed stays can write reviews.
+            <div className="group relative p-6 rounded-xs bg-white/[0.07] dark:bg-black/40 backdrop-blur-md border border-white/15 hover:border-blue-400/50 hover:bg-white/[0.12] transition-all duration-300 shadow-xl flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono font-semibold tracking-wider text-indigo-400">03</span>
+                  <span className="text-[10px] tracking-widest uppercase font-medium text-gray-400">Authentic</span>
+                </div>
+                <h3 className="font-medium text-base text-white group-hover:text-indigo-200 transition-colors">Verified Stays Only</h3>
+                <p className="text-xs text-gray-300 leading-relaxed font-normal">
+                  Zero fake reviews or unvetted hosts. Only guests with completed check-outs can submit reviews and ratings.
                 </p>
+              </div>
+              <div className="mt-5 pt-3 border-t border-white/10 flex items-center gap-2">
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-blue-400" />
+                <span className="text-[10px] font-medium text-gray-300">100% Guest-Validated</span>
               </div>
             </div>
 
             {/* Instant E-Voucher */}
-            <div className="group p-5 rounded-xs bg-white/10 dark:bg-black/30 backdrop-blur-md border border-white/15 hover:border-blue-400/50 hover:bg-white/[0.14] transition-all duration-300 space-y-3 shadow-lg">
-              <div className="w-10 h-10 rounded-xs bg-amber-500/20 border border-amber-400/30 text-amber-300 flex items-center justify-center group-hover:scale-110 group-hover:bg-amber-500 group-hover:text-white transition-all duration-300">
-                <QrCode className="w-5 h-5 stroke-[1.8]" />
-              </div>
-              <div>
-                <h3 className="font-medium text-sm text-white">Instant E-Voucher</h3>
-                <p className="text-xs text-gray-300 leading-relaxed font-normal mt-1">
-                  Receive an immediate digital voucher with a check-in QR code sent right to your device.
+            <div className="group relative p-6 rounded-xs bg-white/[0.07] dark:bg-black/40 backdrop-blur-md border border-white/15 hover:border-blue-400/50 hover:bg-white/[0.12] transition-all duration-300 shadow-xl flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono font-semibold tracking-wider text-amber-400">04</span>
+                  <span className="text-[10px] tracking-widest uppercase font-medium text-gray-400">Mobile-Ready</span>
+                </div>
+                <h3 className="font-medium text-base text-white group-hover:text-amber-200 transition-colors">Instant E-Voucher</h3>
+                <p className="text-xs text-gray-300 leading-relaxed font-normal">
+                  Receive a digital confirmation voucher with a check-in QR code immediately via SMS and your account dashboard.
                 </p>
+              </div>
+              <div className="mt-5 pt-3 border-t border-white/10 flex items-center gap-2">
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-amber-400" />
+                <span className="text-[10px] font-medium text-gray-300">Fast Front-Desk Scan</span>
               </div>
             </div>
           </div>
@@ -137,7 +157,7 @@ export default function HomePage() {
       </section>
 
       {/* Popular Destinations */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-14">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
         <div className="flex items-center justify-between mb-5">
           <div>
             <h2 className="text-xl font-medium text-gray-900 dark:text-white">Popular Destinations</h2>
