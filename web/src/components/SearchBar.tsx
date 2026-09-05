@@ -56,10 +56,10 @@ export default function SearchBar() {
   return (
     <form
       onSubmit={handleSearch}
-      className="bg-white p-1.5 rounded-xs border border-gray-200 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1.5 items-center max-w-4xl mx-auto shadow-none"
+      className="bg-white rounded-xs border border-gray-300 max-w-4xl mx-auto flex flex-col lg:flex-row items-stretch divide-y lg:divide-y-0 lg:divide-x divide-gray-200"
     >
       {/* City / Destination */}
-      <div className="flex items-center gap-2 px-3 py-2 bg-gray-50/60 hover:bg-gray-50 rounded-xs border border-transparent focus-within:border-[#0F5132] focus-within:bg-white transition-colors duration-150">
+      <div className="flex-1 flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50/70 focus-within:bg-gray-50/90 transition-colors">
         <MapPin className="w-4 h-4 text-[#0F5132] shrink-0 stroke-[1.5]" />
         <div className="w-full text-left">
           <label className="block text-[10px] font-medium tracking-wide text-gray-400 uppercase">
@@ -70,13 +70,13 @@ export default function SearchBar() {
             placeholder="Where to? (e.g. Harare)"
             value={city}
             onChange={(e) => setCity(e.target.value)}
-            className="w-full bg-transparent text-gray-800 text-xs sm:text-sm font-normal focus:outline-none placeholder:text-gray-400"
+            className="w-full bg-transparent text-gray-800 text-xs sm:text-sm font-normal outline-none focus:outline-none placeholder:text-gray-400"
           />
         </div>
       </div>
 
       {/* Flatpickr Date Range */}
-      <div className="flex items-center gap-2 px-3 py-2 bg-gray-50/60 hover:bg-gray-50 rounded-xs border border-transparent focus-within:border-[#0F5132] focus-within:bg-white transition-colors duration-150">
+      <div className="flex-1 flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50/70 focus-within:bg-gray-50/90 transition-colors">
         <CalendarIcon className="w-4 h-4 text-[#0F5132] shrink-0 stroke-[1.5]" />
         <div className="w-full text-left">
           <label className="block text-[10px] font-medium tracking-wide text-gray-400 uppercase">
@@ -86,13 +86,13 @@ export default function SearchBar() {
             ref={datePickerRef}
             type="text"
             placeholder="Select stay dates"
-            className="w-full bg-transparent text-gray-800 text-xs sm:text-sm font-normal focus:outline-none cursor-pointer placeholder:text-gray-400"
+            className="w-full bg-transparent text-gray-800 text-xs sm:text-sm font-normal outline-none focus:outline-none cursor-pointer placeholder:text-gray-400"
           />
         </div>
       </div>
 
       {/* Guests */}
-      <div className="flex items-center gap-2 px-3 py-2 bg-gray-50/60 hover:bg-gray-50 rounded-xs border border-transparent focus-within:border-[#0F5132] focus-within:bg-white transition-colors duration-150">
+      <div className="w-full lg:w-48 flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50/70 focus-within:bg-gray-50/90 transition-colors">
         <Users className="w-4 h-4 text-[#0F5132] shrink-0 stroke-[1.5]" />
         <div className="w-full text-left relative">
           <label className="block text-[10px] font-medium tracking-wide text-gray-400 uppercase">
@@ -101,7 +101,7 @@ export default function SearchBar() {
           <select
             value={guests}
             onChange={(e) => setGuests(e.target.value)}
-            className="w-full bg-transparent text-gray-800 text-xs sm:text-sm font-normal focus:outline-none cursor-pointer appearance-none pr-4"
+            className="w-full bg-transparent text-gray-800 text-xs sm:text-sm font-normal outline-none focus:outline-none cursor-pointer appearance-none pr-4"
           >
             <option value="1">1 Guest</option>
             <option value="2">2 Guests</option>
@@ -114,13 +114,15 @@ export default function SearchBar() {
       </div>
 
       {/* Search Button */}
-      <button
-        type="submit"
-        className="w-full h-full min-h-[44px] bg-[#0F5132] hover:bg-[#0B3D26] active:scale-[0.99] text-white font-medium text-xs sm:text-sm rounded-xs flex items-center justify-center gap-2 transition-all duration-150 cursor-pointer"
-      >
-        <Search className="w-4 h-4 stroke-[1.8]" />
-        <span>Search Stays</span>
-      </button>
+      <div className="p-1.5 flex items-center">
+        <button
+          type="submit"
+          className="w-full lg:w-auto px-6 py-3 bg-[#0F5132] hover:bg-[#0B3D26] active:scale-[0.98] text-white font-medium text-xs sm:text-sm rounded-xs flex items-center justify-center gap-2 transition-all duration-150 cursor-pointer whitespace-nowrap shadow-xs"
+        >
+          <Search className="w-4 h-4 stroke-[1.8]" />
+          <span>Search Stays</span>
+        </button>
+      </div>
     </form>
   );
 }
