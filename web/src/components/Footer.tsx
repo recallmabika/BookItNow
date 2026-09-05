@@ -157,7 +157,18 @@ export default function Footer() {
 
         {/* Bottom Copyright Row */}
         <div className="pt-8 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-medium">
-          <p className="text-blue-100 drop-shadow-xs">© 2026 BookItNow Lodging Platform. All rights reserved.</p>
+          <div className="flex items-center gap-3">
+            <div className="relative w-7 h-7 rounded-full overflow-hidden shrink-0 ring-1 ring-white/30 bg-white/10">
+              <Image
+                src="/logo.png"
+                alt="BookItNow Logo"
+                fill
+                sizes="28px"
+                className="object-contain"
+              />
+            </div>
+            <p className="text-blue-100 drop-shadow-xs">© 2026 BookItNow Lodging Platform. All rights reserved.</p>
+          </div>
           <div className="flex gap-6 text-blue-100 drop-shadow-xs">
             <span className="hover:text-white cursor-pointer transition-colors">Terms & Policies</span>
             <span className="hover:text-white cursor-pointer transition-colors">Privacy Notice</span>
