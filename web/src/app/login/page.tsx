@@ -111,9 +111,46 @@ function LoginForm() {
         >
           {loading ? "Signing In..." : "Sign In"}
         </button>
+
+        <div className="relative flex items-center justify-center my-4">
+          <div className="border-t border-gray-200 dark:border-gray-700 w-full" />
+          <span className="bg-white dark:bg-[#111827] px-3 text-[11px] uppercase tracking-wider text-gray-400 font-medium shrink-0">
+            or continue with
+          </span>
+          <div className="border-t border-gray-200 dark:border-gray-700 w-full" />
+        </div>
+
+        {/* Google Sign In Button */}
+        <button
+          type="button"
+          onClick={() => {
+            alert("Google Sign In: Connect your Google Cloud Client ID to enable 1-tap authentication.");
+          }}
+          className="w-full py-2.5 px-4 rounded-xs border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/80 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 font-medium text-xs flex items-center justify-center gap-2.5 shadow-2xs transition-colors cursor-pointer"
+        >
+          <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
+            <path
+              fill="#4285F4"
+              d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"
+            />
+            <path
+              fill="#34A853"
+              d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"
+            />
+            <path
+              fill="#FBBC05"
+              d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15z"
+            />
+            <path
+              fill="#EA4335"
+              d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"
+            />
+          </svg>
+          <span>Sign In with Google</span>
+        </button>
       </form>
 
-      <p className="text-center text-xs text-gray-500 dark:text-gray-400">
+      <p className="text-center text-xs text-gray-500 dark:text-gray-400 pt-2">
         Don't have an account?{" "}
         <Link href="/register" className="font-semibold text-[#2563EB] dark:text-blue-400 hover:underline">
           Register as a Guest
@@ -125,8 +162,8 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <div className="relative min-h-[calc(100vh-4.5rem)] flex items-center justify-center px-4 py-12 overflow-hidden">
-      {/* Background Image with Dark Vignette Scrim */}
+    <div className="relative min-h-[calc(100vh-4.5rem)] flex items-center justify-center px-4 py-12 overflow-hidden bg-gray-900">
+      {/* Background Image with subtle gradient scrim matching Why Book With Us */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Image
           src="/vicfalls-pillars.jpg"
@@ -135,8 +172,7 @@ export default function LoginPage() {
           priority
           className="object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gray-950/80 backdrop-blur-[3px]" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-black/80" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/75" />
       </div>
 
       <div className="relative z-10 w-full flex items-center justify-center">

@@ -27,7 +27,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#0A2540] dark:bg-[#061527] text-white pt-14 pb-10 mt-16 border-t border-[#0D3256] transition-colors duration-200">
+    <footer className="bg-[#0A2540] dark:bg-[#061527] text-white pt-14 pb-10 border-t border-[#0D3256] transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Newsletter Subscription Row */}
         <div className="rounded-xs p-6 sm:p-8 bg-white/5 border border-white/10 backdrop-blur-sm flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
