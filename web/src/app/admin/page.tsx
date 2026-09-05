@@ -396,18 +396,18 @@ export default function AdminDashboardPage() {
   return (
     <div className="min-h-screen flex bg-[#F8FAFC] dark:bg-[#070B14] text-gray-900 dark:text-gray-100">
       {/* ============================================================ */}
-      {/* PROFESSIONAL EXECUTIVE SIDEBAR                               */}
+      {/* PROFESSIONAL EXECUTIVE SIDEBAR (SIGNATURE BOOKITNOW BLUE)    */}
       {/* ============================================================ */}
       <aside
-        className={`fixed top-0 bottom-0 left-0 z-30 w-64 bg-[#0B101E] border-r border-gray-800 flex flex-col justify-between transition-transform duration-200 lg:translate-x-0 ${
+        className={`fixed top-0 bottom-0 left-0 z-30 w-64 bg-[#0F294A] border-r border-[#1E3E66] text-white flex flex-col justify-between transition-transform duration-200 lg:translate-x-0 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         <div className="flex flex-col h-full">
           {/* Workspace & Portal Header with real BookItNow Logo */}
-          <div className="p-4 border-b border-gray-800 flex items-center justify-between">
+          <div className="p-4 border-b border-[#1E3E66] bg-[#0A1F38] flex items-center justify-between">
             <Link href="/" className="flex items-center gap-3 group">
-              <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 shadow-md ring-1 ring-white/20 bg-white/5">
+              <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 shadow-md ring-1 ring-white/30 bg-white/10">
                 <Image
                   src="/logo.png"
                   alt="BookItNow Logo"
@@ -421,14 +421,14 @@ export default function AdminDashboardPage() {
                 <span className="text-sm font-bold text-white tracking-tight block">
                   BookItNow
                 </span>
-                <span className="text-[10px] font-semibold text-blue-400 uppercase tracking-wider block">
+                <span className="text-[10px] font-semibold text-blue-300 uppercase tracking-wider block">
                   Admin Console
                 </span>
               </div>
             </Link>
             <button
               onClick={() => setSidebarOpen(false)}
-              className="lg:hidden p-1.5 text-gray-400 hover:text-white rounded-xs"
+              className="lg:hidden p-1.5 text-blue-200 hover:text-white rounded-xs"
             >
               <X className="w-4 h-4" />
             </button>
@@ -436,7 +436,7 @@ export default function AdminDashboardPage() {
 
           {/* Navigation Items */}
           <nav className="p-3 space-y-1 flex-1 overflow-y-auto">
-            <div className="px-3 pt-2 pb-1.5 text-[10px] font-bold uppercase tracking-wider text-gray-400">
+            <div className="px-3 pt-2 pb-1.5 text-[10px] font-bold uppercase tracking-wider text-blue-300/80">
               Operations & Inventory
             </div>
 
@@ -447,8 +447,8 @@ export default function AdminDashboardPage() {
               }}
               className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xs text-xs font-semibold transition-all cursor-pointer ${
                 activeTab === "overview"
-                  ? "bg-blue-600 text-white shadow-sm"
-                  : "text-gray-400 hover:text-gray-200 hover:bg-gray-900/60"
+                  ? "bg-[#2563EB] text-white shadow-md ring-1 ring-white/20"
+                  : "text-blue-100/80 hover:text-white hover:bg-white/10"
               }`}
             >
               <div className="flex items-center gap-2.5">
@@ -457,7 +457,7 @@ export default function AdminDashboardPage() {
               </div>
               <span
                 className={`text-[10px] px-1.5 py-0.5 rounded-full font-mono ${
-                  activeTab === "overview" ? "bg-white/20 text-white" : "bg-gray-800 text-gray-400"
+                  activeTab === "overview" ? "bg-white/25 text-white" : "bg-[#1E3E66] text-blue-200"
                 }`}
               >
                 {totalProperties}
@@ -471,8 +471,8 @@ export default function AdminDashboardPage() {
               }}
               className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xs text-xs font-semibold transition-all cursor-pointer ${
                 activeTab === "properties"
-                  ? "bg-blue-600 text-white shadow-sm"
-                  : "text-gray-400 hover:text-gray-200 hover:bg-gray-900/60"
+                  ? "bg-[#2563EB] text-white shadow-md ring-1 ring-white/20"
+                  : "text-blue-100/80 hover:text-white hover:bg-white/10"
               }`}
             >
               <div className="flex items-center gap-2.5">
@@ -481,7 +481,7 @@ export default function AdminDashboardPage() {
               </div>
               <span
                 className={`text-[10px] px-1.5 py-0.5 rounded-full font-mono ${
-                  activeTab === "properties" ? "bg-white/20 text-white" : "bg-gray-800 text-gray-400"
+                  activeTab === "properties" ? "bg-white/25 text-white" : "bg-[#1E3E66] text-blue-200"
                 }`}
               >
                 {properties.length}
@@ -490,13 +490,13 @@ export default function AdminDashboardPage() {
 
             <Link
               href="/host/inventory"
-              className="w-full flex items-center justify-between px-3 py-2.5 rounded-xs text-xs font-semibold text-gray-400 hover:text-gray-200 hover:bg-gray-900/60 transition-all cursor-pointer"
+              className="w-full flex items-center justify-between px-3 py-2.5 rounded-xs text-xs font-semibold text-blue-100/80 hover:text-white hover:bg-white/10 transition-all cursor-pointer"
             >
               <div className="flex items-center gap-2.5">
-                <Layers className="w-4 h-4 text-cyan-400" />
+                <Layers className="w-4 h-4 text-cyan-300" />
                 <span>Live Rates & Quotas</span>
               </div>
-              <ChevronRight className="w-3.5 h-3.5 text-gray-500" />
+              <ChevronRight className="w-3.5 h-3.5 text-blue-300" />
             </Link>
 
             <button
@@ -506,8 +506,8 @@ export default function AdminDashboardPage() {
               }}
               className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xs text-xs font-semibold transition-all cursor-pointer ${
                 activeTab === "bookings"
-                  ? "bg-blue-600 text-white shadow-sm"
-                  : "text-gray-400 hover:text-gray-200 hover:bg-gray-900/60"
+                  ? "bg-[#2563EB] text-white shadow-md ring-1 ring-white/20"
+                  : "text-blue-100/80 hover:text-white hover:bg-white/10"
               }`}
             >
               <div className="flex items-center gap-2.5">
@@ -516,14 +516,14 @@ export default function AdminDashboardPage() {
               </div>
               <span
                 className={`text-[10px] px-1.5 py-0.5 rounded-full font-mono ${
-                  activeTab === "bookings" ? "bg-white/20 text-white" : "bg-gray-800 text-gray-400"
+                  activeTab === "bookings" ? "bg-white/25 text-white" : "bg-[#1E3E66] text-blue-200"
                 }`}
               >
                 {bookings.length}
               </span>
             </button>
 
-            <div className="px-3 pt-5 pb-1.5 text-[10px] font-bold uppercase tracking-wider text-gray-400">
+            <div className="px-3 pt-5 pb-1.5 text-[10px] font-bold uppercase tracking-wider text-blue-300/80">
               Access & Security
             </div>
 
@@ -534,8 +534,8 @@ export default function AdminDashboardPage() {
               }}
               className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xs text-xs font-semibold transition-all cursor-pointer ${
                 activeTab === "users"
-                  ? "bg-blue-600 text-white shadow-sm"
-                  : "text-gray-400 hover:text-gray-200 hover:bg-gray-900/60"
+                  ? "bg-[#2563EB] text-white shadow-md ring-1 ring-white/20"
+                  : "text-blue-100/80 hover:text-white hover:bg-white/10"
               }`}
             >
               <div className="flex items-center gap-2.5">
@@ -544,14 +544,14 @@ export default function AdminDashboardPage() {
               </div>
               <span
                 className={`text-[10px] px-1.5 py-0.5 rounded-full font-mono ${
-                  activeTab === "users" ? "bg-white/20 text-white" : "bg-gray-800 text-gray-400"
+                  activeTab === "users" ? "bg-white/25 text-white" : "bg-[#1E3E66] text-blue-200"
                 }`}
               >
                 {usersList.length}
               </span>
             </button>
 
-            <div className="px-3 pt-5 pb-1.5 text-[10px] font-bold uppercase tracking-wider text-gray-400">
+            <div className="px-3 pt-5 pb-1.5 text-[10px] font-bold uppercase tracking-wider text-blue-300/80">
               Direct Actions
             </div>
 
@@ -560,7 +560,7 @@ export default function AdminDashboardPage() {
                 setCreateError("");
                 setShowCreateModal(true);
               }}
-              className="w-full flex items-center gap-2.5 px-3 py-2.5 text-xs font-semibold text-emerald-400 hover:bg-emerald-950/30 rounded-xs transition-colors cursor-pointer"
+              className="w-full flex items-center gap-2.5 px-3 py-2.5 text-xs font-semibold text-emerald-300 hover:bg-emerald-900/30 rounded-xs transition-colors cursor-pointer"
             >
               <Plus className="w-4 h-4" />
               <span>Add New Lodging</span>
@@ -571,7 +571,7 @@ export default function AdminDashboardPage() {
                 setCreateUserError("");
                 setShowCreateUserModal(true);
               }}
-              className="w-full flex items-center gap-2.5 px-3 py-2.5 text-xs font-semibold text-blue-400 hover:bg-blue-950/30 rounded-xs transition-colors cursor-pointer"
+              className="w-full flex items-center gap-2.5 px-3 py-2.5 text-xs font-semibold text-cyan-300 hover:bg-cyan-900/30 rounded-xs transition-colors cursor-pointer"
             >
               <UserPlus className="w-4 h-4" />
               <span>Provision Staff User</span>
@@ -579,9 +579,9 @@ export default function AdminDashboardPage() {
           </nav>
 
           {/* User Profile Pill & System Status */}
-          <div className="p-4 border-t border-gray-800 bg-[#070B14] space-y-2.5 pb-6">
+          <div className="p-4 border-t border-[#1E3E66] bg-[#0A1F38] space-y-2.5 pb-6">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center text-xs shrink-0 shadow-xs">
+              <div className="w-8 h-8 rounded-full bg-blue-500 text-white font-bold flex items-center justify-center text-xs shrink-0 shadow-xs ring-1 ring-white/30">
                 {user?.first_name ? user.first_name[0].toUpperCase() : "A"}
               </div>
               <div className="min-w-0 flex-1">
@@ -589,15 +589,15 @@ export default function AdminDashboardPage() {
                   <span className="text-xs font-semibold text-white truncate block">
                     {user?.first_name} {user?.last_name}
                   </span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" title="Online"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" title="Online"></span>
                 </div>
-                <span className="text-[10px] text-gray-400 block truncate">{user?.email}</span>
+                <span className="text-[10px] text-blue-200/70 block truncate">{user?.email}</span>
               </div>
             </div>
 
-            <div className="flex items-center justify-between text-[11px] text-gray-400 pt-2 border-t border-gray-800/80">
+            <div className="flex items-center justify-between text-[11px] text-blue-200/70 pt-2 border-t border-[#1E3E66]">
               <span className="font-mono text-[10px] uppercase">
-                Role: <span className="text-blue-400 font-bold">{user?.role}</span>
+                Role: <span className="text-cyan-300 font-bold">{user?.role}</span>
               </span>
               <button
                 onClick={() => {
@@ -605,7 +605,7 @@ export default function AdminDashboardPage() {
                   localStorage.removeItem("bookitnow_user");
                   router.push("/login");
                 }}
-                className="text-gray-400 hover:text-red-400 transition-colors flex items-center gap-1 cursor-pointer text-xs"
+                className="text-blue-300 hover:text-red-300 transition-colors flex items-center gap-1 cursor-pointer text-xs font-medium"
                 title="Sign out"
               >
                 <LogOut className="w-3.5 h-3.5" />
