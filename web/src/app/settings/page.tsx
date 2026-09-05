@@ -4,6 +4,16 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Lock, Bell, Globe, ArrowLeft, CheckCircle2 } from "lucide-react";
+import SearchableDropdown, { DropdownOption } from "@/components/SearchableDropdown";
+
+const CURRENCY_OPTIONS: DropdownOption[] = [
+  { value: "USD", label: "USD ($) - United States Dollar", sublabel: "Global default currency" },
+  { value: "ZWG", label: "ZWG (ZiG) - Zimbabwe Gold", sublabel: "Zimbabwe local gold-backed unit" },
+  { value: "ZAR", label: "ZAR (R) - South African Rand", sublabel: "Southern Africa regional currency" },
+  { value: "GBP", label: "GBP (£) - British Pound", sublabel: "United Kingdom" },
+  { value: "EUR", label: "EUR (€) - Euro", sublabel: "European Union" },
+  { value: "BWP", label: "BWP (P) - Botswana Pula", sublabel: "Botswana" },
+];
 
 export default function SettingsPage() {
   const router = useRouter();
@@ -100,19 +110,15 @@ export default function SettingsPage() {
                   Currency & Region
                 </h3>
               </div>
-              <div className="pl-6 max-w-xs">
-                <label className="block text-xs font-medium text-gray-700 mb-1.5">
-                  Display Currency
-                </label>
-                <select
+              <div className="pl-6 max-w-sm">
+                <SearchableDropdown
+                  label="Display Currency"
+                  options={CURRENCY_OPTIONS}
                   value={currency}
-                  onChange={(e) => setCurrency(e.target.value)}
-                  className="w-full px-3 py-2 text-xs border border-gray-200 rounded-xs focus:outline-none focus:border-[#0F5132]"
-                >
-                  <option value="USD">USD ($) - United States Dollar</option>
-                  <option value="ZWG">ZWG (ZiG) - Zimbabwe Gold</option>
-                  <option value="ZAR">ZAR (R) - South African Rand</option>
-                </select>
+                  onChange={(val) => setCurrency(val)}
+                  placeholder="Select display currency"
+                  searchPlaceholder="Search currency code or country..."
+                />
               </div>
             </div>
 
