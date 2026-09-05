@@ -168,3 +168,134 @@ export function SkeletonRegisterForm() {
     </div>
   );
 }
+
+// Admin Dashboard Skeleton UI
+export function SkeletonAdminDashboard() {
+  return (
+    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#070B14] animate-pulse">
+      {/* Header Skeleton */}
+      <div className="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-[#0B101E] px-4 sm:px-8 py-6">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="space-y-2">
+            <div className="h-4 w-32 bg-gray-200 dark:bg-gray-800 rounded" />
+            <div className="h-8 w-72 bg-gray-200 dark:bg-gray-800 rounded" />
+            <div className="h-3 w-80 bg-gray-200 dark:bg-gray-800 rounded" />
+          </div>
+          <div className="flex gap-3">
+            <div className="h-9 w-32 bg-gray-200 dark:bg-gray-800 rounded" />
+            <div className="h-9 w-40 bg-gray-200 dark:bg-gray-800 rounded" />
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-8 space-y-8">
+        {/* 4 Stats Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div key={i} className="p-5 bg-white dark:bg-[#0B101E] border border-gray-200 dark:border-gray-800 rounded-xs space-y-3">
+              <div className="flex justify-between">
+                <div className="h-3 w-20 bg-gray-200 dark:bg-gray-800 rounded" />
+                <div className="h-4 w-4 bg-gray-200 dark:bg-gray-800 rounded" />
+              </div>
+              <div className="h-8 w-24 bg-gray-200 dark:bg-gray-800 rounded" />
+              <div className="h-2.5 w-32 bg-gray-200 dark:bg-gray-800 rounded" />
+            </div>
+          ))}
+        </div>
+
+        {/* Tab Header Skeleton */}
+        <div className="flex gap-6 border-b border-gray-200 dark:border-gray-800 pb-3">
+          <div className="h-4 w-36 bg-gray-200 dark:bg-gray-800 rounded" />
+          <div className="h-4 w-36 bg-gray-200 dark:bg-gray-800 rounded" />
+        </div>
+
+        {/* Search / Filter bar skeleton */}
+        <div className="flex justify-between gap-4">
+          <div className="h-9 w-72 bg-gray-200 dark:bg-gray-800 rounded" />
+          <div className="h-9 w-32 bg-gray-200 dark:bg-gray-800 rounded" />
+        </div>
+
+        {/* Table Skeleton */}
+        <div className="border border-gray-200 dark:border-gray-800 rounded-xs bg-white dark:bg-[#0B101E] overflow-hidden">
+          <div className="h-10 bg-gray-100 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800" />
+          {Array.from({ length: 5 }).map((_, i) => (
+            <div key={i} className="p-4 border-b border-gray-100 dark:border-gray-800/60 flex items-center justify-between">
+              <div className="space-y-1.5 w-1/3">
+                <div className="h-3.5 w-48 bg-gray-200 dark:bg-gray-800 rounded" />
+                <div className="h-2 w-28 bg-gray-200 dark:bg-gray-800 rounded" />
+              </div>
+              <div className="h-3 w-24 bg-gray-200 dark:bg-gray-800 rounded" />
+              <div className="h-3 w-20 bg-gray-200 dark:bg-gray-800 rounded" />
+              <div className="h-5 w-16 bg-gray-200 dark:bg-gray-800 rounded-full" />
+              <div className="h-6 w-24 bg-gray-200 dark:bg-gray-800 rounded" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Inventory Manager Skeleton UI
+export function SkeletonInventoryManager() {
+  return (
+    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#070B14] animate-pulse">
+      {/* Header */}
+      <div className="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-[#0B101E] px-4 sm:px-8 py-6">
+        <div className="max-w-7xl mx-auto space-y-2">
+          <div className="h-3 w-32 bg-gray-200 dark:bg-gray-800 rounded" />
+          <div className="h-8 w-64 bg-gray-200 dark:bg-gray-800 rounded" />
+          <div className="h-3 w-80 bg-gray-200 dark:bg-gray-800 rounded" />
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          {/* Left Column Skeleton */}
+          <div className="lg:col-span-4 space-y-6">
+            <div className="bg-white dark:bg-[#0B101E] border border-gray-200 dark:border-gray-800 rounded-xs p-5 space-y-4">
+              <div className="h-3 w-28 bg-gray-200 dark:bg-gray-800 rounded" />
+              <div className="space-y-2">
+                {Array.from({ length: 3 }).map((_, i) => (
+                  <div key={i} className="h-14 bg-gray-100 dark:bg-gray-800 rounded-xs" />
+                ))}
+              </div>
+            </div>
+            <div className="bg-white dark:bg-[#0B101E] border border-gray-200 dark:border-gray-800 rounded-xs p-5 space-y-4">
+              <div className="h-3 w-28 bg-gray-200 dark:bg-gray-800 rounded" />
+              <div className="space-y-2">
+                {Array.from({ length: 2 }).map((_, i) => (
+                  <div key={i} className="h-12 bg-gray-100 dark:bg-gray-800 rounded-xs" />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Right Main Form Skeleton */}
+          <div className="lg:col-span-8">
+            <div className="bg-white dark:bg-[#0B101E] border border-gray-200 dark:border-gray-800 rounded-xs p-6 sm:p-8 space-y-6">
+              <div className="space-y-2 border-b border-gray-100 dark:border-gray-800 pb-5">
+                <div className="h-3 w-32 bg-gray-200 dark:bg-gray-800 rounded" />
+                <div className="h-6 w-48 bg-gray-200 dark:bg-gray-800 rounded" />
+                <div className="h-3 w-64 bg-gray-200 dark:bg-gray-800 rounded" />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="h-10 bg-gray-100 dark:bg-gray-800 rounded-xs" />
+                <div className="h-10 bg-gray-100 dark:bg-gray-800 rounded-xs" />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="h-10 bg-gray-100 dark:bg-gray-800 rounded-xs" />
+                <div className="h-10 bg-gray-100 dark:bg-gray-800 rounded-xs" />
+              </div>
+              <div className="h-14 bg-gray-100 dark:bg-gray-800 rounded-xs" />
+              <div className="flex justify-end">
+                <div className="h-10 w-44 bg-blue-600/30 rounded-xs" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+

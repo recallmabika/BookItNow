@@ -8,6 +8,7 @@ import {
   fetchManagedProperties,
   updateRoomAvailability
 } from "@/lib/api";
+import { SkeletonInventoryManager } from "@/components/Skeleton";
 import {
   Layers,
   Calendar,
@@ -163,14 +164,7 @@ function InventoryContent() {
   }
 
   if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-50 dark:bg-[#070B14] flex items-center justify-center p-6">
-        <div className="space-y-3 text-center">
-          <div className="w-10 h-10 border-2 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto" />
-          <p className="text-xs text-gray-500">Loading live inventory and rates...</p>
-        </div>
-      </div>
-    );
+    return <SkeletonInventoryManager />;
   }
 
   return (
@@ -443,13 +437,7 @@ function InventoryContent() {
 
 export default function InventoryManagementPage() {
   return (
-    <Suspense
-      fallback={
-        <div className="min-h-screen bg-gray-50 dark:bg-[#070B14] flex items-center justify-center p-6">
-          <div className="w-10 h-10 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
-        </div>
-      }
-    >
+    <Suspense fallback={<SkeletonInventoryManager />}>
       <InventoryContent />
     </Suspense>
   );

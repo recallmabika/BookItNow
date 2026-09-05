@@ -11,6 +11,7 @@ import {
   createProperty,
   deleteProperty
 } from "@/lib/api";
+import { SkeletonAdminDashboard } from "@/components/Skeleton";
 import {
   Building2,
   CalendarCheck,
@@ -186,14 +187,7 @@ export default function AdminDashboardPage() {
   });
 
   if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-50 dark:bg-[#090D16] p-4 sm:p-8 flex items-center justify-center">
-        <div className="space-y-3 text-center">
-          <div className="w-10 h-10 border-2 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto" />
-          <p className="text-xs text-gray-500">Loading marketplace admin data...</p>
-        </div>
-      </div>
-    );
+    return <SkeletonAdminDashboard />;
   }
 
   return (
