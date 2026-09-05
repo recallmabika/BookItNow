@@ -157,8 +157,8 @@ export default function ProfilePage() {
                   <h2 className="text-base font-semibold text-gray-900">
                     {user.first_name} {user.last_name || ""}
                   </h2>
-                  <span className="text-[10px] uppercase font-semibold text-[#0F5132] bg-[#E8F5E9] px-2 py-0.5 rounded-xs">
-                    {user.role}
+                  <span className="text-xs font-medium text-gray-500">
+                    • {user.role === "guest" || user.role === "GUEST" ? "Guest Account" : `${user.role.charAt(0).toUpperCase() + user.role.slice(1).toLowerCase()} Account`}
                   </span>
                 </div>
                 <p className="text-xs text-gray-500 mt-1">{user.email}</p>
@@ -212,7 +212,7 @@ export default function ProfilePage() {
                       required
                       value={firstName}
                       onChange={(e) => setFirstName(e.target.value)}
-                      className="w-full pl-9 pr-3 py-2 text-xs border border-gray-200 rounded-xs focus:outline-none focus:border-[#0F5132] focus:ring-1 focus:ring-[#0F5132]"
+                      className="w-full pl-9 pr-3 py-2 text-xs border border-gray-300 rounded-xs outline-none focus:outline-none focus:ring-0 focus:border-[#0F5132] transition-colors"
                     />
                   </div>
                 </div>
@@ -227,7 +227,7 @@ export default function ProfilePage() {
                       type="text"
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}
-                      className="w-full pl-9 pr-3 py-2 text-xs border border-gray-200 rounded-xs focus:outline-none focus:border-[#0F5132] focus:ring-1 focus:ring-[#0F5132]"
+                      className="w-full pl-9 pr-3 py-2 text-xs border border-gray-300 rounded-xs outline-none focus:outline-none focus:ring-0 focus:border-[#0F5132] transition-colors"
                     />
                   </div>
                 </div>
@@ -244,7 +244,7 @@ export default function ProfilePage() {
                       type="email"
                       disabled
                       value={user.email}
-                      className="w-full pl-9 pr-3 py-2 text-xs border border-gray-200 rounded-xs bg-gray-50 text-gray-500 cursor-not-allowed"
+                      className="w-full pl-9 pr-3 py-2 text-xs border border-gray-200 rounded-xs bg-gray-50 text-gray-500 cursor-not-allowed outline-none focus:outline-none focus:ring-0"
                     />
                   </div>
                   <span className="text-[10px] text-gray-400 mt-1 block">
@@ -263,9 +263,8 @@ export default function ProfilePage() {
                       placeholder="+263 77 123 4567"
                       value={phoneNumber}
                       onChange={(e) => setPhoneNumber(e.target.value)}
-                      className="w-full pl-9 pr-3 py-2 text-xs border border-gray-200 rounded-xs focus:outline-none focus:border-[#0F5132] focus:ring-1 focus:ring-[#0F5132]"
+                      className="w-full pl-9 pr-3 py-2 text-xs border border-gray-300 rounded-xs outline-none focus:outline-none focus:border-[#0F5132] transition-colors focus:ring-0"
                     />
-                  </div>
                 </div>
               </div>
 

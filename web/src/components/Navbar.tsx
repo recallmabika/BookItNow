@@ -150,8 +150,8 @@ export default function Navbar() {
                           {user.first_name} {user.last_name || ""}
                         </div>
                         <div className="text-[10px] text-gray-500 truncate">{user.email}</div>
-                        <span className="inline-block text-[9px] uppercase tracking-wider text-[#0F5132] bg-[#E8F5E9] px-1.5 py-0.5 rounded-xs mt-1 font-medium">
-                          {user.role}
+                        <span className="inline-block text-[11px] text-gray-500 font-medium mt-0.5">
+                          {user.role === "guest" || user.role === "GUEST" ? "Guest Account" : `${user.role.charAt(0).toUpperCase() + user.role.slice(1).toLowerCase()} Account`}
                         </span>
                       </div>
                     </div>

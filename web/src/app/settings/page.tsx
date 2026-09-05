@@ -134,7 +134,7 @@ export default function SettingsPage() {
                   <input
                     type="password"
                     placeholder="••••••••"
-                    className="w-full px-3 py-2 text-xs border border-gray-200 rounded-xs focus:outline-none focus:border-[#0F5132]"
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-xs outline-none focus:outline-none focus:ring-0 focus:border-[#0F5132] transition-colors"
                   />
                 </div>
                 <div>
@@ -144,7 +144,7 @@ export default function SettingsPage() {
                   <input
                     type="password"
                     placeholder="••••••••"
-                    className="w-full px-3 py-2 text-xs border border-gray-200 rounded-xs focus:outline-none focus:border-[#0F5132]"
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-xs outline-none focus:outline-none focus:ring-0 focus:border-[#0F5132] transition-colors"
                   />
                 </div>
               </div>
