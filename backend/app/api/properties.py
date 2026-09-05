@@ -264,6 +264,23 @@ async def update_property_status(
     return {"id": str(prop.id), "status": prop.status.value}
 
 
+@router.delete("/{property_id}", status_code=status.HTTP_200_OK)
+async def delete_property(
+    property_id: uuid.UUID,
+    current_user: User = Depends(require_roles(UserRole.HOST, UserRole.ADMIN)),
+    db: AsyncSession = Depends(get_db)
+):
+    prop = await db.get(Property, property_id)
+    if not prop:
+        raise HTTPException(status_code=404, detail="Property not found")
+    if prop.host_id != current_user.id and current_user.role != UserRole.ADMIN:
+        raise HTTPException(status_code=403, detail="Not authorized to delete this property")
+    await db.delete(prop)
+    await db.commit()
+    return {"status": "success", "message": f"Property '{prop.title}' has been deleted."}
+
+
+
 @router.post("/", status_code=status.HTTP_201_CREATED)
 async def create_property(
     prop_in: PropertyCreate,

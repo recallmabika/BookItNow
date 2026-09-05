@@ -3,10 +3,13 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import {
   fetchManagedProperties,
   fetchManagedBookings,
-  updatePropertyStatus
+  updatePropertyStatus,
+  createProperty,
+  deleteProperty
 } from "@/lib/api";
 import {
   Building2,
@@ -21,7 +24,10 @@ import {
   Search,
   ExternalLink,
   ShieldAlert,
-  ArrowRight
+  ArrowRight,
+  Plus,
+  Trash2,
+  X
 } from "lucide-react";
 
 export default function AdminDashboardPage() {
@@ -35,6 +41,15 @@ export default function AdminDashboardPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [actionLoading, setActionLoading] = useState<string | null>(null);
   const [actionSuccess, setActionSuccess] = useState("");
+
+  // Create Property Modal States
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [createSubmitting, setCreateSubmitting] = useState(false);
+  const [newPropTitle, setNewPropTitle] = useState("");
+  const [newPropDesc, setNewPropDesc] = useState("");
+  const [newPropType, setNewPropType] = useState("lodge");
+  const [newPropCity, setNewPropCity] = useState("Harare");
+  const [newPropAddress, setNewPropAddress] = useState("");
 
   useEffect(() => {
     const rawUser = localStorage.getItem("bookitnow_user");
@@ -93,6 +108,67 @@ export default function AdminDashboardPage() {
     }
   }
 
+  async function handleDeleteProperty(propertyId: string, title: string) {
+    if (!confirm(`Are you sure you want to delete "${title}"? This cannot be undone.`)) {
+      return;
+    }
+    const token = localStorage.getItem("bookitnow_token");
+    if (!token) return;
+
+    setActionLoading(propertyId);
+    try {
+      await deleteProperty(propertyId, token);
+      setProperties((prev) => prev.filter((p) => p.id !== propertyId));
+      setActionSuccess(`Property "${title}" deleted successfully.`);
+      setTimeout(() => setActionSuccess(""), 4000);
+    } catch (err: any) {
+      alert(err.message || "Failed to delete property.");
+    } finally {
+      setActionLoading(null);
+    }
+  }
+
+  async function handleCreatePropertySubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const token = localStorage.getItem("bookitnow_token");
+    if (!token) return;
+
+    setCreateSubmitting(true);
+    try {
+      const slug = newPropTitle
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+
+      const created = await createProperty(
+        {
+          title: newPropTitle.trim(),
+          slug: slug || `stay-${Date.now()}`,
+          description: newPropDesc.trim() || "A premier lodging stay in Zimbabwe.",
+          property_type: newPropType,
+          address_line: newPropAddress.trim() || "Main Street",
+          city: newPropCity.trim() || "Harare",
+          country: "Zimbabwe",
+          amenities: ["WiFi", "Pool", "Air Conditioning", "Free Parking"],
+          photos: ["/hero-bg.jpg"]
+        },
+        token
+      );
+
+      setActionSuccess(`Property "${created.title}" successfully added!`);
+      setShowCreateModal(false);
+      setNewPropTitle("");
+      setNewPropDesc("");
+      setNewPropCity("Harare");
+      setNewPropAddress("");
+      loadData(token);
+    } catch (err: any) {
+      alert(err.message || "Failed to create property.");
+    } finally {
+      setCreateSubmitting(false);
+    }
+  }
+
   const totalProperties = properties.length;
   const activeProperties = properties.filter((p) => p.status === "active").length;
   const pendingProperties = properties.filter((p) => p.status === "pending_approval").length;
@@ -137,11 +213,19 @@ export default function AdminDashboardPage() {
           </div>
 
           <div className="flex items-center gap-3">
+            <button
+              onClick={() => setShowCreateModal(true)}
+              className="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white text-xs font-semibold rounded-xs shadow-sm flex items-center gap-1.5 transition-all cursor-pointer"
+            >
+              <Plus className="w-4 h-4" />
+              <span>Add New Lodging</span>
+            </button>
+
             <Link
               href="/host/inventory"
-              className="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white text-xs font-semibold rounded-xs shadow-sm flex items-center gap-2 transition-all cursor-pointer"
+              className="px-4 py-2.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-blue-500 active:scale-95 text-gray-700 dark:text-gray-200 text-xs font-semibold rounded-xs shadow-xs flex items-center gap-2 transition-all cursor-pointer"
             >
-              <Layers className="w-4 h-4" />
+              <Layers className="w-4 h-4 text-blue-500" />
               <span>Inventory Management</span>
             </Link>
           </div>
@@ -357,11 +441,20 @@ export default function AdminDashboardPage() {
                                   <button
                                     onClick={() => handleStatusChange(prop.id, "suspended")}
                                     disabled={actionLoading === prop.id}
-                                    className="px-2 py-1 bg-red-600 hover:bg-red-700 text-white rounded-xs text-[10px] font-semibold transition-colors cursor-pointer"
+                                    className="px-2 py-1 bg-amber-600 hover:bg-amber-700 text-white rounded-xs text-[10px] font-semibold transition-colors cursor-pointer"
                                   >
                                     Suspend
                                   </button>
                                 )}
+
+                                <button
+                                  onClick={() => handleDeleteProperty(prop.id, prop.title)}
+                                  disabled={actionLoading === prop.id}
+                                  className="p-1 text-gray-400 hover:text-red-600 transition-colors cursor-pointer"
+                                  title="Delete Property"
+                                >
+                                  <Trash2 className="w-3.5 h-3.5" />
+                                </button>
                               </div>
                             )}
                           </div>
@@ -371,6 +464,35 @@ export default function AdminDashboardPage() {
                   )}
                 </tbody>
               </table>
+
+              {filteredProperties.length === 0 && (
+                <div className="py-12 px-6 text-center space-y-4">
+                  <div className="relative w-52 h-52 mx-auto">
+                    <Image
+                      src="/empty-state-working.png"
+                      alt="No properties found illustration"
+                      fill
+                      priority
+                      className="object-contain"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <h4 className="text-sm font-bold text-gray-900 dark:text-white">
+                      No Lodgings or Properties Found
+                    </h4>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 max-w-sm mx-auto">
+                      There are no lodgings currently recorded in the marketplace. Click below to add your first property listing.
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => setShowCreateModal(true)}
+                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-xs transition-colors inline-flex items-center gap-1.5 cursor-pointer shadow-xs"
+                  >
+                    <Plus className="w-3.5 h-3.5" />
+                    <span>Create First Property</span>
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -425,6 +547,119 @@ export default function AdminDashboardPage() {
                   )}
                 </tbody>
               </table>
+            </div>
+          </div>
+        )}
+
+        {/* Create Property Modal */}
+        {showCreateModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-150">
+            <div className="relative w-full max-w-lg bg-white dark:bg-[#0B101E] border border-gray-200 dark:border-gray-800 rounded-xs shadow-2xl overflow-hidden space-y-5 p-6 sm:p-8">
+              <div className="flex items-center justify-between border-b border-gray-100 dark:border-gray-800 pb-4">
+                <div>
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white">Add New Lodging</h3>
+                  <p className="text-xs text-gray-500">Create a real property listing in the central database.</p>
+                </div>
+                <button
+                  onClick={() => setShowCreateModal(false)}
+                  className="p-1.5 text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 rounded-xs transition-colors cursor-pointer"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <form onSubmit={handleCreatePropertySubmit} className="space-y-4">
+                <div className="space-y-1.5">
+                  <label className="block text-[11px] font-semibold uppercase tracking-wider text-gray-500">
+                    Property Title *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Victoria Falls Safari Lodge"
+                    value={newPropTitle}
+                    onChange={(e) => setNewPropTitle(e.target.value)}
+                    className="w-full px-3.5 py-2.5 text-xs rounded-xs border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/50 focus:outline-none focus:border-blue-500"
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <label className="block text-[11px] font-semibold uppercase tracking-wider text-gray-500">
+                      Property Type *
+                    </label>
+                    <select
+                      value={newPropType}
+                      onChange={(e) => setNewPropType(e.target.value)}
+                      className="w-full px-3 py-2.5 text-xs rounded-xs border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/50 focus:outline-none cursor-pointer"
+                    >
+                      <option value="lodge">Safari Lodge</option>
+                      <option value="hotel">Hotel</option>
+                      <option value="guesthouse">Guesthouse</option>
+                      <option value="apartment">Serviced Apartment</option>
+                    </select>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="block text-[11px] font-semibold uppercase tracking-wider text-gray-500">
+                      City *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. Victoria Falls, Harare, Bulawayo"
+                      value={newPropCity}
+                      onChange={(e) => setNewPropCity(e.target.value)}
+                      className="w-full px-3.5 py-2.5 text-xs rounded-xs border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/50 focus:outline-none focus:border-blue-500"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="block text-[11px] font-semibold uppercase tracking-wider text-gray-500">
+                    Physical Street Address *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Stand 471, Squire Cummings Road"
+                    value={newPropAddress}
+                    onChange={(e) => setNewPropAddress(e.target.value)}
+                    className="w-full px-3.5 py-2.5 text-xs rounded-xs border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/50 focus:outline-none focus:border-blue-500"
+                  />
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="block text-[11px] font-semibold uppercase tracking-wider text-gray-500">
+                    Description
+                  </label>
+                  <textarea
+                    rows={3}
+                    placeholder="Describe amenities, view, breakfast options, and guest hospitality..."
+                    value={newPropDesc}
+                    onChange={(e) => setNewPropDesc(e.target.value)}
+                    className="w-full px-3.5 py-2.5 text-xs rounded-xs border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/50 focus:outline-none focus:border-blue-500"
+                  />
+                </div>
+
+                <div className="pt-3 flex justify-end gap-3 border-t border-gray-100 dark:border-gray-800">
+                  <button
+                    type="button"
+                    onClick={() => setShowCreateModal(false)}
+                    className="px-4 py-2.5 text-xs font-semibold rounded-xs border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={createSubmitting}
+                    className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white text-xs font-semibold rounded-xs transition-all shadow-xs flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+                  >
+                    <Plus className="w-3.5 h-3.5" />
+                    <span>{createSubmitting ? "Creating..." : "Save Property"}</span>
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         )}

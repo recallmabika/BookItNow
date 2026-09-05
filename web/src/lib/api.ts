@@ -158,3 +158,70 @@ export async function fetchManagedBookings(token: string) {
   return await res.json();
 }
 
+export async function createProperty(payload: {
+  title: string;
+  slug: string;
+  description: string;
+  property_type: string;
+  address_line: string;
+  city: string;
+  country: string;
+  amenities: string[];
+  photos: string[];
+}, token: string) {
+  const res = await fetch(`${API_BASE_URL}/properties/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify(payload)
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || "Failed to create property");
+  }
+  return await res.json();
+}
+
+export async function addRoomType(propertyId: string, payload: {
+  name: string;
+  description?: string;
+  max_adults: number;
+  max_children: number;
+  total_rooms: number;
+  base_price_per_night: number;
+  currency: string;
+  amenities: string[];
+  photos: string[];
+}, token: string) {
+  const res = await fetch(`${API_BASE_URL}/properties/${propertyId}/room-types`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify(payload)
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || "Failed to add room type");
+  }
+  return await res.json();
+}
+
+export async function deleteProperty(propertyId: string, token: string) {
+  const res = await fetch(`${API_BASE_URL}/properties/${propertyId}`, {
+    method: "DELETE",
+    headers: {
+      "Authorization": `Bearer ${token}`
+    }
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || "Failed to delete property");
+  }
+  return await res.json();
+}
+
+

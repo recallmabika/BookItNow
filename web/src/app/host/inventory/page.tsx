@@ -2,6 +2,7 @@
 
 import { useEffect, useState, Suspense } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   fetchManagedProperties,
@@ -197,12 +198,32 @@ function InventoryContent() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-8 py-8">
         {properties.length === 0 ? (
-          <div className="p-12 text-center bg-white dark:bg-[#0B101E] border border-gray-200 dark:border-gray-800 rounded-xs space-y-3">
-            <Building2 className="w-12 h-12 text-gray-400 mx-auto" />
-            <h3 className="text-base font-semibold">No Managed Properties Found</h3>
-            <p className="text-xs text-gray-500 max-w-sm mx-auto">
-              You do not have any properties assigned to manage or approve yet.
-            </p>
+          <div className="p-10 sm:p-14 text-center bg-white dark:bg-[#0B101E] border border-gray-200 dark:border-gray-800 rounded-xs space-y-4 max-w-2xl mx-auto shadow-xs">
+            <div className="relative w-64 h-64 sm:w-72 sm:h-72 mx-auto">
+              <Image
+                src="/empty-state-working.png"
+                alt="No managed properties found illustration"
+                fill
+                priority
+                className="object-contain"
+              />
+            </div>
+            <div className="space-y-1.5">
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white tracking-tight">
+                No Managed Properties Found
+              </h3>
+              <p className="text-xs text-gray-500 dark:text-gray-400 max-w-md mx-auto leading-relaxed">
+                You do not have any properties assigned to manage or approve yet. Add your first lodging listing to start setting seasonal rates and inventory quotas.
+              </p>
+            </div>
+            <div className="pt-2 flex justify-center gap-3">
+              <Link
+                href="/admin"
+                className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-xs transition-colors shadow-xs"
+              >
+                Go to Admin Dashboard
+              </Link>
+            </div>
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
