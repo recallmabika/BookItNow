@@ -151,3 +151,50 @@ input.flatpickr-input[type="hidden"] {
   fill: #FFFFFF !important;
 }
 
+/* Smooth motion entrance animations */
+@keyframes heroRevealRight {
+  0% {
+    opacity: 0;
+    transform: translateX(48px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes heroRevealBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(48px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroRevealLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-56px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-hero-text {
+  animation: heroRevealRight 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-hero-search {
+  animation: heroRevealBottom 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+.animate-hero-image {
+  animation: heroRevealLeft 1.15s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+

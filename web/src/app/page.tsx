@@ -7,7 +7,7 @@ export default function HomePage() {
   return (
     <div className="space-y-16 sm:space-y-20 bg-white dark:bg-[#0B0F19] overflow-x-hidden transition-colors">
       {/* Hero Section - Full Screen Viewport Fit */}
-      <section className="relative min-h-[calc(100vh-4.5rem)] flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 text-center py-12 sm:py-16">
+      <section className="relative min-h-[calc(100vh-4.5rem)] flex flex-col justify-center px-4 sm:px-6 lg:px-8 py-10 sm:py-14 overflow-hidden">
         {/* Background Resort Pool Image with Rich Overlay */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <Image
@@ -17,28 +17,48 @@ export default function HomePage() {
             priority
             className="object-cover object-center"
           />
-          {/* Subtle multi-stop gradient for high contrast readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/45 to-black/75 dark:from-black/75 dark:via-[#0B0F19]/60 dark:to-[#0B0F19]" />
+          {/* Subtle multi-stop gradient for contrast and clarity */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/65 to-black/75 dark:from-black/90 dark:via-[#0B0F19]/75 dark:to-[#0B0F19]/80" />
         </div>
 
-        {/* Hero Content */}
-        <div className="relative z-10 max-w-4xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md text-white text-[11px] font-medium tracking-wide border border-white/20 shadow-sm">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
-            Verified Lodgings & Regional Travel
-          </div>
-          
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-medium text-white tracking-tight leading-[1.15] drop-shadow-md">
-            Book Authentic Lodging, <br className="hidden sm:inline" />
-            <span className="text-blue-300 font-semibold">With Complete Peace of Mind.</span>
-          </h1>
-          
-          <p className="text-xs sm:text-base text-gray-200 max-w-xl mx-auto font-normal leading-relaxed drop-shadow-sm">
-            Discover vetted hotels, safari lodges, and serene guesthouses. Enjoy instant booking, transparent price breakdowns, and local payments via EcoCash and card.
-          </p>
+        {/* Hero Content Container */}
+        <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col justify-center gap-8 lg:gap-10">
+          {/* Top Row: Left-aligned Text + Right-aligned Triangle Notched Image */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            {/* Left Content: Text reveals smoothly from right to left */}
+            <div className="lg:col-span-7 text-left space-y-4 sm:space-y-5 animate-hero-text">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-medium text-white tracking-tight leading-[1.12] drop-shadow-md">
+                Book Authentic Lodging, <br />
+                <span className="text-blue-300 font-semibold">With Complete Peace of Mind.</span>
+              </h1>
+              
+              <p className="text-xs sm:text-base text-gray-200 max-w-xl font-normal leading-relaxed drop-shadow-sm">
+                Discover vetted hotels, safari lodges, and serene guesthouses. Enjoy instant booking, transparent price breakdowns, and local payments via EcoCash and card.
+              </p>
+            </div>
 
-          {/* Live Search Widget */}
-          <div className="pt-6 w-full max-w-5xl mx-auto">
+            {/* Right Content: Triangle-notched Image reveals smoothly from left to right */}
+            <div className="lg:col-span-5 flex justify-center lg:justify-end animate-hero-image">
+              <div 
+                className="relative w-full max-w-md aspect-[16/10] sm:aspect-[16/9] lg:aspect-[4/3] rounded-xs overflow-hidden shadow-2xl border border-white/20 bg-gray-900"
+                style={{
+                  clipPath: "polygon(0% 0%, 100% 0%, 78% 50%, 100% 100%, 0% 100%)"
+                }}
+              >
+                <Image
+                  src="/hero-couple.png"
+                  alt="Happy couple booking their stay on phone"
+                  fill
+                  priority
+                  className="object-cover object-center transform hover:scale-105 transition-transform duration-700 ease-out"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20 pointer-events-none" />
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Row: Search Widget reveals smoothly from bottom to center */}
+          <div className="w-full pt-2 animate-hero-search">
             <SearchBar />
           </div>
         </div>
