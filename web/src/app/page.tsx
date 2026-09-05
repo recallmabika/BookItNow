@@ -85,8 +85,7 @@ export default function HomePage() {
             <div className="group relative p-6 rounded-xs bg-white/[0.07] dark:bg-black/40 backdrop-blur-md border border-white/15 hover:border-blue-400/50 hover:bg-white/[0.12] transition-all duration-300 shadow-xl flex flex-col justify-between">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono font-semibold tracking-wider text-blue-400">01</span>
-                  <span className="text-[10px] tracking-widest uppercase font-medium text-gray-400">Real-time</span>
+                  <span className="text-[10px] tracking-widest uppercase font-medium text-blue-300">Real-time</span>
                 </div>
                 <h3 className="font-medium text-base text-white group-hover:text-blue-200 transition-colors">Instant Confirmation</h3>
                 <p className="text-xs text-gray-300 leading-relaxed font-normal">
@@ -103,8 +102,7 @@ export default function HomePage() {
             <div className="group relative p-6 rounded-xs bg-white/[0.07] dark:bg-black/40 backdrop-blur-md border border-white/15 hover:border-blue-400/50 hover:bg-white/[0.12] transition-all duration-300 shadow-xl flex flex-col justify-between">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono font-semibold tracking-wider text-emerald-400">02</span>
-                  <span className="text-[10px] tracking-widest uppercase font-medium text-gray-400">No Surprises</span>
+                  <span className="text-[10px] tracking-widest uppercase font-medium text-emerald-300">No Surprises</span>
                 </div>
                 <h3 className="font-medium text-base text-white group-hover:text-emerald-200 transition-colors">Transparent Pricing</h3>
                 <p className="text-xs text-gray-300 leading-relaxed font-normal">
@@ -121,8 +119,7 @@ export default function HomePage() {
             <div className="group relative p-6 rounded-xs bg-white/[0.07] dark:bg-black/40 backdrop-blur-md border border-white/15 hover:border-blue-400/50 hover:bg-white/[0.12] transition-all duration-300 shadow-xl flex flex-col justify-between">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono font-semibold tracking-wider text-indigo-400">03</span>
-                  <span className="text-[10px] tracking-widest uppercase font-medium text-gray-400">Authentic</span>
+                  <span className="text-[10px] tracking-widest uppercase font-medium text-indigo-300">Authentic</span>
                 </div>
                 <h3 className="font-medium text-base text-white group-hover:text-indigo-200 transition-colors">Verified Stays Only</h3>
                 <p className="text-xs text-gray-300 leading-relaxed font-normal">
@@ -139,8 +136,7 @@ export default function HomePage() {
             <div className="group relative p-6 rounded-xs bg-white/[0.07] dark:bg-black/40 backdrop-blur-md border border-white/15 hover:border-blue-400/50 hover:bg-white/[0.12] transition-all duration-300 shadow-xl flex flex-col justify-between">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono font-semibold tracking-wider text-amber-400">04</span>
-                  <span className="text-[10px] tracking-widest uppercase font-medium text-gray-400">Mobile-Ready</span>
+                  <span className="text-[10px] tracking-widest uppercase font-medium text-amber-300">Mobile-Ready</span>
                 </div>
                 <h3 className="font-medium text-base text-white group-hover:text-amber-200 transition-colors">Instant E-Voucher</h3>
                 <p className="text-xs text-gray-300 leading-relaxed font-normal">
