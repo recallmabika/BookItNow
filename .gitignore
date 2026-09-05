@@ -1,14 +1,63 @@
-/backend/__pycache__
-/backend/app/__pycache__
-/backend/.venv
-/backend/venv
-/.agents
-./.claude
-./.gemini 
-/.opencode
-/.cursor
-/.github
+# Python & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+backend/venv/
+backend/.venv/
+venv/
+.venv/
+ENV/
+env/
+*.egg-info/
+.installed.cfg
+*.egg
+.pytest_cache/
 
-/.task
+# Environment Variables & Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Node.js, Next.js & React
+node_modules/
+.next/
+dist/
+build/
+out/
+.turbo/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.pnpm-debug.log*
+web/next-env.d.ts
+
+# Database local storage & logs
+postgres_data/
+redis_data/
+local_pgdata/
+*.log
+
+# AI / IDE / Editor Configs
+/.agents/
+./.claude/
+./.gemini/
+/.opencode/
+/.cursor/
+/.task/
 .agents/rules/
-.agents\rules
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS Generated
+.DS_Store
+Thumbs.db
+ehthumbs.db
+[Dd]esktop.ini
