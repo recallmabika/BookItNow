@@ -110,29 +110,29 @@ export default function Navbar() {
 
               <div className="h-5 w-px bg-white/20 mx-1" />
 
-              {/* Profile Trigger - Always crisp white background */}
+              {/* Profile Trigger - Full height left avatar, centered name, clean hover */}
               <div className="relative" ref={dropdownRef}>
                 <button
                   type="button"
                   onClick={() => setDropdownOpen((prev) => !prev)}
-                  className="flex items-center gap-2 px-3 py-2 bg-white text-[#2563EB] rounded-xs shadow-xs border border-white/80 hover:bg-gray-50 active:bg-gray-100 transition-colors duration-150 cursor-pointer"
+                  className="flex items-center h-10 pl-0 pr-3.5 bg-white text-[#2563EB] rounded-xs shadow-xs border border-white/80 hover:bg-blue-50/50 hover:border-white active:scale-[0.98] transition-all duration-150 cursor-pointer overflow-hidden group"
                 >
                   {user.avatar ? (
                     <img
                       src={user.avatar}
                       alt={user.first_name}
-                      className="w-6 h-6 rounded-xs object-cover border border-gray-200"
+                      className="h-full aspect-square object-cover border-r border-gray-200 shrink-0"
                     />
                   ) : (
-                    <span className="w-6 h-6 rounded-xs bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center font-bold text-[11px] border border-blue-200">
+                    <span className="h-full aspect-square bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center font-bold text-xs border-r border-blue-200 shrink-0 group-hover:bg-[#DBEAFE] transition-colors">
                       {user.first_name[0]?.toUpperCase()}
                     </span>
                   )}
-                  <span className="text-xs font-semibold">
+                  <span className="text-xs font-semibold px-3 truncate">
                     {user.first_name}
                   </span>
                   <ChevronDown
-                    className={`w-3.5 h-3.5 stroke-[2] transition-transform duration-200 text-[#2563EB] ${
+                    className={`w-3.5 h-3.5 stroke-[2] transition-transform duration-200 text-[#2563EB] shrink-0 ${
                       dropdownOpen ? "rotate-180" : ""
                     }`}
                   />
