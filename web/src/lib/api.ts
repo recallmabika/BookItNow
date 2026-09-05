@@ -224,4 +224,55 @@ export async function deleteProperty(propertyId: string, token: string) {
   return await res.json();
 }
 
+export async function fetchAllUsers(token: string) {
+  const res = await fetch(`${API_BASE_URL}/auth/users`, {
+    headers: {
+      "Authorization": `Bearer ${token}`
+    },
+    cache: "no-store"
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || "Failed to fetch platform users");
+  }
+  return await res.json();
+}
+
+export async function adminCreateUser(payload: {
+  email: string;
+  password: string;
+  first_name: string;
+  last_name: string;
+  phone_number?: string;
+  role: string;
+}, token: string) {
+  const res = await fetch(`${API_BASE_URL}/auth/users`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify(payload)
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || "Failed to create user account");
+  }
+  return await res.json();
+}
+
+export async function toggleUserStatus(userId: string, token: string) {
+  const res = await fetch(`${API_BASE_URL}/auth/users/${userId}/toggle-status`, {
+    method: "PATCH",
+    headers: {
+      "Authorization": `Bearer ${token}`
+    }
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || "Failed to toggle user status");
+  }
+  return await res.json();
+}
+
 
