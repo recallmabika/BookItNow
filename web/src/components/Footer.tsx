@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, Check, ArrowRight } from "lucide-react";
+import { Mail, Check, ArrowRight, AlertCircle } from "lucide-react";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -12,9 +12,15 @@ export default function Footer() {
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !email.includes("@")) {
+    const trimmed = email.trim();
+    if (!trimmed) {
       setStatus("error");
-      setMessage("Please enter a valid email address.");
+      setMessage("Please enter your email address.");
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
+      setStatus("error");
+      setMessage("Please enter a valid email address (e.g. you@example.com).");
       return;
     }
 
@@ -59,25 +65,28 @@ export default function Footer() {
 
           <div className="w-full lg:flex-1 lg:max-w-xl">
             {status === "success" ? (
-              <div className="flex items-center gap-3 p-3.5 rounded-xs bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-medium">
+              <div className="flex items-center gap-3 p-3.5 rounded-xs bg-emerald-500/20 border border-emerald-500/40 text-emerald-200 text-xs font-medium">
                 <Check className="w-4 h-4 shrink-0 text-emerald-400" />
                 <span>{message}</span>
               </div>
             ) : (
-              <form onSubmit={handleSubscribe} className="space-y-2">
+              <form noValidate onSubmit={handleSubscribe} className="space-y-2">
                 <div className="flex flex-col sm:flex-row items-stretch gap-2.5">
                   <div className="relative flex-1">
                     <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-200" />
                     <input
-                      type="email"
+                      type="text"
                       value={email}
                       onChange={(e) => {
                         setEmail(e.target.value);
                         if (status === "error") setStatus("idle");
                       }}
                       placeholder="Enter your email address"
-                      className="w-full pl-10 pr-4 py-3.5 text-xs sm:text-sm bg-white/10 hover:bg-white/15 focus:bg-white/15 border border-white/20 focus:border-white/50 rounded-xs text-white placeholder:text-blue-100/75 outline-none focus:outline-none focus:ring-0 transition-colors"
-                      required
+                      className={`w-full pl-10 pr-4 py-3.5 text-xs sm:text-sm bg-white/10 hover:bg-white/15 focus:bg-white/15 border ${
+                        status === "error"
+                          ? "border-red-400 bg-red-500/10 focus:border-red-400"
+                          : "border-white/20 focus:border-white/50"
+                      } rounded-xs text-white placeholder:text-blue-100/75 outline-none focus:outline-none focus:ring-0 transition-colors`}
                     />
                   </div>
                   <button
@@ -90,7 +99,10 @@ export default function Footer() {
                   </button>
                 </div>
                 {status === "error" && (
-                  <p className="text-[11px] text-rose-300 font-normal pl-1">{message}</p>
+                  <p className="text-[11px] text-red-300 font-medium pl-1 flex items-center gap-1.5 mt-1">
+                    <AlertCircle className="w-3.5 h-3.5 shrink-0 text-red-400" />
+                    <span>{message}</span>
+                  </p>
                 )}
                 <p className="text-[11px] text-blue-100 font-normal pl-1">
                   Your email is securely stored. Unsubscribe at any time.
