@@ -1,3 +1,4 @@
+import Image from "next/image";
 import SearchBar from "@/components/SearchBar";
 import Link from "next/link";
 import { ShieldCheck, Zap, Wallet, QrCode, ArrowUpRight } from "lucide-react";
@@ -5,27 +6,41 @@ import { ShieldCheck, Zap, Wallet, QrCode, ArrowUpRight } from "lucide-react";
 export default function HomePage() {
   return (
     <div className="space-y-16 sm:space-y-20 bg-white dark:bg-[#0B0F19] overflow-x-hidden transition-colors">
-      {/* Hero Section */}
-      <section className="relative pt-10 sm:pt-16 pb-8 sm:pb-10 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
-        <div className="max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-xs bg-[#EFF6FF] dark:bg-blue-950/40 text-[#2563EB] dark:text-blue-400 text-[11px] font-normal tracking-wide border border-blue-200/60 dark:border-blue-900/50">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB] dark:bg-blue-400 animate-pulse" />
+      {/* Hero Section - Full Screen Viewport Fit */}
+      <section className="relative min-h-[calc(100vh-4.5rem)] flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 text-center py-12 sm:py-16">
+        {/* Background Resort Pool Image with Rich Overlay */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          <Image
+            src="/hero-bg.jpg"
+            alt="Tropical resort pool at sunset"
+            fill
+            priority
+            className="object-cover object-center"
+          />
+          {/* Subtle multi-stop gradient for high contrast readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/45 to-black/75 dark:from-black/75 dark:via-[#0B0F19]/60 dark:to-[#0B0F19]" />
+        </div>
+
+        {/* Hero Content */}
+        <div className="relative z-10 max-w-4xl mx-auto space-y-4">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md text-white text-[11px] font-medium tracking-wide border border-white/20 shadow-sm">
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
             Verified Lodgings & Regional Travel
           </div>
           
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-gray-900 dark:text-white tracking-tight leading-[1.2]">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-medium text-white tracking-tight leading-[1.15] drop-shadow-md">
             Book Authentic Lodging, <br className="hidden sm:inline" />
-            <span className="text-[#2563EB] dark:text-blue-400 font-semibold">With Complete Peace of Mind.</span>
+            <span className="text-blue-300 font-semibold">With Complete Peace of Mind.</span>
           </h1>
           
-          <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 max-w-lg mx-auto font-normal leading-relaxed">
+          <p className="text-xs sm:text-base text-gray-200 max-w-xl mx-auto font-normal leading-relaxed drop-shadow-sm">
             Discover vetted hotels, safari lodges, and serene guesthouses. Enjoy instant booking, transparent price breakdowns, and local payments via EcoCash and card.
           </p>
-        </div>
 
-        {/* Live Search Widget */}
-        <div className="mt-8">
-          <SearchBar />
+          {/* Live Search Widget */}
+          <div className="pt-6 w-full max-w-5xl mx-auto">
+            <SearchBar />
+          </div>
         </div>
       </section>
 
