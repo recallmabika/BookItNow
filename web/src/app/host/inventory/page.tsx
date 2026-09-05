@@ -30,7 +30,8 @@ import {
   X,
   Menu,
   LayoutDashboard,
-  Users
+  Users,
+  LogOut
 } from "lucide-react";
 
 function InventoryContent() {
@@ -212,11 +213,8 @@ function InventoryContent() {
                 />
               </div>
               <div className="min-w-0">
-                <span className="text-sm font-bold text-white tracking-tight block">
+                <span className="text-base font-bold text-white tracking-tight block">
                   BookItNow
-                </span>
-                <span className="text-[10px] font-semibold text-cyan-200 uppercase tracking-wider block">
-                  Inventory Console
                 </span>
               </div>
             </Link>
@@ -284,19 +282,21 @@ function InventoryContent() {
             </div>
           </div>
 
-          {/* User status */}
-          <div className="p-4 border-t border-[#1D4ED8] bg-[#1D4ED8]">
-            <div className="flex items-center gap-2.5">
-              <div className="w-7 h-7 rounded-full bg-white text-[#2563EB] font-bold flex items-center justify-center text-xs shadow-xs">
-                {user?.first_name ? user.first_name[0].toUpperCase() : "M"}
-              </div>
-              <div className="min-w-0">
-                <span className="text-xs font-semibold text-white block truncate">
-                  {user?.first_name} {user?.last_name}
-                </span>
-                <span className="text-[10px] text-blue-200 block font-mono">Role: {user?.role}</span>
-              </div>
-            </div>
+          {/* Sidebar Footer */}
+          <div className="p-4 border-t border-[#1D4ED8] bg-[#1D4ED8] flex items-center justify-between">
+            <span className="text-xs text-blue-100/75 font-medium">BookItNow &copy; 2026</span>
+            <button
+              onClick={() => {
+                localStorage.removeItem("bookitnow_token");
+                localStorage.removeItem("bookitnow_user");
+                router.push("/login");
+              }}
+              className="text-white hover:text-red-200 transition-colors flex items-center gap-1.5 cursor-pointer text-xs font-semibold py-1 px-2 rounded-xs hover:bg-white/10"
+              title="Sign out"
+            >
+              <LogOut className="w-3.5 h-3.5" />
+              <span>Log out</span>
+            </button>
           </div>
         </div>
       </aside>
@@ -337,14 +337,41 @@ function InventoryContent() {
               </div>
             </div>
 
+            {/* Topbar Right with Profile Pill */}
             <div className="flex items-center gap-3">
               <Link
                 href="/admin"
-                className="px-3 py-1.5 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-xs font-semibold rounded-xs transition-colors flex items-center gap-1.5"
+                className="px-3 py-1.5 border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#0B101E] hover:bg-gray-50 dark:hover:bg-gray-800 text-xs font-semibold rounded-xs transition-colors flex items-center gap-1.5 text-gray-700 dark:text-gray-200"
               >
                 <LayoutDashboard className="w-3.5 h-3.5 text-blue-500" />
                 <span className="hidden sm:inline">Admin Overview</span>
               </Link>
+
+              {/* User Profile Pill */}
+              <div className="flex items-center gap-2.5 pl-3 border-l border-gray-200 dark:border-gray-800">
+                <div className="w-8 h-8 rounded-full bg-[#2563EB] text-white font-bold flex items-center justify-center text-xs shadow-xs ring-2 ring-blue-100 dark:ring-blue-900/40 shrink-0">
+                  {user?.first_name ? user.first_name[0].toUpperCase() : "M"}
+                </div>
+                <div className="hidden sm:block text-left min-w-0">
+                  <span className="text-xs font-bold text-gray-900 dark:text-white truncate block">
+                    {user?.first_name} {user?.last_name}
+                  </span>
+                  <span className="text-[10px] text-gray-500 dark:text-gray-400 block truncate">
+                    {user?.email}
+                  </span>
+                </div>
+                <button
+                  onClick={() => {
+                    localStorage.removeItem("bookitnow_token");
+                    localStorage.removeItem("bookitnow_user");
+                    router.push("/login");
+                  }}
+                  className="p-1.5 text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 rounded-xs transition-colors cursor-pointer"
+                  title="Sign out"
+                >
+                  <ArrowLeft className="w-4 h-4 rotate-180" />
+                </button>
+              </div>
             </div>
           </div>
         </header>

@@ -418,11 +418,8 @@ export default function AdminDashboardPage() {
                 />
               </div>
               <div className="min-w-0">
-                <span className="text-sm font-bold text-white tracking-tight block">
+                <span className="text-base font-bold text-white tracking-tight block">
                   BookItNow
-                </span>
-                <span className="text-[10px] font-semibold text-blue-100 uppercase tracking-wider block">
-                  Admin Console
                 </span>
               </div>
             </Link>
@@ -578,40 +575,21 @@ export default function AdminDashboardPage() {
             </button>
           </nav>
 
-          {/* User Profile Pill & System Status */}
-          <div className="p-4 border-t border-[#1D4ED8] bg-[#1D4ED8] space-y-2.5 pb-6">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-white text-[#2563EB] font-bold flex items-center justify-center text-xs shrink-0 shadow-xs">
-                {user?.first_name ? user.first_name[0].toUpperCase() : "A"}
-              </div>
-              <div className="min-w-0 flex-1">
-                <div className="flex items-center gap-1.5">
-                  <span className="text-xs font-semibold text-white truncate block">
-                    {user?.first_name} {user?.last_name}
-                  </span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 shrink-0" title="Online"></span>
-                </div>
-                <span className="text-[10px] text-blue-100/80 block truncate">{user?.email}</span>
-              </div>
-            </div>
-
-            <div className="flex items-center justify-between text-[11px] text-blue-100/90 pt-2 border-t border-white/20">
-              <span className="font-mono text-[10px] uppercase">
-                Role: <span className="text-white font-bold bg-white/20 px-1.5 py-0.5 rounded-xs">{user?.role}</span>
-              </span>
-              <button
-                onClick={() => {
-                  localStorage.removeItem("bookitnow_token");
-                  localStorage.removeItem("bookitnow_user");
-                  router.push("/login");
-                }}
-                className="text-white hover:text-red-200 transition-colors flex items-center gap-1 cursor-pointer text-xs font-medium"
-                title="Sign out"
-              >
-                <LogOut className="w-3.5 h-3.5" />
-                <span>Exit</span>
-              </button>
-            </div>
+          {/* Sidebar Footer */}
+          <div className="p-4 border-t border-[#1D4ED8] bg-[#1D4ED8] flex items-center justify-between">
+            <span className="text-xs text-blue-100/75 font-medium">BookItNow &copy; 2026</span>
+            <button
+              onClick={() => {
+                localStorage.removeItem("bookitnow_token");
+                localStorage.removeItem("bookitnow_user");
+                router.push("/login");
+              }}
+              className="text-white hover:text-red-200 transition-colors flex items-center gap-1.5 cursor-pointer text-xs font-semibold py-1 px-2 rounded-xs hover:bg-white/10"
+              title="Sign out"
+            >
+              <LogOut className="w-3.5 h-3.5" />
+              <span>Log out</span>
+            </button>
           </div>
         </div>
       </aside>
@@ -655,39 +633,47 @@ export default function AdminDashboardPage() {
               </div>
             </div>
 
-            <div className="flex items-center gap-2 sm:gap-3">
+            {/* Topbar Right Profile & Status */}
+            <div className="flex items-center gap-3">
               <button
                 onClick={() => {
                   const token = localStorage.getItem("bookitnow_token");
                   if (token) loadData(token);
                 }}
-                className="p-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xs transition-colors cursor-pointer border border-gray-200 dark:border-gray-700"
-                title="Refresh live ledger"
+                className="p-2 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xs transition-colors cursor-pointer border border-gray-200 dark:border-gray-800"
+                title="Refresh central ledger"
               >
                 <RefreshCw className="w-4 h-4" />
               </button>
 
-              <button
-                onClick={() => {
-                  setCreateUserError("");
-                  setShowCreateUserModal(true);
-                }}
-                className="hidden sm:inline-flex px-3 py-2 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 text-xs font-semibold rounded-xs shadow-xs items-center gap-1.5 transition-all cursor-pointer"
-              >
-                <UserPlus className="w-3.5 h-3.5 text-blue-500" />
-                <span>+ User / Staff</span>
-              </button>
-
-              <button
-                onClick={() => {
-                  setCreateError("");
-                  setShowCreateModal(true);
-                }}
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white text-xs font-semibold rounded-xs shadow-xs flex items-center gap-1.5 transition-all cursor-pointer"
-              >
-                <Plus className="w-4 h-4" />
-                <span>+ Add Lodging</span>
-              </button>
+              {/* User Profile Pill */}
+              <div className="flex items-center gap-3 pl-3 border-l border-gray-200 dark:border-gray-800">
+                <div className="w-9 h-9 rounded-full bg-[#2563EB] text-white font-bold flex items-center justify-center text-xs shadow-xs ring-2 ring-blue-100 dark:ring-blue-900/40 shrink-0">
+                  {user?.first_name ? user.first_name[0].toUpperCase() : "A"}
+                </div>
+                <div className="hidden sm:block text-left min-w-0">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-xs font-bold text-gray-900 dark:text-white truncate block">
+                      {user?.first_name} {user?.last_name}
+                    </span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" title="Active"></span>
+                  </div>
+                  <span className="text-[10px] text-gray-500 dark:text-gray-400 block truncate">
+                    {user?.email}
+                  </span>
+                </div>
+                <button
+                  onClick={() => {
+                    localStorage.removeItem("bookitnow_token");
+                    localStorage.removeItem("bookitnow_user");
+                    router.push("/login");
+                  }}
+                  className="p-2 text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 rounded-xs transition-colors cursor-pointer"
+                  title="Sign out"
+                >
+                  <LogOut className="w-4 h-4" />
+                </button>
+              </div>
             </div>
           </div>
         </header>
@@ -787,18 +773,31 @@ export default function AdminDashboardPage() {
                   />
                 </div>
 
-                <div className="flex items-center gap-2">
-                  <span className="text-[11px] text-gray-500 font-medium">Status:</span>
-                  <select
-                    value={statusFilter}
-                    onChange={(e) => setStatusFilter(e.target.value)}
-                    className="px-3 py-2 text-xs rounded-xs border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#0B101E] focus:outline-none cursor-pointer"
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[11px] text-gray-500 font-medium">Status:</span>
+                    <select
+                      value={statusFilter}
+                      onChange={(e) => setStatusFilter(e.target.value)}
+                      className="px-3 py-2 text-xs rounded-xs border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#0B101E] focus:outline-none cursor-pointer"
+                    >
+                      <option value="all">All Statuses</option>
+                      <option value="active">Active Only</option>
+                      <option value="pending_approval">Pending Approval</option>
+                      <option value="suspended">Suspended Only</option>
+                    </select>
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      setCreateError("");
+                      setShowCreateModal(true);
+                    }}
+                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white text-xs font-semibold rounded-xs shadow-xs flex items-center gap-1.5 transition-all cursor-pointer whitespace-nowrap"
                   >
-                    <option value="all">All Statuses</option>
-                    <option value="active">Active Only</option>
-                    <option value="pending_approval">Pending Approval</option>
-                    <option value="suspended">Suspended Only</option>
-                  </select>
+                    <Plus className="w-4 h-4" />
+                    <span>Add Lodging</span>
+                  </button>
                 </div>
               </div>
 
