@@ -92,7 +92,7 @@ export default function SearchableDropdown({
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute left-0 right-0 mt-1 bg-white border border-gray-200 rounded-xs shadow-md z-50 animate-fade-in overflow-hidden">
+        <div className="absolute left-0 right-0 mt-1 bg-white border border-gray-200 rounded-xs shadow-xl z-[9999] animate-fade-in overflow-hidden">
           {/* Search Box */}
           <div className="p-2 border-b border-gray-100 bg-gray-50/50">
             <div className="relative">

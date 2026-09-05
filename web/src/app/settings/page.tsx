@@ -68,8 +68,8 @@ export default function SettingsPage() {
           </Link>
         </div>
 
-        <div className="bg-white rounded-xs border border-gray-200/90 shadow-xs overflow-hidden">
-          <div className="bg-[#0F5132] h-28 px-6 sm:px-8 relative flex items-end pb-4">
+        <div className="bg-white rounded-xs border border-gray-200/90 shadow-xs">
+          <div className="bg-[#0F5132] h-28 px-6 sm:px-8 relative flex items-end pb-4 rounded-t-xs">
             <div className="text-white">
               <h1 className="text-xl font-semibold tracking-tight">Account Settings</h1>
               <p className="text-xs text-green-100/80 mt-0.5">
@@ -123,7 +123,7 @@ export default function SettingsPage() {
             <div className="h-px bg-gray-100" />
 
             {/* Currency & Region */}
-            <div>
+            <div className="relative z-20">
               <div className="flex items-center gap-2 mb-3">
                 <Globe className="w-4 h-4 text-[#0F5132]" />
                 <h3 className="text-xs font-semibold text-gray-900 uppercase tracking-wider">
@@ -142,10 +142,10 @@ export default function SettingsPage() {
               </div>
             </div>
 
-            <div className="h-px bg-gray-100" />
+            <div className="h-px bg-gray-100 relative z-0" />
 
             {/* Password */}
-            <div>
+            <div className="relative z-0">
               <div className="flex items-center gap-2 mb-3">
                 <Lock className="w-4 h-4 text-[#0F5132]" />
                 <h3 className="text-xs font-semibold text-gray-900 uppercase tracking-wider">
