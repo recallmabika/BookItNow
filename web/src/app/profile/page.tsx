@@ -127,16 +127,16 @@ export default function ProfilePage() {
             )}
 
             {/* Profile Avatar & Upload Section */}
-            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 pb-8 border-b border-gray-100">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 pb-8 border-b border-gray-100 dark:border-gray-800">
               <div className="relative group">
                 {avatar ? (
                   <img
                     src={avatar}
                     alt={user.first_name}
-                    className="w-24 h-24 rounded-xs object-cover border-2 border-gray-200 shadow-xs"
+                    className="w-24 h-24 rounded-xs object-cover border-2 border-gray-200 dark:border-gray-700 shadow-xs"
                   />
                 ) : (
-                  <div className="w-24 h-24 rounded-xs bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center font-bold text-3xl border border-blue-200">
+                  <div className="w-24 h-24 rounded-xs bg-[#EFF6FF] dark:bg-blue-950/40 text-[#2563EB] dark:text-blue-400 flex items-center justify-center font-bold text-3xl border border-blue-200 dark:border-blue-900/50">
                     {user.first_name[0]?.toUpperCase()}
                   </div>
                 )}
@@ -162,14 +162,14 @@ export default function ProfilePage() {
 
               <div className="flex-1 text-center sm:text-left">
                 <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
-                  <h2 className="text-base font-semibold text-gray-900">
+                  <h2 className="text-base font-semibold text-gray-900 dark:text-white">
                     {user.first_name} {user.last_name || ""}
                   </h2>
-                  <span className="text-xs font-medium text-gray-500">
+                  <span className="text-xs font-medium text-gray-500 dark:text-gray-400">
                     • {user.role === "guest" || user.role === "GUEST" ? "Guest Account" : `${user.role.charAt(0).toUpperCase() + user.role.slice(1).toLowerCase()} Account`}
                   </span>
                 </div>
-                <p className="text-xs text-gray-500 mt-1">{user.email}</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{user.email}</p>
 
                 <div className="mt-4 flex flex-wrap gap-2 justify-center sm:justify-start">
                   <button
@@ -194,13 +194,13 @@ export default function ProfilePage() {
                           setTimeout(() => setSavedMsg(""), 3500);
                         }
                       }}
-                      className="px-3 py-2 border border-gray-200 text-gray-600 text-xs font-medium rounded-xs hover:bg-gray-50 transition-colors cursor-pointer"
+                      className="px-3 py-2 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 text-xs font-medium rounded-xs hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors cursor-pointer"
                     >
                       Remove
                     </button>
                   )}
                 </div>
-                <p className="text-[11px] text-gray-400 mt-2">
+                <p className="text-[11px] text-gray-400 dark:text-gray-500 mt-2">
                   JPG, PNG, or WEBP up to 2MB. Square format recommended.
                 </p>
               </div>
@@ -210,32 +210,32 @@ export default function ProfilePage() {
             <form onSubmit={handleSaveProfile} className="pt-6 space-y-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-gray-700 mb-1.5">
+                  <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                     First Name
                   </label>
                   <div className="relative">
-                    <User className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                    <User className="w-4 h-4 text-gray-400 dark:text-gray-500 absolute left-3 top-1/2 -translate-y-1/2" />
                     <input
                       type="text"
                       required
                       value={firstName}
                       onChange={(e) => setFirstName(e.target.value)}
-                      className="w-full pl-9 pr-3 py-2 text-xs border border-gray-300 rounded-xs outline-none focus:outline-none focus:ring-0 focus:border-[#2563EB] transition-colors"
+                      className="w-full pl-9 pr-3 py-2 text-xs border border-gray-300 dark:border-gray-700 rounded-xs bg-white dark:bg-gray-900/60 text-gray-900 dark:text-white outline-none focus:outline-none focus:ring-0 focus:border-[#2563EB] transition-colors"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-gray-700 mb-1.5">
+                  <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                     Last Name
                   </label>
                   <div className="relative">
-                    <User className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                    <User className="w-4 h-4 text-gray-400 dark:text-gray-500 absolute left-3 top-1/2 -translate-y-1/2" />
                     <input
                       type="text"
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}
-                      className="w-full pl-9 pr-3 py-2 text-xs border border-gray-300 rounded-xs outline-none focus:outline-none focus:ring-0 focus:border-[#2563EB] transition-colors"
+                      className="w-full pl-9 pr-3 py-2 text-xs border border-gray-300 dark:border-gray-700 rounded-xs bg-white dark:bg-gray-900/60 text-gray-900 dark:text-white outline-none focus:outline-none focus:ring-0 focus:border-[#2563EB] transition-colors"
                     />
                   </div>
                 </div>
@@ -243,35 +243,35 @@ export default function ProfilePage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-gray-700 mb-1.5">
+                  <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                     Email Address
                   </label>
                   <div className="relative">
-                    <Mail className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                    <Mail className="w-4 h-4 text-gray-400 dark:text-gray-500 absolute left-3 top-1/2 -translate-y-1/2" />
                     <input
                       type="email"
                       disabled
                       value={user.email}
-                      className="w-full pl-9 pr-3 py-2 text-xs border border-gray-200 rounded-xs bg-gray-50 text-gray-500 cursor-not-allowed outline-none focus:outline-none focus:ring-0"
+                      className="w-full pl-9 pr-3 py-2 text-xs border border-gray-200 dark:border-gray-800 rounded-xs bg-gray-50 dark:bg-gray-800/50 text-gray-500 dark:text-gray-400 cursor-not-allowed outline-none focus:outline-none focus:ring-0"
                     />
                   </div>
-                  <span className="text-[10px] text-gray-400 mt-1 block">
+                  <span className="text-[10px] text-gray-400 dark:text-gray-500 mt-1 block">
                     Contact support to update verified email.
                   </span>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-gray-700 mb-1.5">
+                  <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                     Phone Number
                   </label>
                   <div className="relative">
-                    <Phone className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                    <Phone className="w-4 h-4 text-gray-400 dark:text-gray-500 absolute left-3 top-1/2 -translate-y-1/2" />
                     <input
                       type="tel"
                       placeholder="+263 77 123 4567"
                       value={phoneNumber}
                       onChange={(e) => setPhoneNumber(e.target.value)}
-                      className="w-full pl-9 pr-3 py-2 text-xs border border-gray-300 rounded-xs outline-none focus:outline-none focus:border-[#2563EB] transition-colors focus:ring-0"
+                      className="w-full pl-9 pr-3 py-2 text-xs border border-gray-300 dark:border-gray-700 rounded-xs bg-white dark:bg-gray-900/60 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600 outline-none focus:outline-none focus:border-[#2563EB] transition-colors focus:ring-0"
                     />
                   </div>
                 </div>

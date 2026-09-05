@@ -78,13 +78,13 @@ export default function SearchableDropdown({
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className="w-full flex items-center justify-between px-3 py-2 text-xs border border-gray-300 rounded-xs bg-white text-gray-800 outline-none focus:outline-none focus:ring-0 focus:border-[#2563EB] transition-colors cursor-pointer text-left"
+        className="w-full flex items-center justify-between px-3 py-2 text-xs border border-gray-300 dark:border-gray-700 rounded-xs bg-white dark:bg-gray-900/60 text-gray-800 dark:text-gray-200 outline-none focus:outline-none focus:ring-0 focus:border-[#2563EB] transition-colors cursor-pointer text-left"
       >
-        <span className={selectedOption ? "text-gray-900 font-medium truncate" : "text-gray-400 truncate"}>
+        <span className={selectedOption ? "text-gray-900 dark:text-white font-medium truncate" : "text-gray-400 dark:text-gray-500 truncate"}>
           {selectedOption ? selectedOption.label : placeholder}
         </span>
         <ChevronDown
-          className={`w-3.5 h-3.5 text-gray-500 stroke-[2] transition-transform duration-200 shrink-0 ml-2 ${
+          className={`w-3.5 h-3.5 text-gray-500 dark:text-gray-400 stroke-[2] transition-transform duration-200 shrink-0 ml-2 ${
             isOpen ? "rotate-180" : ""
           }`}
         />
@@ -92,9 +92,9 @@ export default function SearchableDropdown({
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute left-0 right-0 mt-1 bg-white border border-gray-200 rounded-xs shadow-xl z-[9999] animate-fade-in overflow-hidden">
+        <div className="absolute left-0 right-0 mt-1 bg-white dark:bg-[#111827] border border-gray-200 dark:border-gray-800 rounded-xs shadow-xl z-[9999] animate-fade-in overflow-hidden">
           {/* Search Box */}
-          <div className="p-2 border-b border-gray-100 bg-gray-50/50">
+          <div className="p-2 border-b border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-900/50">
             <div className="relative">
               <Search className="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
               <input
@@ -103,13 +103,13 @@ export default function SearchableDropdown({
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={searchPlaceholder}
-                className="w-full pl-8 pr-3 py-1.5 text-xs border border-gray-200 rounded-xs bg-white outline-none focus:outline-none focus:border-[#2563EB] transition-colors text-gray-800"
+                className="w-full pl-8 pr-3 py-1.5 text-xs border border-gray-200 dark:border-gray-700 rounded-xs bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 placeholder:text-gray-400 dark:placeholder:text-gray-500 outline-none focus:outline-none focus:border-[#2563EB] transition-colors"
               />
             </div>
           </div>
 
           {/* Options List */}
-          <div className="max-h-52 overflow-y-auto py-1 divide-y divide-gray-50">
+          <div className="max-h-52 overflow-y-auto py-1 divide-y divide-gray-50 dark:divide-gray-800/60">
             {filteredOptions.length > 0 ? (
               filteredOptions.map((opt) => {
                 const isSelected = opt.value === value;
@@ -120,27 +120,27 @@ export default function SearchableDropdown({
                     onClick={() => handleSelect(opt.value)}
                     className={`w-full flex items-center justify-between px-3 py-2 text-xs text-left cursor-pointer transition-colors ${
                       isSelected
-                        ? "bg-[#EFF6FF] text-[#2563EB] font-semibold"
-                        : "text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+                        ? "bg-[#EFF6FF] dark:bg-blue-950/50 text-[#2563EB] dark:text-blue-400 font-semibold"
+                        : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white"
                     }`}
                   >
                     <div className="truncate">
                       <div>{opt.label}</div>
                       {opt.sublabel && (
-                        <div className="text-[10px] text-gray-400 font-normal truncate">
+                        <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal truncate">
                           {opt.sublabel}
                         </div>
                       )}
                     </div>
                     {isSelected && (
-                      <Check className="w-3.5 h-3.5 text-[#2563EB] stroke-[2.5] shrink-0 ml-2" />
+                      <Check className="w-3.5 h-3.5 text-[#2563EB] dark:text-blue-400 stroke-[2.5] shrink-0 ml-2" />
                     )}
                   </button>
                 );
               })
             ) : (
-              <div className="px-3 py-3 text-center text-xs text-gray-400">
-                No matching options
+              <div className="p-3 text-center text-xs text-gray-400 dark:text-gray-500">
+                No matching options found
               </div>
             )}
           </div>
