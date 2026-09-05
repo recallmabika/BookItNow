@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { Search, MapPin, Calendar as CalendarIcon, Users } from "lucide-react";
+import { Search, MapPin, Calendar as CalendarIcon, Users, Loader2 } from "lucide-react";
 import flatpickr from "flatpickr";
 
 export default function SearchBar() {
@@ -12,6 +12,7 @@ export default function SearchBar() {
   const [checkOut, setCheckOut] = useState("");
   const [guests, setGuests] = useState("2");
   const [guestsOpen, setGuestsOpen] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
   
   const checkInRef = useRef<HTMLInputElement | null>(null);
   const checkOutRef = useRef<HTMLInputElement | null>(null);
@@ -36,7 +37,7 @@ export default function SearchBar() {
         minDate: "today",
         dateFormat: "M j, Y",
         allowInput: false,
-        disableMobile: "true",
+        disableMobile: true,
         onChange: (selectedDates) => {
           if (selectedDates.length > 0) {
             const dStr = selectedDates[0].toISOString().split("T")[0];
@@ -56,7 +57,7 @@ export default function SearchBar() {
         minDate: "today",
         dateFormat: "M j, Y",
         allowInput: false,
-        disableMobile: "true",
+        disableMobile: true,
         onChange: (selectedDates) => {
           if (selectedDates.length > 0) {
             const dStr = selectedDates[0].toISOString().split("T")[0];
@@ -76,12 +77,18 @@ export default function SearchBar() {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSearching(true);
     const query = new URLSearchParams();
     if (city.trim()) query.append("city", city.trim());
     if (checkIn) query.append("check_in", checkIn);
     if (checkOut) query.append("check_out", checkOut);
     if (guests) query.append("guests", guests);
-    router.push(`/search?${query.toString()}`);
+    
+    // Smooth animation feedback before navigation
+    setTimeout(() => {
+      router.push(`/search?${query.toString()}`);
+      setTimeout(() => setIsSearching(false), 800);
+    }, 250);
   };
 
   return (
@@ -196,10 +203,22 @@ export default function SearchBar() {
       <div className="p-2 flex items-center justify-center">
         <button
           type="submit"
-          className="w-full md:w-auto px-7 py-3.5 bg-[#0F5132] hover:bg-[#0B3D26] active:scale-[0.98] text-white font-semibold text-sm rounded-xs flex items-center justify-center gap-2.5 transition-all duration-150 cursor-pointer whitespace-nowrap shadow-xs"
+          disabled={isSearching}
+          className={`w-full md:w-auto px-7 py-3.5 bg-[#0F5132] hover:bg-[#0B3D26] active:scale-95 text-white font-semibold text-sm rounded-xs flex items-center justify-center gap-2.5 transition-all duration-200 cursor-pointer whitespace-nowrap shadow-xs group ${
+            isSearching ? "opacity-90 scale-[0.98] ring-2 ring-[#0F5132]/30 ring-offset-1" : ""
+          }`}
         >
-          <Search className="w-4 h-4 stroke-[2]" />
-          <span>Search Stays</span>
+          {isSearching ? (
+            <>
+              <Loader2 className="w-4 h-4 animate-spin text-white" />
+              <span className="animate-pulse">Searching...</span>
+            </>
+          ) : (
+            <>
+              <Search className="w-4 h-4 stroke-[2.2] group-hover:scale-110 group-active:scale-90 transition-transform duration-150" />
+              <span>Search Stays</span>
+            </>
+          )}
         </button>
       </div>
     </form>

@@ -3,9 +3,10 @@
 import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { fetchProperties, PropertyListItem } from "@/lib/api";
 import SearchBar from "@/components/SearchBar";
-import { MapPin, ArrowRight, Building2 } from "lucide-react";
+import { MapPin, ArrowRight } from "lucide-react";
 
 function SearchResultsContent() {
   const searchParams = useSearchParams();
@@ -64,11 +65,21 @@ function SearchResultsContent() {
           ))}
         </div>
       ) : properties.length === 0 ? (
-        <div className="text-center py-16 bg-gray-50/30 rounded-xs border border-gray-200/60 space-y-2.5">
-          <Building2 className="w-8 h-8 text-gray-400 mx-auto stroke-[1.5]" />
-          <h3 className="font-medium text-base text-gray-900">No lodgings match your search</h3>
-          <p className="text-[11px] text-gray-500 max-w-sm mx-auto font-normal">
-            Try adjusting your dates, location, or guest count. Real properties will show as hosts publish active inventory.
+        <div className="text-center py-12 px-4 bg-white rounded-xs border border-gray-200/80 shadow-xs flex flex-col items-center justify-center">
+          <div className="relative w-64 h-64 sm:w-80 sm:h-80 mb-6">
+            <Image
+              src="/empty-search.png"
+              alt="No lodgings match your search"
+              fill
+              className="object-contain"
+              priority
+            />
+          </div>
+          <h3 className="font-semibold text-lg sm:text-xl text-gray-900 mb-2">
+            No lodgings match your search
+          </h3>
+          <p className="text-xs sm:text-sm text-gray-500 max-w-md mx-auto font-normal leading-relaxed">
+            We couldn't find any stays matching your exact dates or location. Try adjusting your search criteria or clearing filters.
           </p>
         </div>
       ) : (
