@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { Compass } from "lucide-react";
 
 export default function RegisterPage() {
@@ -72,14 +73,28 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-[75vh] flex items-center justify-center px-4 py-12 bg-gray-50/50 dark:bg-[#0B0F19] transition-colors">
-      <div className="w-full max-w-sm bg-white dark:bg-[#111827] p-8 rounded-xs border border-gray-200 dark:border-gray-800 shadow-xl space-y-5">
-        <div className="text-center space-y-1.5">
-          <div className="w-10 h-10 rounded-xs bg-[#EFF6FF] dark:bg-blue-950/60 text-[#2563EB] dark:text-blue-400 flex items-center justify-center mx-auto border border-blue-200 dark:border-blue-900/50 shadow-xs">
+    <div className="relative min-h-[calc(100vh-4.5rem)] flex items-center justify-center px-4 py-12 overflow-hidden">
+      {/* Background Image with Dark Vignette Scrim */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <Image
+          src="/vicfalls-pillars.jpg"
+          alt="Victoria Falls scenic landscape"
+          fill
+          priority
+          className="object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gray-950/80 backdrop-blur-[3px]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-black/80" />
+      </div>
+
+      {/* Registration Card - Wider 2-Column Grid to reduce vertical height */}
+      <div className="relative z-10 w-full max-w-xl bg-white/95 dark:bg-[#111827]/95 backdrop-blur-md p-7 sm:p-9 rounded-xs border border-white/20 dark:border-gray-800 shadow-2xl space-y-6">
+        <div className="text-center space-y-1">
+          <div className="w-10 h-10 rounded-xs bg-[#EFF6FF] dark:bg-blue-950/60 text-[#2563EB] dark:text-blue-400 flex items-center justify-center mx-auto border border-blue-200 dark:border-blue-900/50 shadow-xs mb-2">
             <Compass className="w-5 h-5 stroke-[2]" />
           </div>
-          <h1 className="text-xl font-medium tracking-tight text-gray-900 dark:text-white">Create Guest Account</h1>
-          <p className="text-xs text-gray-500 dark:text-gray-400 font-normal">Instant bookings and digital check-in e-vouchers</p>
+          <h1 className="text-2xl font-medium tracking-tight text-gray-900 dark:text-white">Create Guest Account</h1>
+          <p className="text-xs text-gray-500 dark:text-gray-400 font-normal">Instant bookings, transparent pricing, and digital check-in e-vouchers</p>
         </div>
 
         {error && (
@@ -88,8 +103,9 @@ export default function RegisterPage() {
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-3.5">
-          <div className="grid grid-cols-2 gap-2.5">
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+            {/* First Name */}
             <div className="space-y-1">
               <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-600 dark:text-gray-400">
                 First Name
@@ -100,9 +116,11 @@ export default function RegisterPage() {
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 placeholder="Tatenda"
-                className="w-full bg-gray-50 dark:bg-gray-800/60 px-3 py-2 rounded-xs border border-gray-200 dark:border-gray-700 text-xs sm:text-sm text-gray-900 dark:text-white font-normal placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] transition-all"
+                className="w-full bg-gray-50 dark:bg-gray-800/70 px-3.5 py-2.5 rounded-xs border border-gray-200 dark:border-gray-700 text-xs sm:text-sm text-gray-900 dark:text-white font-normal placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] transition-all"
               />
             </div>
+
+            {/* Last Name */}
             <div className="space-y-1">
               <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-600 dark:text-gray-400">
                 Last Name
@@ -113,72 +131,76 @@ export default function RegisterPage() {
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
                 placeholder="Moyo"
-                className="w-full bg-gray-50 dark:bg-gray-800/60 px-3 py-2 rounded-xs border border-gray-200 dark:border-gray-700 text-xs sm:text-sm text-gray-900 dark:text-white font-normal placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] transition-all"
+                className="w-full bg-gray-50 dark:bg-gray-800/70 px-3.5 py-2.5 rounded-xs border border-gray-200 dark:border-gray-700 text-xs sm:text-sm text-gray-900 dark:text-white font-normal placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] transition-all"
               />
             </div>
-          </div>
 
-          <div className="space-y-1">
-            <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-600 dark:text-gray-400">
-              Email Address
-            </label>
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@example.com"
-              className="w-full bg-gray-50 dark:bg-gray-800/60 px-3 py-2 rounded-xs border border-gray-200 dark:border-gray-700 text-xs sm:text-sm text-gray-900 dark:text-white font-normal placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] transition-all"
-            />
-          </div>
+            {/* Email Address */}
+            <div className="space-y-1">
+              <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-600 dark:text-gray-400">
+                Email Address
+              </label>
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@example.com"
+                className="w-full bg-gray-50 dark:bg-gray-800/70 px-3.5 py-2.5 rounded-xs border border-gray-200 dark:border-gray-700 text-xs sm:text-sm text-gray-900 dark:text-white font-normal placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] transition-all"
+              />
+            </div>
 
-          <div className="space-y-1">
-            <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-600 dark:text-gray-400">
-              Phone (Optional)
-            </label>
-            <input
-              type="tel"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              placeholder="+263 77 123 4567"
-              className="w-full bg-gray-50 dark:bg-gray-800/60 px-3 py-2 rounded-xs border border-gray-200 dark:border-gray-700 text-xs sm:text-sm text-gray-900 dark:text-white font-normal placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] transition-all"
-            />
-          </div>
+            {/* Phone Number */}
+            <div className="space-y-1">
+              <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-600 dark:text-gray-400">
+                Phone (Optional)
+              </label>
+              <input
+                type="tel"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                placeholder="+263 77 123 4567"
+                className="w-full bg-gray-50 dark:bg-gray-800/70 px-3.5 py-2.5 rounded-xs border border-gray-200 dark:border-gray-700 text-xs sm:text-sm text-gray-900 dark:text-white font-normal placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] transition-all"
+              />
+            </div>
 
-          <div className="space-y-1">
-            <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-600 dark:text-gray-400">
-              Password (Min. 6 chars)
-            </label>
-            <input
-              type="password"
-              required
-              minLength={6}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
-              className="w-full bg-gray-50 dark:bg-gray-800/60 px-3 py-2 rounded-xs border border-gray-200 dark:border-gray-700 text-xs sm:text-sm text-gray-900 dark:text-white font-normal placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] transition-all"
-            />
-          </div>
+            {/* Password */}
+            <div className="space-y-1">
+              <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-600 dark:text-gray-400">
+                Password (Min. 6 chars)
+              </label>
+              <input
+                type="password"
+                required
+                minLength={6}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                className="w-full bg-gray-50 dark:bg-gray-800/70 px-3.5 py-2.5 rounded-xs border border-gray-200 dark:border-gray-700 text-xs sm:text-sm text-gray-900 dark:text-white font-normal placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] transition-all"
+              />
+            </div>
 
-          <div className="space-y-1">
-            <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-600 dark:text-gray-400">
-              Confirm Password
-            </label>
-            <input
-              type="password"
-              required
-              minLength={6}
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="••••••••"
-              className="w-full bg-gray-50 dark:bg-gray-800/60 px-3 py-2 rounded-xs border border-gray-200 dark:border-gray-700 text-xs sm:text-sm text-gray-900 dark:text-white font-normal placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] transition-all"
-            />
+            {/* Confirm Password */}
+            <div className="space-y-1">
+              <label className="block text-[10px] font-medium uppercase tracking-wider text-gray-600 dark:text-gray-400">
+                Confirm Password
+              </label>
+              <input
+                type="password"
+                required
+                minLength={6}
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder="••••••••"
+                className="w-full bg-gray-50 dark:bg-gray-800/70 px-3.5 py-2.5 rounded-xs border border-gray-200 dark:border-gray-700 text-xs sm:text-sm text-gray-900 dark:text-white font-normal placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] transition-all"
+              />
+            </div>
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-[#2563EB] hover:bg-[#1D4ED8] active:scale-[0.99] disabled:opacity-50 text-white py-2.5 rounded-xs font-semibold text-xs tracking-wide shadow-sm transition-all duration-150 cursor-pointer"
+            className="w-full mt-2 bg-[#2563EB] hover:bg-[#1D4ED8] active:scale-[0.99] disabled:opacity-50 text-white py-3 rounded-xs font-semibold text-xs tracking-wide shadow-sm transition-all duration-150 cursor-pointer"
           >
             {loading ? "Creating Account..." : "Create Account"}
           </button>

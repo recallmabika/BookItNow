@@ -3,6 +3,7 @@
 import { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { Compass } from "lucide-react";
 
 function LoginForm() {
@@ -124,10 +125,25 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <div className="min-h-[75vh] flex items-center justify-center px-4 py-12 bg-gray-50/50 dark:bg-[#0B0F19] transition-colors">
-      <Suspense fallback={<div className="text-xs text-gray-500">Loading sign in...</div>}>
-        <LoginForm />
-      </Suspense>
+    <div className="relative min-h-[calc(100vh-4.5rem)] flex items-center justify-center px-4 py-12 overflow-hidden">
+      {/* Background Image with Dark Vignette Scrim */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <Image
+          src="/vicfalls-pillars.jpg"
+          alt="Victoria Falls scenic landscape"
+          fill
+          priority
+          className="object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gray-950/80 backdrop-blur-[3px]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-black/80" />
+      </div>
+
+      <div className="relative z-10 w-full flex items-center justify-center">
+        <Suspense fallback={<div className="text-xs text-white">Loading sign in...</div>}>
+          <LoginForm />
+        </Suspense>
+      </div>
     </div>
   );
 }
