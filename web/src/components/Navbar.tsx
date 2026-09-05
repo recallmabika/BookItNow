@@ -74,22 +74,22 @@ export default function Navbar() {
     <header className="bg-[#2563EB] border-b border-[#1D4ED8] sticky top-0 z-50 shadow-xs">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-18 flex items-center justify-between gap-2">
         {/* Brand */}
-        <Link href="/" className="flex items-center gap-2.5 group py-1.5 shrink-0">
-          <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden shrink-0 shadow-xs ring-1 ring-white/30 bg-white/10 group-hover:scale-105 transition-transform duration-150">
+        <Link href="/" className="flex items-center gap-3 group py-0.5 shrink-0">
+          <div className="relative w-12 h-12 sm:w-14 sm:h-14 -my-2 rounded-full overflow-hidden shrink-0 shadow-md ring-1 ring-white/30 bg-white/5 group-hover:scale-105 transition-transform duration-150">
             <Image
               src="/logo.png"
               alt="BookItNow Logo"
               fill
-              sizes="(max-width: 640px) 32px, 36px"
+              sizes="(max-width: 640px) 48px, 56px"
               className="object-contain"
               priority
             />
           </div>
           <div>
-            <span className="font-semibold text-base sm:text-lg tracking-tight text-white block leading-none">
+            <span className="font-semibold text-lg sm:text-xl tracking-tight text-white block leading-none">
               BookIt<span className="text-blue-200">Now</span>
             </span>
-            <span className="hidden sm:block text-[9px] tracking-wider uppercase text-blue-100/80 font-normal mt-0.5">
+            <span className="hidden sm:block text-[10px] tracking-wider uppercase text-blue-100/80 font-normal mt-1">
               Lodging & Stays
             </span>
           </div>
